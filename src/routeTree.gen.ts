@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolicitacoesRouteImport } from './routes/solicitacoes'
 import { Route as ProdutosRouteImport } from './routes/produtos'
 import { Route as PedidosRouteImport } from './routes/pedidos'
+import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as FornecedoresRouteImport } from './routes/fornecedores'
 import { Route as EstoqueRouteImport } from './routes/estoque'
 import { Route as CotacoesRouteImport } from './routes/cotacoes'
@@ -30,6 +31,11 @@ const ProdutosRoute = ProdutosRouteImport.update({
 const PedidosRoute = PedidosRouteImport.update({
   id: '/pedidos',
   path: '/pedidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndicadoresRoute = IndicadoresRouteImport.update({
+  id: '/indicadores',
+  path: '/indicadores',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FornecedoresRoute = FornecedoresRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
+  '/indicadores': typeof IndicadoresRoute
   '/pedidos': typeof PedidosRoute
   '/produtos': typeof ProdutosRoute
   '/solicitacoes': typeof SolicitacoesRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
+  '/indicadores': typeof IndicadoresRoute
   '/pedidos': typeof PedidosRoute
   '/produtos': typeof ProdutosRoute
   '/solicitacoes': typeof SolicitacoesRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
+  '/indicadores': typeof IndicadoresRoute
   '/pedidos': typeof PedidosRoute
   '/produtos': typeof ProdutosRoute
   '/solicitacoes': typeof SolicitacoesRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/cotacoes'
     | '/estoque'
     | '/fornecedores'
+    | '/indicadores'
     | '/pedidos'
     | '/produtos'
     | '/solicitacoes'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/cotacoes'
     | '/estoque'
     | '/fornecedores'
+    | '/indicadores'
     | '/pedidos'
     | '/produtos'
     | '/solicitacoes'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/cotacoes'
     | '/estoque'
     | '/fornecedores'
+    | '/indicadores'
     | '/pedidos'
     | '/produtos'
     | '/solicitacoes'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   CotacoesRoute: typeof CotacoesRoute
   EstoqueRoute: typeof EstoqueRoute
   FornecedoresRoute: typeof FornecedoresRoute
+  IndicadoresRoute: typeof IndicadoresRoute
   PedidosRoute: typeof PedidosRoute
   ProdutosRoute: typeof ProdutosRoute
   SolicitacoesRoute: typeof SolicitacoesRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/pedidos'
       fullPath: '/pedidos'
       preLoaderRoute: typeof PedidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/indicadores': {
+      id: '/indicadores'
+      path: '/indicadores'
+      fullPath: '/indicadores'
+      preLoaderRoute: typeof IndicadoresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fornecedores': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   CotacoesRoute: CotacoesRoute,
   EstoqueRoute: EstoqueRoute,
   FornecedoresRoute: FornecedoresRoute,
+  IndicadoresRoute: IndicadoresRoute,
   PedidosRoute: PedidosRoute,
   ProdutosRoute: ProdutosRoute,
   SolicitacoesRoute: SolicitacoesRoute,
