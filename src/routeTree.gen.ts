@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolicitacoesRouteImport } from './routes/solicitacoes'
+import { Route as CotacoesRouteImport } from './routes/cotacoes'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SolicitacoesRoute = SolicitacoesRouteImport.update({
   id: '/solicitacoes',
   path: '/solicitacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CotacoesRoute = CotacoesRouteImport.update({
+  id: '/cotacoes',
+  path: '/cotacoes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cotacoes': typeof CotacoesRoute
   '/solicitacoes': typeof SolicitacoesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cotacoes': typeof CotacoesRoute
   '/solicitacoes': typeof SolicitacoesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cotacoes': typeof CotacoesRoute
   '/solicitacoes': typeof SolicitacoesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/solicitacoes'
+  fullPaths: '/' | '/cotacoes' | '/solicitacoes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/solicitacoes'
-  id: '__root__' | '/' | '/solicitacoes'
+  to: '/' | '/cotacoes' | '/solicitacoes'
+  id: '__root__' | '/' | '/cotacoes' | '/solicitacoes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CotacoesRoute: typeof CotacoesRoute
   SolicitacoesRoute: typeof SolicitacoesRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/solicitacoes'
       fullPath: '/solicitacoes'
       preLoaderRoute: typeof SolicitacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cotacoes': {
+      id: '/cotacoes'
+      path: '/cotacoes'
+      fullPath: '/cotacoes'
+      preLoaderRoute: typeof CotacoesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CotacoesRoute: CotacoesRoute,
   SolicitacoesRoute: SolicitacoesRoute,
 }
 export const routeTree = rootRouteImport
