@@ -16,6 +16,7 @@ import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as FornecedoresRouteImport } from './routes/fornecedores'
 import { Route as EstoqueRouteImport } from './routes/estoque'
 import { Route as CotacoesRouteImport } from './routes/cotacoes'
+import { Route as AssistenteRouteImport } from './routes/assistente'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SolicitacoesRoute = SolicitacoesRouteImport.update({
@@ -53,6 +54,11 @@ const CotacoesRoute = CotacoesRouteImport.update({
   path: '/cotacoes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssistenteRoute = AssistenteRouteImport.update({
+  id: '/assistente',
+  path: '/assistente',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -61,6 +67,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistente': typeof AssistenteRoute
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistente': typeof AssistenteRoute
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistente': typeof AssistenteRoute
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/assistente'
     | '/cotacoes'
     | '/estoque'
     | '/fornecedores'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/assistente'
     | '/cotacoes'
     | '/estoque'
     | '/fornecedores'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/assistente'
     | '/cotacoes'
     | '/estoque'
     | '/fornecedores'
@@ -125,6 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistenteRoute: typeof AssistenteRoute
   CotacoesRoute: typeof CotacoesRoute
   EstoqueRoute: typeof EstoqueRoute
   FornecedoresRoute: typeof FornecedoresRoute
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CotacoesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/assistente': {
+      id: '/assistente'
+      path: '/assistente'
+      fullPath: '/assistente'
+      preLoaderRoute: typeof AssistenteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -197,6 +217,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistenteRoute: AssistenteRoute,
   CotacoesRoute: CotacoesRoute,
   EstoqueRoute: EstoqueRoute,
   FornecedoresRoute: FornecedoresRoute,
