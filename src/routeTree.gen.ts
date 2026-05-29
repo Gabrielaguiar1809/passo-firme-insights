@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolicitacoesRouteImport } from './routes/solicitacoes'
+import { Route as ProdutosRouteImport } from './routes/produtos'
 import { Route as PedidosRouteImport } from './routes/pedidos'
 import { Route as FornecedoresRouteImport } from './routes/fornecedores'
 import { Route as EstoqueRouteImport } from './routes/estoque'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const SolicitacoesRoute = SolicitacoesRouteImport.update({
   id: '/solicitacoes',
   path: '/solicitacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdutosRoute = ProdutosRouteImport.update({
+  id: '/produtos',
+  path: '/produtos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PedidosRoute = PedidosRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
   '/pedidos': typeof PedidosRoute
+  '/produtos': typeof ProdutosRoute
   '/solicitacoes': typeof SolicitacoesRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
   '/pedidos': typeof PedidosRoute
+  '/produtos': typeof ProdutosRoute
   '/solicitacoes': typeof SolicitacoesRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/estoque': typeof EstoqueRoute
   '/fornecedores': typeof FornecedoresRoute
   '/pedidos': typeof PedidosRoute
+  '/produtos': typeof ProdutosRoute
   '/solicitacoes': typeof SolicitacoesRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/estoque'
     | '/fornecedores'
     | '/pedidos'
+    | '/produtos'
     | '/solicitacoes'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/estoque'
     | '/fornecedores'
     | '/pedidos'
+    | '/produtos'
     | '/solicitacoes'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/estoque'
     | '/fornecedores'
     | '/pedidos'
+    | '/produtos'
     | '/solicitacoes'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   EstoqueRoute: typeof EstoqueRoute
   FornecedoresRoute: typeof FornecedoresRoute
   PedidosRoute: typeof PedidosRoute
+  ProdutosRoute: typeof ProdutosRoute
   SolicitacoesRoute: typeof SolicitacoesRoute
 }
 
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/solicitacoes'
       fullPath: '/solicitacoes'
       preLoaderRoute: typeof SolicitacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produtos': {
+      id: '/produtos'
+      path: '/produtos'
+      fullPath: '/produtos'
+      preLoaderRoute: typeof ProdutosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pedidos': {
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   EstoqueRoute: EstoqueRoute,
   FornecedoresRoute: FornecedoresRoute,
   PedidosRoute: PedidosRoute,
+  ProdutosRoute: ProdutosRoute,
   SolicitacoesRoute: SolicitacoesRoute,
 }
 export const routeTree = rootRouteImport
