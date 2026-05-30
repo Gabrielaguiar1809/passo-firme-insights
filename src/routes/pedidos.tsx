@@ -12,7 +12,7 @@ export const Route = createFileRoute("/pedidos")({
 });
 
 function PedidosPage() {
-  const { pedidos, fornecedores, addPedido, updatePedido } = useData();
+  const { pedidos, fornecedores, addPedido, updatePedido, receberPedido } = useData();
   const fMap = useMemo(() => Object.fromEntries(fornecedores.map((f) => [f.id, f.nome])), [fornecedores]);
 
   const cols: Column<PedidoCompra>[] = [
@@ -48,15 +48,17 @@ function PedidosPage() {
         toast.success("Pedido de compra criado");
       }}
       onRowClick={(r) => {
+        if (r.status === "Em Transporte") {
+          receberPedido(r.id);
+          toast.success(`Pedido ${r.numero} recebido — estoque atualizado automaticamente`);
+          return;
+        }
         const next: Record<PedidoCompra["status"], PedidoCompra["status"]> = {
           Emitido: "Confirmado", Confirmado: "Em Transporte", "Em Transporte": "Recebido",
           Recebido: "Atrasado", Atrasado: "Emitido",
         };
         const ns = next[r.status];
-        updatePedido(r.id, {
-          status: ns,
-          entregaRealizada: ns === "Recebido" ? new Date().toISOString().slice(0, 10) : r.entregaRealizada,
-        });
+        updatePedido(r.id, { status: ns });
         toast.info(`Pedido ${r.numero}: ${ns}`);
       }}
     />

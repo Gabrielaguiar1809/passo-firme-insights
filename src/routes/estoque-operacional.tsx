@@ -1,46 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useData } from "@/lib/passofirme/store";
-import { CATEGORIAS_MP, type CategoriaMP } from "@/lib/passofirme/data";
+import { CATEGORIAS_OP, type CategoriaOP } from "@/lib/passofirme/data";
 import { StockCard } from "@/components/passofirme/StockCard";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Package } from "lucide-react";
+import { ChevronLeft, Boxes } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/estoque")({
-  head: () => ({ meta: [{ title: "Estoque MP — PassoFirme" }] }),
-  component: EstoqueMpPage,
+export const Route = createFileRoute("/estoque-operacional")({
+  head: () => ({ meta: [{ title: "Estoque Operacional — PassoFirme" }] }),
+  component: EstoqueOpPage,
 });
 
-function EstoqueMpPage() {
-  const { materias, addRequisicao, requisicoes } = useData();
-  const [cat, setCat] = useState<CategoriaMP | null>(null);
+function EstoqueOpPage() {
+  const { itensOperacional, addRequisicao, requisicoes } = useData();
+  const [cat, setCat] = useState<CategoriaOP | null>(null);
 
   const counts = useMemo(() => {
     const map: Record<string, { total: number; ruptura: number }> = {};
-    CATEGORIAS_MP.forEach((c) => (map[c.nome] = { total: 0, ruptura: 0 }));
-    materias.forEach((m) => {
+    CATEGORIAS_OP.forEach((c) => (map[c.nome] = { total: 0, ruptura: 0 }));
+    itensOperacional.forEach((m) => {
       if (!map[m.categoria]) map[m.categoria] = { total: 0, ruptura: 0 };
       map[m.categoria].total += 1;
       if (m.estoqueAtual < m.estoqueMinimo) map[m.categoria].ruptura += 1;
     });
     return map;
-  }, [materias]);
+  }, [itensOperacional]);
 
-  const itens = cat ? materias.filter((m) => m.categoria === cat) : [];
+  const itens = cat ? itensOperacional.filter((m) => m.categoria === cat) : [];
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-2">
-          <Package className="h-6 w-6 text-primary" /> Estoque de Matéria-Prima
+          <Boxes className="h-6 w-6 text-primary" /> Estoque Operacional
         </h1>
-        <p className="text-sm text-muted-foreground">Selecione uma categoria para ver os itens. O estoque é atualizado somente por movimentações.</p>
+        <p className="text-sm text-muted-foreground">Itens de uso interno: limpeza, escritório, EPI, manutenção, copa e tecnologia.</p>
       </div>
 
       {!cat ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {CATEGORIAS_MP.map((c) => {
+          {CATEGORIAS_OP.map((c) => {
             const info = counts[c.nome] ?? { total: 0, ruptura: 0 };
             return (
               <button
@@ -81,16 +81,16 @@ function EstoqueMpPage() {
                   item={i}
                   onSolicitar={(it) => {
                     addRequisicao({
-                      numero: `REQ-${String(2000 + requisicoes.length).padStart(5, "0")}`,
-                      setor: "Almoxarifado",
-                      itemTipo: "MP",
+                      numero: `REQ-${String(3000 + requisicoes.length).padStart(5, "0")}`,
+                      setor: "Administrativo",
+                      itemTipo: "OP",
                       itemId: it.id,
                       item: it.nome,
-                      quantidade: Math.max(50, Math.ceil(i.consumoMedioDiario * 10)),
+                      quantidade: Math.max(2, Math.ceil(i.consumoMedioDiario * 10)),
                       data: new Date().toISOString().slice(0, 10),
-                      prioridade: i.estoqueAtual < i.estoqueMinimo ? "Crítica" : "Alta",
+                      prioridade: i.estoqueAtual < i.estoqueMinimo ? "Alta" : "Média",
                       status: "Aberta",
-                      observacao: "Solicitação gerada a partir do estoque",
+                      observacao: "Reposição operacional",
                     });
                     toast.success(`Requisição criada para ${it.nome}`);
                   }}
