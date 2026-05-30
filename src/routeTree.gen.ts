@@ -10,14 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RequisicoesRouteImport } from './routes/requisicoes'
-import { Route as PlanejamentoRouteImport } from './routes/planejamento'
 import { Route as ProdutosRouteImport } from './routes/produtos'
+import { Route as PlanejamentoRouteImport } from './routes/planejamento'
 import { Route as PedidosRouteImport } from './routes/pedidos'
 import { Route as MovimentacoesRouteImport } from './routes/movimentacoes'
 import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as FornecedoresRouteImport } from './routes/fornecedores'
-import { Route as EstoqueRouteImport } from './routes/estoque'
 import { Route as EstoqueOperacionalRouteImport } from './routes/estoque-operacional'
+import { Route as EstoqueRouteImport } from './routes/estoque'
 import { Route as CotacoesRouteImport } from './routes/cotacoes'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as AssistenteRouteImport } from './routes/assistente'
@@ -28,14 +28,14 @@ const RequisicoesRoute = RequisicoesRouteImport.update({
   path: '/requisicoes',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PlanejamentoRoute = PlanejamentoRouteImport.update({
-  id: '/planejamento',
-  path: '/planejamento',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProdutosRoute = ProdutosRouteImport.update({
   id: '/produtos',
   path: '/produtos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanejamentoRoute = PlanejamentoRouteImport.update({
+  id: '/planejamento',
+  path: '/planejamento',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PedidosRoute = PedidosRouteImport.update({
@@ -58,14 +58,14 @@ const FornecedoresRoute = FornecedoresRouteImport.update({
   path: '/fornecedores',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EstoqueRoute = EstoqueRouteImport.update({
-  id: '/estoque',
-  path: '/estoque',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const EstoqueOperacionalRoute = EstoqueOperacionalRouteImport.update({
   id: '/estoque-operacional',
   path: '/estoque-operacional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstoqueRoute = EstoqueRouteImport.update({
+  id: '/estoque',
+  path: '/estoque',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CotacoesRoute = CotacoesRouteImport.update({
@@ -94,14 +94,14 @@ export interface FileRoutesByFullPath {
   '/assistente': typeof AssistenteRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
-  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/estoque': typeof EstoqueRoute
+  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
   '/movimentacoes': typeof MovimentacoesRoute
   '/pedidos': typeof PedidosRoute
-  '/produtos': typeof ProdutosRoute
   '/planejamento': typeof PlanejamentoRoute
+  '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
 }
 export interface FileRoutesByTo {
@@ -109,14 +109,14 @@ export interface FileRoutesByTo {
   '/assistente': typeof AssistenteRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
-  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/estoque': typeof EstoqueRoute
+  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
   '/movimentacoes': typeof MovimentacoesRoute
   '/pedidos': typeof PedidosRoute
-  '/produtos': typeof ProdutosRoute
   '/planejamento': typeof PlanejamentoRoute
+  '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
 }
 export interface FileRoutesById {
@@ -125,14 +125,14 @@ export interface FileRoutesById {
   '/assistente': typeof AssistenteRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
-  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/estoque': typeof EstoqueRoute
+  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
   '/movimentacoes': typeof MovimentacoesRoute
   '/pedidos': typeof PedidosRoute
-  '/produtos': typeof ProdutosRoute
   '/planejamento': typeof PlanejamentoRoute
+  '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
 }
 export interface FileRouteTypes {
@@ -142,14 +142,14 @@ export interface FileRouteTypes {
     | '/assistente'
     | '/configuracoes'
     | '/cotacoes'
-    | '/estoque-operacional'
     | '/estoque'
+    | '/estoque-operacional'
     | '/fornecedores'
     | '/indicadores'
     | '/movimentacoes'
     | '/pedidos'
-    | '/produtos'
     | '/planejamento'
+    | '/produtos'
     | '/requisicoes'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -157,14 +157,14 @@ export interface FileRouteTypes {
     | '/assistente'
     | '/configuracoes'
     | '/cotacoes'
-    | '/estoque-operacional'
     | '/estoque'
+    | '/estoque-operacional'
     | '/fornecedores'
     | '/indicadores'
     | '/movimentacoes'
     | '/pedidos'
-    | '/produtos'
     | '/planejamento'
+    | '/produtos'
     | '/requisicoes'
   id:
     | '__root__'
@@ -172,14 +172,14 @@ export interface FileRouteTypes {
     | '/assistente'
     | '/configuracoes'
     | '/cotacoes'
-    | '/estoque-operacional'
     | '/estoque'
+    | '/estoque-operacional'
     | '/fornecedores'
     | '/indicadores'
     | '/movimentacoes'
     | '/pedidos'
-    | '/produtos'
     | '/planejamento'
+    | '/produtos'
     | '/requisicoes'
   fileRoutesById: FileRoutesById
 }
@@ -188,14 +188,14 @@ export interface RootRouteChildren {
   AssistenteRoute: typeof AssistenteRoute
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   CotacoesRoute: typeof CotacoesRoute
-  EstoqueOperacionalRoute: typeof EstoqueOperacionalRoute
   EstoqueRoute: typeof EstoqueRoute
+  EstoqueOperacionalRoute: typeof EstoqueOperacionalRoute
   FornecedoresRoute: typeof FornecedoresRoute
   IndicadoresRoute: typeof IndicadoresRoute
   MovimentacoesRoute: typeof MovimentacoesRoute
   PedidosRoute: typeof PedidosRoute
-  ProdutosRoute: typeof ProdutosRoute
   PlanejamentoRoute: typeof PlanejamentoRoute
+  ProdutosRoute: typeof ProdutosRoute
   RequisicoesRoute: typeof RequisicoesRoute
 }
 
@@ -208,18 +208,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RequisicoesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/planejamento': {
-      id: '/planejamento'
-      path: '/planejamento'
-      fullPath: '/planejamento'
-      preLoaderRoute: typeof PlanejamentoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/produtos': {
       id: '/produtos'
       path: '/produtos'
       fullPath: '/produtos'
       preLoaderRoute: typeof ProdutosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planejamento': {
+      id: '/planejamento'
+      path: '/planejamento'
+      fullPath: '/planejamento'
+      preLoaderRoute: typeof PlanejamentoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pedidos': {
@@ -300,26 +300,16 @@ const rootRouteChildren: RootRouteChildren = {
   AssistenteRoute: AssistenteRoute,
   ConfiguracoesRoute: ConfiguracoesRoute,
   CotacoesRoute: CotacoesRoute,
-  EstoqueOperacionalRoute: EstoqueOperacionalRoute,
   EstoqueRoute: EstoqueRoute,
+  EstoqueOperacionalRoute: EstoqueOperacionalRoute,
   FornecedoresRoute: FornecedoresRoute,
   IndicadoresRoute: IndicadoresRoute,
   MovimentacoesRoute: MovimentacoesRoute,
   PedidosRoute: PedidosRoute,
-  ProdutosRoute: ProdutosRoute,
   PlanejamentoRoute: PlanejamentoRoute,
+  ProdutosRoute: ProdutosRoute,
   RequisicoesRoute: RequisicoesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
