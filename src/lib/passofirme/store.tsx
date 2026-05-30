@@ -48,13 +48,16 @@ interface Store {
   receberPedido: (id: string) => void;
 
   addMateria: (s: Omit<MateriaPrima, "id">) => void;
+  updateMateria: (id: string, patch: Partial<MateriaPrima>) => void;
   addItemOperacional: (s: Omit<ItemOperacional, "id">) => void;
+  updateItemOperacional: (id: string, patch: Partial<ItemOperacional>) => void;
 
   addPlanejamento: (s: Omit<Planejamento, "id">) => void;
   updatePlanejamento: (id: string, patch: Partial<Planejamento>) => void;
 
   registrarMovimentacao: (m: Omit<Movimentacao, "id">) => void;
   addProduto: (s: Omit<ProdutoAcabado, "id">) => void;
+  updateProduto: (id: string, patch: Partial<ProdutoAcabado>) => void;
 }
 
 const Ctx = createContext<Store | null>(null);
@@ -158,9 +161,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
     updateCotacao: cot.update, addCotacao: cot.add,
     updateFornecedor: forn.update, addFornecedor: forn.add,
     updatePedido: ped.update, addPedido: ped.add, receberPedido,
-    addMateria: mat.add, addItemOperacional: op.add,
+    addMateria: mat.add, updateMateria: mat.update,
+    addItemOperacional: op.add, updateItemOperacional: op.update,
     addPlanejamento: pl.add, updatePlanejamento: pl.update,
-    registrarMovimentacao, addProduto: prod.add,
+    registrarMovimentacao, addProduto: prod.add, updateProduto: prod.update,
   };
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
