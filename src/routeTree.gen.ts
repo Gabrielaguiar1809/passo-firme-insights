@@ -9,20 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SolicitacoesRouteImport } from './routes/solicitacoes'
+import { Route as RequisicoesRouteImport } from './routes/requisicoes'
 import { Route as ProdutosRouteImport } from './routes/produtos'
+import { Route as PlanejamentoRouteImport } from './routes/planejamento'
 import { Route as PedidosRouteImport } from './routes/pedidos'
+import { Route as MovimentacoesRouteImport } from './routes/movimentacoes'
 import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as FornecedoresRouteImport } from './routes/fornecedores'
+import { Route as EstoqueOperacionalRouteImport } from './routes/estoque-operacional'
 import { Route as EstoqueRouteImport } from './routes/estoque'
 import { Route as CotacoesRouteImport } from './routes/cotacoes'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as AssistenteRouteImport } from './routes/assistente'
 import { Route as IndexRouteImport } from './routes/index'
 
-const SolicitacoesRoute = SolicitacoesRouteImport.update({
-  id: '/solicitacoes',
-  path: '/solicitacoes',
+const RequisicoesRoute = RequisicoesRouteImport.update({
+  id: '/requisicoes',
+  path: '/requisicoes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProdutosRoute = ProdutosRouteImport.update({
@@ -30,9 +33,19 @@ const ProdutosRoute = ProdutosRouteImport.update({
   path: '/produtos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanejamentoRoute = PlanejamentoRouteImport.update({
+  id: '/planejamento',
+  path: '/planejamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PedidosRoute = PedidosRouteImport.update({
   id: '/pedidos',
   path: '/pedidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MovimentacoesRoute = MovimentacoesRouteImport.update({
+  id: '/movimentacoes',
+  path: '/movimentacoes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndicadoresRoute = IndicadoresRouteImport.update({
@@ -43,6 +56,11 @@ const IndicadoresRoute = IndicadoresRouteImport.update({
 const FornecedoresRoute = FornecedoresRouteImport.update({
   id: '/fornecedores',
   path: '/fornecedores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstoqueOperacionalRoute = EstoqueOperacionalRouteImport.update({
+  id: '/estoque-operacional',
+  path: '/estoque-operacional',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EstoqueRoute = EstoqueRouteImport.update({
@@ -77,11 +95,14 @@ export interface FileRoutesByFullPath {
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
+  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
+  '/movimentacoes': typeof MovimentacoesRoute
   '/pedidos': typeof PedidosRoute
+  '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
-  '/solicitacoes': typeof SolicitacoesRoute
+  '/requisicoes': typeof RequisicoesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -89,11 +110,14 @@ export interface FileRoutesByTo {
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
+  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
+  '/movimentacoes': typeof MovimentacoesRoute
   '/pedidos': typeof PedidosRoute
+  '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
-  '/solicitacoes': typeof SolicitacoesRoute
+  '/requisicoes': typeof RequisicoesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -102,11 +126,14 @@ export interface FileRoutesById {
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
   '/estoque': typeof EstoqueRoute
+  '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
+  '/movimentacoes': typeof MovimentacoesRoute
   '/pedidos': typeof PedidosRoute
+  '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
-  '/solicitacoes': typeof SolicitacoesRoute
+  '/requisicoes': typeof RequisicoesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -116,11 +143,14 @@ export interface FileRouteTypes {
     | '/configuracoes'
     | '/cotacoes'
     | '/estoque'
+    | '/estoque-operacional'
     | '/fornecedores'
     | '/indicadores'
+    | '/movimentacoes'
     | '/pedidos'
+    | '/planejamento'
     | '/produtos'
-    | '/solicitacoes'
+    | '/requisicoes'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -128,11 +158,14 @@ export interface FileRouteTypes {
     | '/configuracoes'
     | '/cotacoes'
     | '/estoque'
+    | '/estoque-operacional'
     | '/fornecedores'
     | '/indicadores'
+    | '/movimentacoes'
     | '/pedidos'
+    | '/planejamento'
     | '/produtos'
-    | '/solicitacoes'
+    | '/requisicoes'
   id:
     | '__root__'
     | '/'
@@ -140,11 +173,14 @@ export interface FileRouteTypes {
     | '/configuracoes'
     | '/cotacoes'
     | '/estoque'
+    | '/estoque-operacional'
     | '/fornecedores'
     | '/indicadores'
+    | '/movimentacoes'
     | '/pedidos'
+    | '/planejamento'
     | '/produtos'
-    | '/solicitacoes'
+    | '/requisicoes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -153,20 +189,23 @@ export interface RootRouteChildren {
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   CotacoesRoute: typeof CotacoesRoute
   EstoqueRoute: typeof EstoqueRoute
+  EstoqueOperacionalRoute: typeof EstoqueOperacionalRoute
   FornecedoresRoute: typeof FornecedoresRoute
   IndicadoresRoute: typeof IndicadoresRoute
+  MovimentacoesRoute: typeof MovimentacoesRoute
   PedidosRoute: typeof PedidosRoute
+  PlanejamentoRoute: typeof PlanejamentoRoute
   ProdutosRoute: typeof ProdutosRoute
-  SolicitacoesRoute: typeof SolicitacoesRoute
+  RequisicoesRoute: typeof RequisicoesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/solicitacoes': {
-      id: '/solicitacoes'
-      path: '/solicitacoes'
-      fullPath: '/solicitacoes'
-      preLoaderRoute: typeof SolicitacoesRouteImport
+    '/requisicoes': {
+      id: '/requisicoes'
+      path: '/requisicoes'
+      fullPath: '/requisicoes'
+      preLoaderRoute: typeof RequisicoesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/produtos': {
@@ -176,11 +215,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProdutosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/planejamento': {
+      id: '/planejamento'
+      path: '/planejamento'
+      fullPath: '/planejamento'
+      preLoaderRoute: typeof PlanejamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pedidos': {
       id: '/pedidos'
       path: '/pedidos'
       fullPath: '/pedidos'
       preLoaderRoute: typeof PedidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/movimentacoes': {
+      id: '/movimentacoes'
+      path: '/movimentacoes'
+      fullPath: '/movimentacoes'
+      preLoaderRoute: typeof MovimentacoesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/indicadores': {
@@ -195,6 +248,13 @@ declare module '@tanstack/react-router' {
       path: '/fornecedores'
       fullPath: '/fornecedores'
       preLoaderRoute: typeof FornecedoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estoque-operacional': {
+      id: '/estoque-operacional'
+      path: '/estoque-operacional'
+      fullPath: '/estoque-operacional'
+      preLoaderRoute: typeof EstoqueOperacionalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/estoque': {
@@ -241,11 +301,14 @@ const rootRouteChildren: RootRouteChildren = {
   ConfiguracoesRoute: ConfiguracoesRoute,
   CotacoesRoute: CotacoesRoute,
   EstoqueRoute: EstoqueRoute,
+  EstoqueOperacionalRoute: EstoqueOperacionalRoute,
   FornecedoresRoute: FornecedoresRoute,
   IndicadoresRoute: IndicadoresRoute,
+  MovimentacoesRoute: MovimentacoesRoute,
   PedidosRoute: PedidosRoute,
+  PlanejamentoRoute: PlanejamentoRoute,
   ProdutosRoute: ProdutosRoute,
-  SolicitacoesRoute: SolicitacoesRoute,
+  RequisicoesRoute: RequisicoesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

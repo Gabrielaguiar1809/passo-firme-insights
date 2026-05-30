@@ -10,6 +10,9 @@ import {
   TrendingUp,
   Settings,
   Sparkles,
+  Boxes,
+  ArrowLeftRight,
+  Target,
 } from "lucide-react";
 import {
   Sidebar,
@@ -25,11 +28,14 @@ import {
 
 const items = [
   { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Solicitações", url: "/solicitacoes", icon: ShoppingCart },
+  { title: "Planejamento", url: "/planejamento", icon: Target },
+  { title: "Requisições", url: "/requisicoes", icon: ShoppingCart },
   { title: "Cotações", url: "/cotacoes", icon: ClipboardList },
   { title: "Fornecedores", url: "/fornecedores", icon: Factory },
   { title: "Pedidos de Compra", url: "/pedidos", icon: PackageCheck },
   { title: "Estoque MP", url: "/estoque", icon: Package },
+  { title: "Estoque Operacional", url: "/estoque-operacional", icon: Boxes },
+  { title: "Movimentações", url: "/movimentacoes", icon: ArrowLeftRight },
   { title: "Produto Acabado", url: "/produtos", icon: Footprints },
   { title: "Indicadores", url: "/indicadores", icon: TrendingUp },
   { title: "Assistente IA", url: "/assistente", icon: Sparkles },
