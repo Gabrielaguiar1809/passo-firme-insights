@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useData, useIndicadores } from "@/lib/passofirme/store";
 import { KpiCard } from "@/components/passofirme/ui-bits";
 import { brl } from "@/components/passofirme/ui-bits";
-import { AlertTriangle, ClipboardList, PackageX, ShoppingCart, Sparkles, Target, TrendingUp, Truck } from "lucide-react";
+import { AlertTriangle, ClipboardList, DollarSign, Factory, PackageX, ShoppingCart, Sparkles, Target, TrendingUp, Truck } from "lucide-react";
 import {
   Bar, BarChart, CartesianGrid, Cell, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
@@ -28,10 +28,14 @@ function Dashboard() {
         <p className="text-sm text-muted-foreground">Visão geral da operação de compras e estoque.</p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-        <KpiCard label="Compras Pendentes" value={ind.comprasPendentes} icon={<ShoppingCart className="h-5 w-5" />} tone="info" hint="Solicitações em aberto" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+        <KpiCard label="Vendas do Mês" value={brl(ind.vendasMes)} icon={<DollarSign className="h-5 w-5" />} tone="success" hint="Pedidos de venda" />
+        <KpiCard label="Produção do Mês" value={`${ind.producaoMes} pares`} icon={<Factory className="h-5 w-5" />} tone="info" hint="OPs em andamento" />
+        <KpiCard label="Compras Pendentes" value={ind.comprasPendentes} icon={<ShoppingCart className="h-5 w-5" />} tone="info" hint="Requisições em aberto" />
+        <KpiCard label="Itens Críticos" value={ind.itensRuptura} icon={<PackageX className="h-5 w-5" />} tone="danger" hint="Abaixo do mínimo" />
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <KpiCard label="Economia Gerada" value={brl(ind.saving)} icon={<TrendingUp className="h-5 w-5" />} tone="success" hint="Saving acumulado" />
-        <KpiCard label="Itens em Ruptura" value={ind.itensRuptura} icon={<PackageX className="h-5 w-5" />} tone="danger" hint="Abaixo do estoque mínimo" />
         <KpiCard label="OTIF Médio" value={`${ind.otif}%`} icon={<Target className="h-5 w-5" />} tone={ind.otif >= 90 ? "success" : "warning"} hint="Entrega no prazo + completa" />
         <KpiCard label="IQF Médio" value={ind.iqfMedio} icon={<ClipboardList className="h-5 w-5" />} tone="default" hint={`${fornecedores.length} fornecedores`} />
         <KpiCard label="Pedidos em Aberto" value={ind.pedidosAberto} icon={<Truck className="h-5 w-5" />} tone="warning" hint="Ainda não recebidos" />
