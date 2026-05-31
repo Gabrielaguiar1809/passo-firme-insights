@@ -22,6 +22,30 @@ import { Route as CotacoesRouteImport } from './routes/cotacoes'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as AssistenteRouteImport } from './routes/assistente'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VisaoSugestoesRouteImport } from './routes/visao.sugestoes'
+import { Route as VisaoPlanoAcaoRouteImport } from './routes/visao.plano-acao'
+import { Route as VisaoObservacoesRouteImport } from './routes/visao.observacoes'
+import { Route as VendasPedidosRouteImport } from './routes/vendas.pedidos'
+import { Route as VendasIndicadoresRouteImport } from './routes/vendas.indicadores'
+import { Route as VendasDisponibilidadeRouteImport } from './routes/vendas.disponibilidade'
+import { Route as VendasCrmB2cRouteImport } from './routes/vendas.crm-b2c'
+import { Route as VendasCrmB2bRouteImport } from './routes/vendas.crm-b2b'
+import { Route as ProducaoProgramacaoRouteImport } from './routes/producao.programacao'
+import { Route as ProducaoOrdensRouteImport } from './routes/producao.ordens'
+import { Route as ProducaoIndicadoresRouteImport } from './routes/producao.indicadores'
+import { Route as ProducaoGargalosRouteImport } from './routes/producao.gargalos'
+import { Route as ProducaoConsumoRouteImport } from './routes/producao.consumo'
+import { Route as InteligenciaRelatoriosRouteImport } from './routes/inteligencia.relatorios'
+import { Route as InteligenciaHistoricoRouteImport } from './routes/inteligencia.historico'
+import { Route as EstoqueRecebimentosRouteImport } from './routes/estoque.recebimentos'
+import { Route as EstoqueIndicadoresRouteImport } from './routes/estoque.indicadores'
+import { Route as EstoqueDevolucoesRouteImport } from './routes/estoque.devolucoes'
+import { Route as ComprasIndicadoresRouteImport } from './routes/compras.indicadores'
+import { Route as AdminSolicitacoesRouteImport } from './routes/admin.solicitacoes'
+import { Route as AdminLimpezaRouteImport } from './routes/admin.limpeza'
+import { Route as AdminIndicadoresRouteImport } from './routes/admin.indicadores'
+import { Route as AdminEscritorioRouteImport } from './routes/admin.escritorio'
+import { Route as AdminEpiRouteImport } from './routes/admin.epi'
 
 const RequisicoesRoute = RequisicoesRouteImport.update({
   id: '/requisicoes',
@@ -88,13 +112,133 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VisaoSugestoesRoute = VisaoSugestoesRouteImport.update({
+  id: '/visao/sugestoes',
+  path: '/visao/sugestoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisaoPlanoAcaoRoute = VisaoPlanoAcaoRouteImport.update({
+  id: '/visao/plano-acao',
+  path: '/visao/plano-acao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisaoObservacoesRoute = VisaoObservacoesRouteImport.update({
+  id: '/visao/observacoes',
+  path: '/visao/observacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendasPedidosRoute = VendasPedidosRouteImport.update({
+  id: '/vendas/pedidos',
+  path: '/vendas/pedidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendasIndicadoresRoute = VendasIndicadoresRouteImport.update({
+  id: '/vendas/indicadores',
+  path: '/vendas/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendasDisponibilidadeRoute = VendasDisponibilidadeRouteImport.update({
+  id: '/vendas/disponibilidade',
+  path: '/vendas/disponibilidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendasCrmB2cRoute = VendasCrmB2cRouteImport.update({
+  id: '/vendas/crm-b2c',
+  path: '/vendas/crm-b2c',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendasCrmB2bRoute = VendasCrmB2bRouteImport.update({
+  id: '/vendas/crm-b2b',
+  path: '/vendas/crm-b2b',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducaoProgramacaoRoute = ProducaoProgramacaoRouteImport.update({
+  id: '/producao/programacao',
+  path: '/producao/programacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducaoOrdensRoute = ProducaoOrdensRouteImport.update({
+  id: '/producao/ordens',
+  path: '/producao/ordens',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducaoIndicadoresRoute = ProducaoIndicadoresRouteImport.update({
+  id: '/producao/indicadores',
+  path: '/producao/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducaoGargalosRoute = ProducaoGargalosRouteImport.update({
+  id: '/producao/gargalos',
+  path: '/producao/gargalos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducaoConsumoRoute = ProducaoConsumoRouteImport.update({
+  id: '/producao/consumo',
+  path: '/producao/consumo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InteligenciaRelatoriosRoute = InteligenciaRelatoriosRouteImport.update({
+  id: '/inteligencia/relatorios',
+  path: '/inteligencia/relatorios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InteligenciaHistoricoRoute = InteligenciaHistoricoRouteImport.update({
+  id: '/inteligencia/historico',
+  path: '/inteligencia/historico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstoqueRecebimentosRoute = EstoqueRecebimentosRouteImport.update({
+  id: '/recebimentos',
+  path: '/recebimentos',
+  getParentRoute: () => EstoqueRoute,
+} as any)
+const EstoqueIndicadoresRoute = EstoqueIndicadoresRouteImport.update({
+  id: '/indicadores',
+  path: '/indicadores',
+  getParentRoute: () => EstoqueRoute,
+} as any)
+const EstoqueDevolucoesRoute = EstoqueDevolucoesRouteImport.update({
+  id: '/devolucoes',
+  path: '/devolucoes',
+  getParentRoute: () => EstoqueRoute,
+} as any)
+const ComprasIndicadoresRoute = ComprasIndicadoresRouteImport.update({
+  id: '/compras/indicadores',
+  path: '/compras/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSolicitacoesRoute = AdminSolicitacoesRouteImport.update({
+  id: '/admin/solicitacoes',
+  path: '/admin/solicitacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLimpezaRoute = AdminLimpezaRouteImport.update({
+  id: '/admin/limpeza',
+  path: '/admin/limpeza',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndicadoresRoute = AdminIndicadoresRouteImport.update({
+  id: '/admin/indicadores',
+  path: '/admin/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEscritorioRoute = AdminEscritorioRouteImport.update({
+  id: '/admin/escritorio',
+  path: '/admin/escritorio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEpiRoute = AdminEpiRouteImport.update({
+  id: '/admin/epi',
+  path: '/admin/epi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assistente': typeof AssistenteRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
-  '/estoque': typeof EstoqueRoute
+  '/estoque': typeof EstoqueRouteWithChildren
   '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
@@ -103,13 +247,37 @@ export interface FileRoutesByFullPath {
   '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
+  '/admin/epi': typeof AdminEpiRoute
+  '/admin/escritorio': typeof AdminEscritorioRoute
+  '/admin/indicadores': typeof AdminIndicadoresRoute
+  '/admin/limpeza': typeof AdminLimpezaRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/indicadores': typeof ComprasIndicadoresRoute
+  '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
+  '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/inteligencia/historico': typeof InteligenciaHistoricoRoute
+  '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/producao/consumo': typeof ProducaoConsumoRoute
+  '/producao/gargalos': typeof ProducaoGargalosRoute
+  '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/ordens': typeof ProducaoOrdensRoute
+  '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/vendas/crm-b2b': typeof VendasCrmB2bRoute
+  '/vendas/crm-b2c': typeof VendasCrmB2cRoute
+  '/vendas/disponibilidade': typeof VendasDisponibilidadeRoute
+  '/vendas/indicadores': typeof VendasIndicadoresRoute
+  '/vendas/pedidos': typeof VendasPedidosRoute
+  '/visao/observacoes': typeof VisaoObservacoesRoute
+  '/visao/plano-acao': typeof VisaoPlanoAcaoRoute
+  '/visao/sugestoes': typeof VisaoSugestoesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assistente': typeof AssistenteRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
-  '/estoque': typeof EstoqueRoute
+  '/estoque': typeof EstoqueRouteWithChildren
   '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
@@ -118,6 +286,30 @@ export interface FileRoutesByTo {
   '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
+  '/admin/epi': typeof AdminEpiRoute
+  '/admin/escritorio': typeof AdminEscritorioRoute
+  '/admin/indicadores': typeof AdminIndicadoresRoute
+  '/admin/limpeza': typeof AdminLimpezaRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/indicadores': typeof ComprasIndicadoresRoute
+  '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
+  '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/inteligencia/historico': typeof InteligenciaHistoricoRoute
+  '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/producao/consumo': typeof ProducaoConsumoRoute
+  '/producao/gargalos': typeof ProducaoGargalosRoute
+  '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/ordens': typeof ProducaoOrdensRoute
+  '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/vendas/crm-b2b': typeof VendasCrmB2bRoute
+  '/vendas/crm-b2c': typeof VendasCrmB2cRoute
+  '/vendas/disponibilidade': typeof VendasDisponibilidadeRoute
+  '/vendas/indicadores': typeof VendasIndicadoresRoute
+  '/vendas/pedidos': typeof VendasPedidosRoute
+  '/visao/observacoes': typeof VisaoObservacoesRoute
+  '/visao/plano-acao': typeof VisaoPlanoAcaoRoute
+  '/visao/sugestoes': typeof VisaoSugestoesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,7 +317,7 @@ export interface FileRoutesById {
   '/assistente': typeof AssistenteRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/cotacoes': typeof CotacoesRoute
-  '/estoque': typeof EstoqueRoute
+  '/estoque': typeof EstoqueRouteWithChildren
   '/estoque-operacional': typeof EstoqueOperacionalRoute
   '/fornecedores': typeof FornecedoresRoute
   '/indicadores': typeof IndicadoresRoute
@@ -134,6 +326,30 @@ export interface FileRoutesById {
   '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
+  '/admin/epi': typeof AdminEpiRoute
+  '/admin/escritorio': typeof AdminEscritorioRoute
+  '/admin/indicadores': typeof AdminIndicadoresRoute
+  '/admin/limpeza': typeof AdminLimpezaRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/indicadores': typeof ComprasIndicadoresRoute
+  '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
+  '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/inteligencia/historico': typeof InteligenciaHistoricoRoute
+  '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/producao/consumo': typeof ProducaoConsumoRoute
+  '/producao/gargalos': typeof ProducaoGargalosRoute
+  '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/ordens': typeof ProducaoOrdensRoute
+  '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/vendas/crm-b2b': typeof VendasCrmB2bRoute
+  '/vendas/crm-b2c': typeof VendasCrmB2cRoute
+  '/vendas/disponibilidade': typeof VendasDisponibilidadeRoute
+  '/vendas/indicadores': typeof VendasIndicadoresRoute
+  '/vendas/pedidos': typeof VendasPedidosRoute
+  '/visao/observacoes': typeof VisaoObservacoesRoute
+  '/visao/plano-acao': typeof VisaoPlanoAcaoRoute
+  '/visao/sugestoes': typeof VisaoSugestoesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +367,30 @@ export interface FileRouteTypes {
     | '/planejamento'
     | '/produtos'
     | '/requisicoes'
+    | '/admin/epi'
+    | '/admin/escritorio'
+    | '/admin/indicadores'
+    | '/admin/limpeza'
+    | '/admin/solicitacoes'
+    | '/compras/indicadores'
+    | '/estoque/devolucoes'
+    | '/estoque/indicadores'
+    | '/estoque/recebimentos'
+    | '/inteligencia/historico'
+    | '/inteligencia/relatorios'
+    | '/producao/consumo'
+    | '/producao/gargalos'
+    | '/producao/indicadores'
+    | '/producao/ordens'
+    | '/producao/programacao'
+    | '/vendas/crm-b2b'
+    | '/vendas/crm-b2c'
+    | '/vendas/disponibilidade'
+    | '/vendas/indicadores'
+    | '/vendas/pedidos'
+    | '/visao/observacoes'
+    | '/visao/plano-acao'
+    | '/visao/sugestoes'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +406,30 @@ export interface FileRouteTypes {
     | '/planejamento'
     | '/produtos'
     | '/requisicoes'
+    | '/admin/epi'
+    | '/admin/escritorio'
+    | '/admin/indicadores'
+    | '/admin/limpeza'
+    | '/admin/solicitacoes'
+    | '/compras/indicadores'
+    | '/estoque/devolucoes'
+    | '/estoque/indicadores'
+    | '/estoque/recebimentos'
+    | '/inteligencia/historico'
+    | '/inteligencia/relatorios'
+    | '/producao/consumo'
+    | '/producao/gargalos'
+    | '/producao/indicadores'
+    | '/producao/ordens'
+    | '/producao/programacao'
+    | '/vendas/crm-b2b'
+    | '/vendas/crm-b2c'
+    | '/vendas/disponibilidade'
+    | '/vendas/indicadores'
+    | '/vendas/pedidos'
+    | '/visao/observacoes'
+    | '/visao/plano-acao'
+    | '/visao/sugestoes'
   id:
     | '__root__'
     | '/'
@@ -181,6 +445,30 @@ export interface FileRouteTypes {
     | '/planejamento'
     | '/produtos'
     | '/requisicoes'
+    | '/admin/epi'
+    | '/admin/escritorio'
+    | '/admin/indicadores'
+    | '/admin/limpeza'
+    | '/admin/solicitacoes'
+    | '/compras/indicadores'
+    | '/estoque/devolucoes'
+    | '/estoque/indicadores'
+    | '/estoque/recebimentos'
+    | '/inteligencia/historico'
+    | '/inteligencia/relatorios'
+    | '/producao/consumo'
+    | '/producao/gargalos'
+    | '/producao/indicadores'
+    | '/producao/ordens'
+    | '/producao/programacao'
+    | '/vendas/crm-b2b'
+    | '/vendas/crm-b2c'
+    | '/vendas/disponibilidade'
+    | '/vendas/indicadores'
+    | '/vendas/pedidos'
+    | '/visao/observacoes'
+    | '/visao/plano-acao'
+    | '/visao/sugestoes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -188,7 +476,7 @@ export interface RootRouteChildren {
   AssistenteRoute: typeof AssistenteRoute
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   CotacoesRoute: typeof CotacoesRoute
-  EstoqueRoute: typeof EstoqueRoute
+  EstoqueRoute: typeof EstoqueRouteWithChildren
   EstoqueOperacionalRoute: typeof EstoqueOperacionalRoute
   FornecedoresRoute: typeof FornecedoresRoute
   IndicadoresRoute: typeof IndicadoresRoute
@@ -197,6 +485,27 @@ export interface RootRouteChildren {
   PlanejamentoRoute: typeof PlanejamentoRoute
   ProdutosRoute: typeof ProdutosRoute
   RequisicoesRoute: typeof RequisicoesRoute
+  AdminEpiRoute: typeof AdminEpiRoute
+  AdminEscritorioRoute: typeof AdminEscritorioRoute
+  AdminIndicadoresRoute: typeof AdminIndicadoresRoute
+  AdminLimpezaRoute: typeof AdminLimpezaRoute
+  AdminSolicitacoesRoute: typeof AdminSolicitacoesRoute
+  ComprasIndicadoresRoute: typeof ComprasIndicadoresRoute
+  InteligenciaHistoricoRoute: typeof InteligenciaHistoricoRoute
+  InteligenciaRelatoriosRoute: typeof InteligenciaRelatoriosRoute
+  ProducaoConsumoRoute: typeof ProducaoConsumoRoute
+  ProducaoGargalosRoute: typeof ProducaoGargalosRoute
+  ProducaoIndicadoresRoute: typeof ProducaoIndicadoresRoute
+  ProducaoOrdensRoute: typeof ProducaoOrdensRoute
+  ProducaoProgramacaoRoute: typeof ProducaoProgramacaoRoute
+  VendasCrmB2bRoute: typeof VendasCrmB2bRoute
+  VendasCrmB2cRoute: typeof VendasCrmB2cRoute
+  VendasDisponibilidadeRoute: typeof VendasDisponibilidadeRoute
+  VendasIndicadoresRoute: typeof VendasIndicadoresRoute
+  VendasPedidosRoute: typeof VendasPedidosRoute
+  VisaoObservacoesRoute: typeof VisaoObservacoesRoute
+  VisaoPlanoAcaoRoute: typeof VisaoPlanoAcaoRoute
+  VisaoSugestoesRoute: typeof VisaoSugestoesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,15 +601,198 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/visao/sugestoes': {
+      id: '/visao/sugestoes'
+      path: '/visao/sugestoes'
+      fullPath: '/visao/sugestoes'
+      preLoaderRoute: typeof VisaoSugestoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visao/plano-acao': {
+      id: '/visao/plano-acao'
+      path: '/visao/plano-acao'
+      fullPath: '/visao/plano-acao'
+      preLoaderRoute: typeof VisaoPlanoAcaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visao/observacoes': {
+      id: '/visao/observacoes'
+      path: '/visao/observacoes'
+      fullPath: '/visao/observacoes'
+      preLoaderRoute: typeof VisaoObservacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendas/pedidos': {
+      id: '/vendas/pedidos'
+      path: '/vendas/pedidos'
+      fullPath: '/vendas/pedidos'
+      preLoaderRoute: typeof VendasPedidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendas/indicadores': {
+      id: '/vendas/indicadores'
+      path: '/vendas/indicadores'
+      fullPath: '/vendas/indicadores'
+      preLoaderRoute: typeof VendasIndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendas/disponibilidade': {
+      id: '/vendas/disponibilidade'
+      path: '/vendas/disponibilidade'
+      fullPath: '/vendas/disponibilidade'
+      preLoaderRoute: typeof VendasDisponibilidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendas/crm-b2c': {
+      id: '/vendas/crm-b2c'
+      path: '/vendas/crm-b2c'
+      fullPath: '/vendas/crm-b2c'
+      preLoaderRoute: typeof VendasCrmB2cRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendas/crm-b2b': {
+      id: '/vendas/crm-b2b'
+      path: '/vendas/crm-b2b'
+      fullPath: '/vendas/crm-b2b'
+      preLoaderRoute: typeof VendasCrmB2bRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producao/programacao': {
+      id: '/producao/programacao'
+      path: '/producao/programacao'
+      fullPath: '/producao/programacao'
+      preLoaderRoute: typeof ProducaoProgramacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producao/ordens': {
+      id: '/producao/ordens'
+      path: '/producao/ordens'
+      fullPath: '/producao/ordens'
+      preLoaderRoute: typeof ProducaoOrdensRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producao/indicadores': {
+      id: '/producao/indicadores'
+      path: '/producao/indicadores'
+      fullPath: '/producao/indicadores'
+      preLoaderRoute: typeof ProducaoIndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producao/gargalos': {
+      id: '/producao/gargalos'
+      path: '/producao/gargalos'
+      fullPath: '/producao/gargalos'
+      preLoaderRoute: typeof ProducaoGargalosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producao/consumo': {
+      id: '/producao/consumo'
+      path: '/producao/consumo'
+      fullPath: '/producao/consumo'
+      preLoaderRoute: typeof ProducaoConsumoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inteligencia/relatorios': {
+      id: '/inteligencia/relatorios'
+      path: '/inteligencia/relatorios'
+      fullPath: '/inteligencia/relatorios'
+      preLoaderRoute: typeof InteligenciaRelatoriosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inteligencia/historico': {
+      id: '/inteligencia/historico'
+      path: '/inteligencia/historico'
+      fullPath: '/inteligencia/historico'
+      preLoaderRoute: typeof InteligenciaHistoricoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estoque/recebimentos': {
+      id: '/estoque/recebimentos'
+      path: '/recebimentos'
+      fullPath: '/estoque/recebimentos'
+      preLoaderRoute: typeof EstoqueRecebimentosRouteImport
+      parentRoute: typeof EstoqueRoute
+    }
+    '/estoque/indicadores': {
+      id: '/estoque/indicadores'
+      path: '/indicadores'
+      fullPath: '/estoque/indicadores'
+      preLoaderRoute: typeof EstoqueIndicadoresRouteImport
+      parentRoute: typeof EstoqueRoute
+    }
+    '/estoque/devolucoes': {
+      id: '/estoque/devolucoes'
+      path: '/devolucoes'
+      fullPath: '/estoque/devolucoes'
+      preLoaderRoute: typeof EstoqueDevolucoesRouteImport
+      parentRoute: typeof EstoqueRoute
+    }
+    '/compras/indicadores': {
+      id: '/compras/indicadores'
+      path: '/compras/indicadores'
+      fullPath: '/compras/indicadores'
+      preLoaderRoute: typeof ComprasIndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/solicitacoes': {
+      id: '/admin/solicitacoes'
+      path: '/admin/solicitacoes'
+      fullPath: '/admin/solicitacoes'
+      preLoaderRoute: typeof AdminSolicitacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/limpeza': {
+      id: '/admin/limpeza'
+      path: '/admin/limpeza'
+      fullPath: '/admin/limpeza'
+      preLoaderRoute: typeof AdminLimpezaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/indicadores': {
+      id: '/admin/indicadores'
+      path: '/admin/indicadores'
+      fullPath: '/admin/indicadores'
+      preLoaderRoute: typeof AdminIndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/escritorio': {
+      id: '/admin/escritorio'
+      path: '/admin/escritorio'
+      fullPath: '/admin/escritorio'
+      preLoaderRoute: typeof AdminEscritorioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/epi': {
+      id: '/admin/epi'
+      path: '/admin/epi'
+      fullPath: '/admin/epi'
+      preLoaderRoute: typeof AdminEpiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface EstoqueRouteChildren {
+  EstoqueDevolucoesRoute: typeof EstoqueDevolucoesRoute
+  EstoqueIndicadoresRoute: typeof EstoqueIndicadoresRoute
+  EstoqueRecebimentosRoute: typeof EstoqueRecebimentosRoute
+}
+
+const EstoqueRouteChildren: EstoqueRouteChildren = {
+  EstoqueDevolucoesRoute: EstoqueDevolucoesRoute,
+  EstoqueIndicadoresRoute: EstoqueIndicadoresRoute,
+  EstoqueRecebimentosRoute: EstoqueRecebimentosRoute,
+}
+
+const EstoqueRouteWithChildren =
+  EstoqueRoute._addFileChildren(EstoqueRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssistenteRoute: AssistenteRoute,
   ConfiguracoesRoute: ConfiguracoesRoute,
   CotacoesRoute: CotacoesRoute,
-  EstoqueRoute: EstoqueRoute,
+  EstoqueRoute: EstoqueRouteWithChildren,
   EstoqueOperacionalRoute: EstoqueOperacionalRoute,
   FornecedoresRoute: FornecedoresRoute,
   IndicadoresRoute: IndicadoresRoute,
@@ -309,17 +801,28 @@ const rootRouteChildren: RootRouteChildren = {
   PlanejamentoRoute: PlanejamentoRoute,
   ProdutosRoute: ProdutosRoute,
   RequisicoesRoute: RequisicoesRoute,
+  AdminEpiRoute: AdminEpiRoute,
+  AdminEscritorioRoute: AdminEscritorioRoute,
+  AdminIndicadoresRoute: AdminIndicadoresRoute,
+  AdminLimpezaRoute: AdminLimpezaRoute,
+  AdminSolicitacoesRoute: AdminSolicitacoesRoute,
+  ComprasIndicadoresRoute: ComprasIndicadoresRoute,
+  InteligenciaHistoricoRoute: InteligenciaHistoricoRoute,
+  InteligenciaRelatoriosRoute: InteligenciaRelatoriosRoute,
+  ProducaoConsumoRoute: ProducaoConsumoRoute,
+  ProducaoGargalosRoute: ProducaoGargalosRoute,
+  ProducaoIndicadoresRoute: ProducaoIndicadoresRoute,
+  ProducaoOrdensRoute: ProducaoOrdensRoute,
+  ProducaoProgramacaoRoute: ProducaoProgramacaoRoute,
+  VendasCrmB2bRoute: VendasCrmB2bRoute,
+  VendasCrmB2cRoute: VendasCrmB2cRoute,
+  VendasDisponibilidadeRoute: VendasDisponibilidadeRoute,
+  VendasIndicadoresRoute: VendasIndicadoresRoute,
+  VendasPedidosRoute: VendasPedidosRoute,
+  VisaoObservacoesRoute: VisaoObservacoesRoute,
+  VisaoPlanoAcaoRoute: VisaoPlanoAcaoRoute,
+  VisaoSugestoesRoute: VisaoSugestoesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
