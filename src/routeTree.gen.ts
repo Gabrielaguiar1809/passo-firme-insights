@@ -35,10 +35,17 @@ import { Route as ProducaoOrdensRouteImport } from './routes/producao.ordens'
 import { Route as ProducaoIndicadoresRouteImport } from './routes/producao.indicadores'
 import { Route as ProducaoGargalosRouteImport } from './routes/producao.gargalos'
 import { Route as ProducaoConsumoRouteImport } from './routes/producao.consumo'
+import { Route as InteligenciaRelatoriosRouteImport } from './routes/inteligencia.relatorios'
+import { Route as InteligenciaHistoricoRouteImport } from './routes/inteligencia.historico'
 import { Route as EstoqueRecebimentosRouteImport } from './routes/estoque.recebimentos'
 import { Route as EstoqueIndicadoresRouteImport } from './routes/estoque.indicadores'
 import { Route as EstoqueDevolucoesRouteImport } from './routes/estoque.devolucoes'
 import { Route as ComprasIndicadoresRouteImport } from './routes/compras.indicadores'
+import { Route as AdminSolicitacoesRouteImport } from './routes/admin.solicitacoes'
+import { Route as AdminLimpezaRouteImport } from './routes/admin.limpeza'
+import { Route as AdminIndicadoresRouteImport } from './routes/admin.indicadores'
+import { Route as AdminEscritorioRouteImport } from './routes/admin.escritorio'
+import { Route as AdminEpiRouteImport } from './routes/admin.epi'
 
 const RequisicoesRoute = RequisicoesRouteImport.update({
   id: '/requisicoes',
@@ -170,6 +177,16 @@ const ProducaoConsumoRoute = ProducaoConsumoRouteImport.update({
   path: '/producao/consumo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InteligenciaRelatoriosRoute = InteligenciaRelatoriosRouteImport.update({
+  id: '/inteligencia/relatorios',
+  path: '/inteligencia/relatorios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InteligenciaHistoricoRoute = InteligenciaHistoricoRouteImport.update({
+  id: '/inteligencia/historico',
+  path: '/inteligencia/historico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EstoqueRecebimentosRoute = EstoqueRecebimentosRouteImport.update({
   id: '/recebimentos',
   path: '/recebimentos',
@@ -190,6 +207,31 @@ const ComprasIndicadoresRoute = ComprasIndicadoresRouteImport.update({
   path: '/compras/indicadores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSolicitacoesRoute = AdminSolicitacoesRouteImport.update({
+  id: '/admin/solicitacoes',
+  path: '/admin/solicitacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLimpezaRoute = AdminLimpezaRouteImport.update({
+  id: '/admin/limpeza',
+  path: '/admin/limpeza',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndicadoresRoute = AdminIndicadoresRouteImport.update({
+  id: '/admin/indicadores',
+  path: '/admin/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEscritorioRoute = AdminEscritorioRouteImport.update({
+  id: '/admin/escritorio',
+  path: '/admin/escritorio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEpiRoute = AdminEpiRouteImport.update({
+  id: '/admin/epi',
+  path: '/admin/epi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -205,10 +247,17 @@ export interface FileRoutesByFullPath {
   '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
+  '/admin/epi': typeof AdminEpiRoute
+  '/admin/escritorio': typeof AdminEscritorioRoute
+  '/admin/indicadores': typeof AdminIndicadoresRoute
+  '/admin/limpeza': typeof AdminLimpezaRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/inteligencia/historico': typeof InteligenciaHistoricoRoute
+  '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
@@ -237,10 +286,17 @@ export interface FileRoutesByTo {
   '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
+  '/admin/epi': typeof AdminEpiRoute
+  '/admin/escritorio': typeof AdminEscritorioRoute
+  '/admin/indicadores': typeof AdminIndicadoresRoute
+  '/admin/limpeza': typeof AdminLimpezaRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/inteligencia/historico': typeof InteligenciaHistoricoRoute
+  '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
@@ -270,10 +326,17 @@ export interface FileRoutesById {
   '/planejamento': typeof PlanejamentoRoute
   '/produtos': typeof ProdutosRoute
   '/requisicoes': typeof RequisicoesRoute
+  '/admin/epi': typeof AdminEpiRoute
+  '/admin/escritorio': typeof AdminEscritorioRoute
+  '/admin/indicadores': typeof AdminIndicadoresRoute
+  '/admin/limpeza': typeof AdminLimpezaRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/inteligencia/historico': typeof InteligenciaHistoricoRoute
+  '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
@@ -304,10 +367,17 @@ export interface FileRouteTypes {
     | '/planejamento'
     | '/produtos'
     | '/requisicoes'
+    | '/admin/epi'
+    | '/admin/escritorio'
+    | '/admin/indicadores'
+    | '/admin/limpeza'
+    | '/admin/solicitacoes'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
     | '/estoque/recebimentos'
+    | '/inteligencia/historico'
+    | '/inteligencia/relatorios'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
@@ -336,10 +406,17 @@ export interface FileRouteTypes {
     | '/planejamento'
     | '/produtos'
     | '/requisicoes'
+    | '/admin/epi'
+    | '/admin/escritorio'
+    | '/admin/indicadores'
+    | '/admin/limpeza'
+    | '/admin/solicitacoes'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
     | '/estoque/recebimentos'
+    | '/inteligencia/historico'
+    | '/inteligencia/relatorios'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
@@ -368,10 +445,17 @@ export interface FileRouteTypes {
     | '/planejamento'
     | '/produtos'
     | '/requisicoes'
+    | '/admin/epi'
+    | '/admin/escritorio'
+    | '/admin/indicadores'
+    | '/admin/limpeza'
+    | '/admin/solicitacoes'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
     | '/estoque/recebimentos'
+    | '/inteligencia/historico'
+    | '/inteligencia/relatorios'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
@@ -401,7 +485,14 @@ export interface RootRouteChildren {
   PlanejamentoRoute: typeof PlanejamentoRoute
   ProdutosRoute: typeof ProdutosRoute
   RequisicoesRoute: typeof RequisicoesRoute
+  AdminEpiRoute: typeof AdminEpiRoute
+  AdminEscritorioRoute: typeof AdminEscritorioRoute
+  AdminIndicadoresRoute: typeof AdminIndicadoresRoute
+  AdminLimpezaRoute: typeof AdminLimpezaRoute
+  AdminSolicitacoesRoute: typeof AdminSolicitacoesRoute
   ComprasIndicadoresRoute: typeof ComprasIndicadoresRoute
+  InteligenciaHistoricoRoute: typeof InteligenciaHistoricoRoute
+  InteligenciaRelatoriosRoute: typeof InteligenciaRelatoriosRoute
   ProducaoConsumoRoute: typeof ProducaoConsumoRoute
   ProducaoGargalosRoute: typeof ProducaoGargalosRoute
   ProducaoIndicadoresRoute: typeof ProducaoIndicadoresRoute
@@ -601,6 +692,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProducaoConsumoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inteligencia/relatorios': {
+      id: '/inteligencia/relatorios'
+      path: '/inteligencia/relatorios'
+      fullPath: '/inteligencia/relatorios'
+      preLoaderRoute: typeof InteligenciaRelatoriosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inteligencia/historico': {
+      id: '/inteligencia/historico'
+      path: '/inteligencia/historico'
+      fullPath: '/inteligencia/historico'
+      preLoaderRoute: typeof InteligenciaHistoricoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/estoque/recebimentos': {
       id: '/estoque/recebimentos'
       path: '/recebimentos'
@@ -627,6 +732,41 @@ declare module '@tanstack/react-router' {
       path: '/compras/indicadores'
       fullPath: '/compras/indicadores'
       preLoaderRoute: typeof ComprasIndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/solicitacoes': {
+      id: '/admin/solicitacoes'
+      path: '/admin/solicitacoes'
+      fullPath: '/admin/solicitacoes'
+      preLoaderRoute: typeof AdminSolicitacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/limpeza': {
+      id: '/admin/limpeza'
+      path: '/admin/limpeza'
+      fullPath: '/admin/limpeza'
+      preLoaderRoute: typeof AdminLimpezaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/indicadores': {
+      id: '/admin/indicadores'
+      path: '/admin/indicadores'
+      fullPath: '/admin/indicadores'
+      preLoaderRoute: typeof AdminIndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/escritorio': {
+      id: '/admin/escritorio'
+      path: '/admin/escritorio'
+      fullPath: '/admin/escritorio'
+      preLoaderRoute: typeof AdminEscritorioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/epi': {
+      id: '/admin/epi'
+      path: '/admin/epi'
+      fullPath: '/admin/epi'
+      preLoaderRoute: typeof AdminEpiRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -661,7 +801,14 @@ const rootRouteChildren: RootRouteChildren = {
   PlanejamentoRoute: PlanejamentoRoute,
   ProdutosRoute: ProdutosRoute,
   RequisicoesRoute: RequisicoesRoute,
+  AdminEpiRoute: AdminEpiRoute,
+  AdminEscritorioRoute: AdminEscritorioRoute,
+  AdminIndicadoresRoute: AdminIndicadoresRoute,
+  AdminLimpezaRoute: AdminLimpezaRoute,
+  AdminSolicitacoesRoute: AdminSolicitacoesRoute,
   ComprasIndicadoresRoute: ComprasIndicadoresRoute,
+  InteligenciaHistoricoRoute: InteligenciaHistoricoRoute,
+  InteligenciaRelatoriosRoute: InteligenciaRelatoriosRoute,
   ProducaoConsumoRoute: ProducaoConsumoRoute,
   ProducaoGargalosRoute: ProducaoGargalosRoute,
   ProducaoIndicadoresRoute: ProducaoIndicadoresRoute,
