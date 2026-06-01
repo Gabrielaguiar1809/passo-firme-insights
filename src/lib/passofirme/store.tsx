@@ -61,6 +61,7 @@ interface Store {
   planoAcao: PlanoAcao[];
   sugestoes: Sugestao[];
   historicoMelhorias: MelhoriaHistorico[];
+  devolucoesFornecedor: DevolucaoFornecedor[];
 
   updateRequisicao: (id: string, patch: Partial<Requisicao>) => void;
   addRequisicao: (s: Omit<Requisicao, "id">) => void;
