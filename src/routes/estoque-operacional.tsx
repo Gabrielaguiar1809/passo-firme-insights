@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useData } from "@/lib/passofirme/store";
 import { CATEGORIAS_OP, type CategoriaOP } from "@/lib/passofirme/data";
+import { ICONS_OP } from "@/lib/passofirme/category-icons";
 import { StockCard } from "@/components/passofirme/StockCard";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Boxes } from "lucide-react";
@@ -42,6 +43,7 @@ function EstoqueOpPage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {CATEGORIAS_OP.map((c) => {
             const info = counts[c.nome] ?? { total: 0, ruptura: 0 };
+            const Icon = ICONS_OP[c.nome];
             return (
               <button
                 key={c.nome}
@@ -49,7 +51,9 @@ function EstoqueOpPage() {
                 className="rounded-xl border bg-card p-5 text-left hover:border-primary hover:shadow-md transition"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl">{c.icon}</span>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
                   {info.ruptura > 0 && (
                     <span className="inline-flex rounded-full bg-destructive/15 text-destructive px-2 py-0.5 text-[10px] font-medium">
                       {info.ruptura} em ruptura
