@@ -267,7 +267,15 @@ export const cotacoesSeed: Cotacao[] = Array.from({ length: 18 }, (_, i) => {
 });
 
 const statusPC: PedidoCompra["status"][] = ["Emitido", "Confirmado", "Em Transporte", "Recebido", "Atrasado"];
-export const pedidosSeed: PedidoCompra[] = Array.from({ length: 24 }, (_, i) => {
+const statusConf: StatusConferencia[] = ["Conferido", "Pendente", "Com divergência"];
+const opItems = [
+  { nome: "Luva de Vaqueta", cat: "EPI" as const },
+  { nome: "Detergente Industrial 5L", cat: "Limpeza" as const },
+  { nome: "Papel A4 (resma)", cat: "Escritório" as const },
+  { nome: "Óleo Lubrificante 1L", cat: "Manutenção" as const },
+  { nome: "Cartucho Toner", cat: "Escritório" as const },
+];
+export const pedidosSeed: PedidoCompra[] = Array.from({ length: 28 }, (_, i) => {
   const monthsAgo = rint(0, 11);
   const dayInMonth = 1 + rint(0, 26);
   const emiss = new Date(TODAY);
@@ -279,17 +287,42 @@ export const pedidosSeed: PedidoCompra[] = Array.from({ length: 24 }, (_, i) => 
   const recebido = status === "Recebido";
   const realiz = recebido ? new Date(prev) : undefined;
   if (realiz) realiz.setUTCDate(realiz.getUTCDate() + (rnd() < 0.7 ? 0 : rint(0, 5)));
-  const f = fornecedoresSeed[i % fornecedoresSeed.length];
-  const mp = materiasSeed.find((m) => m.categoria === f.categoria) ?? materiasSeed[i % materiasSeed.length];
+  const isOp = i % 5 === 0;
   const qtd = 100 + rint(0, 599);
   const precoAtual = rfloat(15, 104);
   const precoAnterior = +(precoAtual * (1 + (rnd() * 0.2 - 0.02))).toFixed(2);
+  if (isOp) {
+    const it = opItems[i % opItems.length];
+    const f = fornecedoresSeed[i % fornecedoresSeed.length];
+    return {
+      id: `p${i + 1}`,
+      numero: `OC-${String(8400 + i).padStart(5, "0")}`,
+      fornecedorId: f.id,
+      categoria: it.cat,
+      classificacao: "Operacional",
+      itemNome: it.nome,
+      valor: +(qtd * precoAtual).toFixed(2),
+      emissao: emiss.toISOString().slice(0, 10),
+      entregaPrevista: prev.toISOString().slice(0, 10),
+      entregaRealizada: realiz?.toISOString().slice(0, 10),
+      status,
+      completo: rnd() > 0.15,
+      precoAnterior,
+      precoAtual,
+      quantidade: qtd,
+      statusConferencia: recebido ? statusConf[i % statusConf.length] : undefined,
+    } as PedidoCompra;
+  }
+  const f = fornecedoresSeed[i % fornecedoresSeed.length];
+  const mp = materiasSeed.find((m) => m.categoria === f.categoria) ?? materiasSeed[i % materiasSeed.length];
   return {
     id: `p${i + 1}`,
     numero: `OC-${String(8400 + i).padStart(5, "0")}`,
     fornecedorId: f.id,
-    categoria: f.categoria,
+    categoria: mp.categoria,
+    classificacao: "MP",
     itemId: mp.id,
+    itemNome: mp.nome,
     valor: +(qtd * precoAtual).toFixed(2),
     emissao: emiss.toISOString().slice(0, 10),
     entregaPrevista: prev.toISOString().slice(0, 10),
@@ -299,8 +332,15 @@ export const pedidosSeed: PedidoCompra[] = Array.from({ length: 24 }, (_, i) => 
     precoAnterior,
     precoAtual,
     quantidade: qtd,
+    statusConferencia: recebido ? statusConf[i % statusConf.length] : undefined,
   };
 });
+
+export const devolucoesFornecedorSeed: DevolucaoFornecedor[] = [
+  { id: "dv1", data: daysAgo(4), itemNome: "Solado EVA Branco", categoria: "Solados", fornecedorId: "f2", motivo: "Qualidade fora do padrão (espessura)", quantidade: 80, valor: 80 * 12.3, situacao: "Aguardando crédito" },
+  { id: "dv2", data: daysAgo(12), itemNome: "Ilhós Metálico Nº4", categoria: "Aviamentos", fornecedorId: "f6", motivo: "Defeito de acabamento em ilhós", quantidade: 1500, valor: 1500 * 0.15, situacao: "Em análise" },
+  { id: "dv3", data: daysAgo(22), itemNome: "Couro Preto Premium", categoria: "Couro", fornecedorId: "f1", motivo: "Quantidade incorreta no recebimento", quantidade: 15, valor: 15 * 45.5, situacao: "Concluída" },
+];
 
 export const movimentacoesSeed: Movimentacao[] = [
   { id: "mv1", data: "2026-05-28", itemTipo: "MP", itemId: "m2", itemNome: "Solado EVA Branco", tipo: "Entrada", quantidade: 400, origem: "Recebimento OC-08405", responsavel: "Almoxarifado" },
