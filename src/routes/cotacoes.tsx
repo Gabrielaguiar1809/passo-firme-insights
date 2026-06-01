@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useData } from "@/lib/passofirme/store";
 import { brl } from "@/components/passofirme/ui-bits";
 import { CATEGORIAS_MP, calcIQF, type CategoriaMP, type Cotacao } from "@/lib/passofirme/data";
+import { ICONS_MP } from "@/lib/passofirme/category-icons";
 import { Button } from "@/components/ui/button";
 import { Award, ChevronLeft, Clock, ClipboardList, DollarSign, Plus } from "lucide-react";
 import { toast } from "sonner";
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/cotacoes")({
 });
 
 function CotacoesPage() {
-  const { cotacoes, fornecedores, addCotacao } = useData();
+  const { cotacoes, fornecedores, addCotacao, materias } = useData();
   const [cat, setCat] = useState<CategoriaMP | null>(null);
   const fMap = useMemo(() => Object.fromEntries(fornecedores.map((f) => [f.id, f])), [fornecedores]);
 
@@ -24,6 +25,7 @@ function CotacoesPage() {
     return map;
   }, [cotacoes]);
 
+  // FILTRO: pela categoria do ITEM cotado — nunca pela categoria do fornecedor.
   const lista = cat ? cotacoes.filter((c) => c.categoria === cat) : [];
 
   const best = useMemo(() => {
@@ -53,16 +55,21 @@ function CotacoesPage() {
 
       {!cat ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {CATEGORIAS_MP.map((c) => (
-            <button key={c.nome} onClick={() => setCat(c.nome)} className="rounded-xl border bg-card p-5 text-left hover:border-primary hover:shadow-md transition">
-              <div className="flex items-center justify-between">
-                <span className="text-3xl">{c.icon}</span>
-                <span className="rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-medium">{counts[c.nome] ?? 0} cotações</span>
-              </div>
-              <h3 className="mt-3 text-base font-semibold">{c.nome}</h3>
-              <p className="text-xs text-muted-foreground mt-1">Comparar fornecedores</p>
-            </button>
-          ))}
+          {CATEGORIAS_MP.map((c) => {
+            const Icon = ICONS_MP[c.nome];
+            return (
+              <button key={c.nome} onClick={() => setCat(c.nome)} className="rounded-xl border bg-card p-5 text-left hover:border-primary hover:shadow-md transition">
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <span className="rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-medium">{counts[c.nome] ?? 0} cotações</span>
+                </div>
+                <h3 className="mt-3 text-base font-semibold">{c.nome}</h3>
+                <p className="text-xs text-muted-foreground mt-1">Comparar fornecedores</p>
+              </button>
+            );
+          })}
         </div>
       ) : (
         <div className="space-y-4">
@@ -72,11 +79,12 @@ function CotacoesPage() {
             </Button>
             <h2 className="text-lg font-semibold">{cat} — {lista.length} cotações</h2>
             <Button size="sm" onClick={() => {
+              const mp = materias.find((m) => m.categoria === cat) ?? materias[0];
               addCotacao({
                 numero: `COT-${String(1400 + cotacoes.length).padStart(5, "0")}`,
-                categoria: cat, item: `Item ${cat}`, quantidade: 200,
+                categoria: cat, item: mp?.nome ?? `Item ${cat}`, quantidade: 200,
                 fornecedorId: fornecedores.find((f) => f.categoria === cat)?.id ?? fornecedores[0]?.id ?? "",
-                precoUnitario: 45, frete: 200, prazo: 7, condicao: "30 dias",
+                precoUnitario: mp?.custoUnitario ?? 45, frete: 200, prazo: 7, condicao: "30 dias",
               });
               toast.success("Nova cotação adicionada");
             }}><Plus className="h-4 w-4" /> Nova Cotação</Button>
