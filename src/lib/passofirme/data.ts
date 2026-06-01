@@ -248,7 +248,7 @@ export const requisicoesSeed: Requisicao[] = Array.from({ length: 18 }, (_, i) =
   };
 });
 
-const itensMP = ["Couro Preto Premium", "Solado EVA Branco", "Linha Nylon 0.8", "Cola PU Industrial", "Palmilha Comfort", "Ilhós Metálico Nº4", "Caixa Padrão 30cm"];
+
 
 export const cotacoesSeed: Cotacao[] = Array.from({ length: 28 }, (_, i) => {
   // ancorar cotação no item (matéria-prima): a categoria da cotação é SEMPRE a do item
