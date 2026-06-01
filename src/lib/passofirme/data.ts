@@ -250,16 +250,21 @@ export const requisicoesSeed: Requisicao[] = Array.from({ length: 18 }, (_, i) =
 
 const itensMP = ["Couro Preto Premium", "Solado EVA Branco", "Linha Nylon 0.8", "Cola PU Industrial", "Palmilha Comfort", "Ilhós Metálico Nº4", "Caixa Padrão 30cm"];
 
-export const cotacoesSeed: Cotacao[] = Array.from({ length: 18 }, (_, i) => {
-  const f = fornecedoresSeed[i % fornecedoresSeed.length];
+export const cotacoesSeed: Cotacao[] = Array.from({ length: 28 }, (_, i) => {
+  // ancorar cotação no item (matéria-prima): a categoria da cotação é SEMPRE a do item
+  const mp = materiasSeed[i % materiasSeed.length];
+  // fornecedores podem cobrir várias categorias; preferimos um da mesma categoria, mas
+  // permitimos múltiplos fornecedores por item para gerar comparativos.
+  const fornsCat = fornecedoresSeed.filter((f) => f.categoria === mp.categoria);
+  const f = (fornsCat.length ? fornsCat : fornecedoresSeed)[i % (fornsCat.length || fornecedoresSeed.length)];
   return {
     id: `c${i + 1}`,
     numero: `COT-${String(1200 + i).padStart(5, "0")}`,
-    categoria: f.categoria,
-    item: itensMP[i % itensMP.length],
+    categoria: mp.categoria,
+    item: mp.nome,
     quantidade: 100 + rint(0, 399),
     fornecedorId: f.id,
-    precoUnitario: rfloat(10, 99),
+    precoUnitario: +(mp.custoUnitario * (0.9 + rnd() * 0.3)).toFixed(2),
     frete: rfloat(50, 349),
     prazo: 3 + rint(0, 13),
     condicao: ["30 dias", "28/56 dias", "À vista", "45 dias"][i % 4],
