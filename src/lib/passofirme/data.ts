@@ -77,12 +77,26 @@ export interface Cotacao {
   frete: number; prazo: number; condicao: string;
 }
 
+export type ClassificacaoPedido = "MP" | "Operacional";
+export type StatusConferencia = "Conferido" | "Pendente" | "Com divergência";
+
 export interface PedidoCompra {
-  id: string; numero: string; fornecedorId: string; categoria: CategoriaMP;
-  itemId?: string; valor: number; emissao: string; entregaPrevista: string;
+  id: string; numero: string; fornecedorId: string; categoria: string;
+  classificacao: ClassificacaoPedido;
+  itemId?: string; itemNome?: string;
+  valor: number; emissao: string; entregaPrevista: string;
   entregaRealizada?: string;
   status: "Emitido" | "Confirmado" | "Em Transporte" | "Recebido" | "Atrasado";
   completo: boolean; precoAnterior?: number; precoAtual?: number; quantidade?: number;
+  statusConferencia?: StatusConferencia;
+}
+
+export type SituacaoDevolucao = "Aguardando crédito" | "Em análise" | "Concluída";
+export interface DevolucaoFornecedor {
+  id: string; data: string;
+  itemNome: string; categoria: CategoriaMP; fornecedorId: string;
+  motivo: string; quantidade: number; valor: number;
+  situacao: SituacaoDevolucao;
 }
 
 export interface MateriaPrima {
@@ -234,18 +248,23 @@ export const requisicoesSeed: Requisicao[] = Array.from({ length: 18 }, (_, i) =
   };
 });
 
-const itensMP = ["Couro Preto Premium", "Solado EVA Branco", "Linha Nylon 0.8", "Cola PU Industrial", "Palmilha Comfort", "Ilhós Metálico Nº4", "Caixa Padrão 30cm"];
 
-export const cotacoesSeed: Cotacao[] = Array.from({ length: 18 }, (_, i) => {
-  const f = fornecedoresSeed[i % fornecedoresSeed.length];
+
+export const cotacoesSeed: Cotacao[] = Array.from({ length: 28 }, (_, i) => {
+  // ancorar cotação no item (matéria-prima): a categoria da cotação é SEMPRE a do item
+  const mp = materiasSeed[i % materiasSeed.length];
+  // fornecedores podem cobrir várias categorias; preferimos um da mesma categoria, mas
+  // permitimos múltiplos fornecedores por item para gerar comparativos.
+  const fornsCat = fornecedoresSeed.filter((f) => f.categoria === mp.categoria);
+  const f = (fornsCat.length ? fornsCat : fornecedoresSeed)[i % (fornsCat.length || fornecedoresSeed.length)];
   return {
     id: `c${i + 1}`,
     numero: `COT-${String(1200 + i).padStart(5, "0")}`,
-    categoria: f.categoria,
-    item: itensMP[i % itensMP.length],
+    categoria: mp.categoria,
+    item: mp.nome,
     quantidade: 100 + rint(0, 399),
     fornecedorId: f.id,
-    precoUnitario: rfloat(10, 99),
+    precoUnitario: +(mp.custoUnitario * (0.9 + rnd() * 0.3)).toFixed(2),
     frete: rfloat(50, 349),
     prazo: 3 + rint(0, 13),
     condicao: ["30 dias", "28/56 dias", "À vista", "45 dias"][i % 4],
@@ -253,7 +272,15 @@ export const cotacoesSeed: Cotacao[] = Array.from({ length: 18 }, (_, i) => {
 });
 
 const statusPC: PedidoCompra["status"][] = ["Emitido", "Confirmado", "Em Transporte", "Recebido", "Atrasado"];
-export const pedidosSeed: PedidoCompra[] = Array.from({ length: 24 }, (_, i) => {
+const statusConf: StatusConferencia[] = ["Conferido", "Pendente", "Com divergência"];
+const opItems = [
+  { nome: "Luva de Vaqueta", cat: "EPI" as const },
+  { nome: "Detergente Industrial 5L", cat: "Limpeza" as const },
+  { nome: "Papel A4 (resma)", cat: "Escritório" as const },
+  { nome: "Óleo Lubrificante 1L", cat: "Manutenção" as const },
+  { nome: "Cartucho Toner", cat: "Escritório" as const },
+];
+export const pedidosSeed: PedidoCompra[] = Array.from({ length: 28 }, (_, i) => {
   const monthsAgo = rint(0, 11);
   const dayInMonth = 1 + rint(0, 26);
   const emiss = new Date(TODAY);
@@ -265,17 +292,42 @@ export const pedidosSeed: PedidoCompra[] = Array.from({ length: 24 }, (_, i) => 
   const recebido = status === "Recebido";
   const realiz = recebido ? new Date(prev) : undefined;
   if (realiz) realiz.setUTCDate(realiz.getUTCDate() + (rnd() < 0.7 ? 0 : rint(0, 5)));
-  const f = fornecedoresSeed[i % fornecedoresSeed.length];
-  const mp = materiasSeed.find((m) => m.categoria === f.categoria) ?? materiasSeed[i % materiasSeed.length];
+  const isOp = i % 5 === 0;
   const qtd = 100 + rint(0, 599);
   const precoAtual = rfloat(15, 104);
   const precoAnterior = +(precoAtual * (1 + (rnd() * 0.2 - 0.02))).toFixed(2);
+  if (isOp) {
+    const it = opItems[i % opItems.length];
+    const f = fornecedoresSeed[i % fornecedoresSeed.length];
+    return {
+      id: `p${i + 1}`,
+      numero: `OC-${String(8400 + i).padStart(5, "0")}`,
+      fornecedorId: f.id,
+      categoria: it.cat,
+      classificacao: "Operacional",
+      itemNome: it.nome,
+      valor: +(qtd * precoAtual).toFixed(2),
+      emissao: emiss.toISOString().slice(0, 10),
+      entregaPrevista: prev.toISOString().slice(0, 10),
+      entregaRealizada: realiz?.toISOString().slice(0, 10),
+      status,
+      completo: rnd() > 0.15,
+      precoAnterior,
+      precoAtual,
+      quantidade: qtd,
+      statusConferencia: recebido ? statusConf[i % statusConf.length] : undefined,
+    } as PedidoCompra;
+  }
+  const f = fornecedoresSeed[i % fornecedoresSeed.length];
+  const mp = materiasSeed.find((m) => m.categoria === f.categoria) ?? materiasSeed[i % materiasSeed.length];
   return {
     id: `p${i + 1}`,
     numero: `OC-${String(8400 + i).padStart(5, "0")}`,
     fornecedorId: f.id,
-    categoria: f.categoria,
+    categoria: mp.categoria,
+    classificacao: "MP",
     itemId: mp.id,
+    itemNome: mp.nome,
     valor: +(qtd * precoAtual).toFixed(2),
     emissao: emiss.toISOString().slice(0, 10),
     entregaPrevista: prev.toISOString().slice(0, 10),
@@ -285,8 +337,15 @@ export const pedidosSeed: PedidoCompra[] = Array.from({ length: 24 }, (_, i) => 
     precoAnterior,
     precoAtual,
     quantidade: qtd,
+    statusConferencia: recebido ? statusConf[i % statusConf.length] : undefined,
   };
 });
+
+export const devolucoesFornecedorSeed: DevolucaoFornecedor[] = [
+  { id: "dv1", data: daysAgo(4), itemNome: "Solado EVA Branco", categoria: "Solados", fornecedorId: "f2", motivo: "Qualidade fora do padrão (espessura)", quantidade: 80, valor: 80 * 12.3, situacao: "Aguardando crédito" },
+  { id: "dv2", data: daysAgo(12), itemNome: "Ilhós Metálico Nº4", categoria: "Aviamentos", fornecedorId: "f6", motivo: "Defeito de acabamento em ilhós", quantidade: 1500, valor: 1500 * 0.15, situacao: "Em análise" },
+  { id: "dv3", data: daysAgo(22), itemNome: "Couro Preto Premium", categoria: "Couro", fornecedorId: "f1", motivo: "Quantidade incorreta no recebimento", quantidade: 15, valor: 15 * 45.5, situacao: "Concluída" },
+];
 
 export const movimentacoesSeed: Movimentacao[] = [
   { id: "mv1", data: "2026-05-28", itemTipo: "MP", itemId: "m2", itemNome: "Solado EVA Branco", tipo: "Entrada", quantidade: 400, origem: "Recebimento OC-08405", responsavel: "Almoxarifado" },

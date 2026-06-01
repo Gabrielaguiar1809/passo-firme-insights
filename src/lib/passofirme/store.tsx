@@ -4,6 +4,7 @@ import {
   clientesB2BSeed,
   clientesB2CSeed,
   cotacoesSeed,
+  devolucoesFornecedorSeed,
   fornecedoresSeed,
   gargalosSeed,
   historicoMelhoriasSeed,
@@ -22,6 +23,7 @@ import {
   type ClienteB2B,
   type ClienteB2C,
   type Cotacao,
+  type DevolucaoFornecedor,
   type Fornecedor,
   type Gargalo,
   type ItemOperacional,
@@ -59,6 +61,7 @@ interface Store {
   planoAcao: PlanoAcao[];
   sugestoes: Sugestao[];
   historicoMelhorias: MelhoriaHistorico[];
+  devolucoesFornecedor: DevolucaoFornecedor[];
 
   updateRequisicao: (id: string, patch: Partial<Requisicao>) => void;
   addRequisicao: (s: Omit<Requisicao, "id">) => void;
@@ -117,6 +120,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [planoAcao, setPlanoAcao] = useState(planoAcaoSeed);
   const [sugestoes, setSugestoes] = useState(sugestoesSeed);
   const [historicoMelhorias] = useState(historicoMelhoriasSeed);
+  const [devolucoesFornecedor] = useState(devolucoesFornecedorSeed);
 
   const aplicarEstoque = useCallback((itemTipo: "MP" | "OP", itemId: string, tipo: TipoMovimentacao, qtd: number) => {
     const delta = tipo === "Entrada" ? qtd : tipo === "Saída" ? -qtd : tipo === "Devolução" ? qtd : qtd;
@@ -195,7 +199,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const value: Store = {
     requisicoes, cotacoes, fornecedores, pedidos, materias, itensOperacional, movimentacoes, planejamentos, produtos,
-    clientesB2B, clientesB2C, pedidosVenda, ordensProducao, gargalos, observacoes, planoAcao, sugestoes, historicoMelhorias,
+    clientesB2B, clientesB2C, pedidosVenda, ordensProducao, gargalos, observacoes, planoAcao, sugestoes, historicoMelhorias, devolucoesFornecedor,
     updateRequisicao: req.update, addRequisicao: req.add, avancarStatusRequisicao,
     updateCotacao: cot.update, addCotacao: cot.add,
     updateFornecedor: forn.update, addFornecedor: forn.add,
