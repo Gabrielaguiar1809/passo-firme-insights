@@ -77,12 +77,26 @@ export interface Cotacao {
   frete: number; prazo: number; condicao: string;
 }
 
+export type ClassificacaoPedido = "MP" | "Operacional";
+export type StatusConferencia = "Conferido" | "Pendente" | "Com divergência";
+
 export interface PedidoCompra {
-  id: string; numero: string; fornecedorId: string; categoria: CategoriaMP;
-  itemId?: string; valor: number; emissao: string; entregaPrevista: string;
+  id: string; numero: string; fornecedorId: string; categoria: string;
+  classificacao: ClassificacaoPedido;
+  itemId?: string; itemNome?: string;
+  valor: number; emissao: string; entregaPrevista: string;
   entregaRealizada?: string;
   status: "Emitido" | "Confirmado" | "Em Transporte" | "Recebido" | "Atrasado";
   completo: boolean; precoAnterior?: number; precoAtual?: number; quantidade?: number;
+  statusConferencia?: StatusConferencia;
+}
+
+export type SituacaoDevolucao = "Aguardando crédito" | "Em análise" | "Concluída";
+export interface DevolucaoFornecedor {
+  id: string; data: string;
+  itemNome: string; categoria: CategoriaMP; fornecedorId: string;
+  motivo: string; quantidade: number; valor: number;
+  situacao: SituacaoDevolucao;
 }
 
 export interface MateriaPrima {
