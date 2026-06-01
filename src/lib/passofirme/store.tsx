@@ -120,6 +120,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [planoAcao, setPlanoAcao] = useState(planoAcaoSeed);
   const [sugestoes, setSugestoes] = useState(sugestoesSeed);
   const [historicoMelhorias] = useState(historicoMelhoriasSeed);
+  const [devolucoesFornecedor] = useState(devolucoesFornecedorSeed);
 
   const aplicarEstoque = useCallback((itemTipo: "MP" | "OP", itemId: string, tipo: TipoMovimentacao, qtd: number) => {
     const delta = tipo === "Entrada" ? qtd : tipo === "Saída" ? -qtd : tipo === "Devolução" ? qtd : qtd;
