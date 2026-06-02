@@ -8,8 +8,10 @@ import {
   fornecedoresSeed,
   gargalosSeed,
   historicoMelhoriasSeed,
+  interacoesSeed,
   itensOperacionalSeed,
   materiasSeed,
+  metasComerciaisSeed,
   movimentacoesSeed,
   observacoesSeed,
   ordensProducaoSeed,
@@ -20,15 +22,18 @@ import {
   produtosSeed,
   requisicoesSeed,
   sugestoesSeed,
+  vendedoresSeed,
   type ClienteB2B,
   type ClienteB2C,
   type Cotacao,
   type DevolucaoFornecedor,
   type Fornecedor,
   type Gargalo,
+  type InteracaoComercial,
   type ItemOperacional,
   type MateriaPrima,
   type MelhoriaHistorico,
+  type MetasComerciais,
   type Movimentacao,
   type Observacao,
   type OrdemProducao,
@@ -40,7 +45,9 @@ import {
   type Requisicao,
   type Sugestao,
   type TipoMovimentacao,
+  type Vendedor,
 } from "./data";
+
 
 interface Store {
   requisicoes: Requisicao[];
