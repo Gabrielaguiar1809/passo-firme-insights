@@ -218,6 +218,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const value: Store = {
     requisicoes, cotacoes, fornecedores, pedidos, materias, itensOperacional, movimentacoes, planejamentos, produtos,
     clientesB2B, clientesB2C, pedidosVenda, ordensProducao, gargalos, observacoes, planoAcao, sugestoes, historicoMelhorias, devolucoesFornecedor,
+    vendedores, interacoes, metas, setMetas, addInteracao,
     updateRequisicao: req.update, addRequisicao: req.add, avancarStatusRequisicao,
     updateCotacao: cot.update, addCotacao: cot.add,
     updateFornecedor: forn.update, addFornecedor: forn.add,
