@@ -69,6 +69,11 @@ interface Store {
   sugestoes: Sugestao[];
   historicoMelhorias: MelhoriaHistorico[];
   devolucoesFornecedor: DevolucaoFornecedor[];
+  vendedores: Vendedor[];
+  interacoes: InteracaoComercial[];
+  metas: MetasComerciais;
+  setMetas: (m: MetasComerciais) => void;
+  addInteracao: (i: Omit<InteracaoComercial, "id">) => void;
 
   updateRequisicao: (id: string, patch: Partial<Requisicao>) => void;
   addRequisicao: (s: Omit<Requisicao, "id">) => void;
