@@ -132,21 +132,47 @@ export interface ProdutoAcabado {
 
 export type EstagioB2B = "Lead" | "Primeiro Contato" | "Negociação" | "Proposta" | "Pedido Fechado" | "Perdido";
 export type EstagioB2C = "Atendimento" | "Orçamento" | "Negociação" | "Venda" | "Perdido";
+export type ProdutoComercial = "Esportivo" | "Casual";
+export type OrigemB2C = "Site" | "Mercado Livre" | "Instagram" | "Indicação" | "Outro";
+export type MotivoPerda =
+  | "Preço acima do mercado" | "Prazo de entrega incompatível"
+  | "Produto não atende a necessidade" | "Cliente escolheu concorrente"
+  | "Negociação não evoluiu" | "Outro";
+
+export interface Vendedor {
+  id: string; nome: string; iniciais: string; perfil: "Gestor" | "Vendedor";
+  metaMensal: number;
+}
+
+export interface InteracaoComercial {
+  id: string; clienteId: string; data: string;
+  tipo: "Ligação" | "E-mail" | "Visita" | "Proposta Enviada" | "Reunião";
+  descricao: string; vendedorId: string;
+}
 
 export interface ClienteB2B {
   id: string; empresa: string; contato: string; cidade: string; estado: string;
   valor: number; estagio: EstagioB2B; ultimoContato: string;
+  vendedorId?: string; produto?: ProdutoComercial;
+  criacao?: string; etapaDesde?: string; motivoPerda?: MotivoPerda;
+  cicloMedio?: number; ultimoPedido?: string;
 }
 export interface ClienteB2C {
   id: string; nome: string; cidade: string; telefone: string;
   valor: number; estagio: EstagioB2C; ultimoContato: string;
+  origem?: OrigemB2C; produto?: ProdutoComercial; vendedorId?: string;
 }
 
-export type StatusPedidoVenda = "Negociação" | "Reservado" | "Produção" | "Pronto para envio" | "Finalizado";
+export type StatusPedidoVenda = "Negociação" | "Validado" | "Reservado" | "Produção" | "Pronto para envio" | "Finalizado";
 export interface PedidoVenda {
   id: string; numero: string; cliente: string; canal: "B2B" | "B2C";
   produtoId: string; produto: string; quantidade: number; valor: number;
   emissao: string; previsaoEntrega: string; status: StatusPedidoVenda;
+  vendedorId?: string; produtoComercial?: ProdutoComercial;
+}
+
+export interface MetasComerciais {
+  mensal: number; trimestral: number; anual: number;
 }
 
 export type StatusOP = "Planejada" | "Em Produção" | "Concluída" | "Atrasada";
