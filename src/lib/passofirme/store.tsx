@@ -413,3 +413,132 @@ export function useInsights() {
     return insights;
   }, [pedidos, materias, fornecedores, requisicoes, planejamentos]);
 }
+
+// ====== Helpers comerciais v2 ======
+const HOJE_VENDAS = new Date("2026-05-31");
+const PROB_ETAPA: Record<string, number> = {
+  "Lead": 0.10, "Primeiro Contato": 0.25, "Negociação": 0.50, "Proposta": 0.75,
+  "Pedido Fechado": 1.0, "Perdido": 0,
+};
+const diffDays = (a: string | Date, b: string | Date = HOJE_VENDAS) =>
+  Math.floor((new Date(b).getTime() - new Date(a).getTime()) / 86400000);
+
+export function slaOportunidade(c: ClienteB2B): { cor: "verde" | "amarelo" | "vermelho"; dias: number; label: string } {
+  const dias = c.etapaDesde ? diffDays(c.etapaDesde) : 0;
+  if (dias >= 8) return { cor: "vermelho", dias, label: "SLA crítico" };
+  if (dias >= 5) return { cor: "amarelo", dias, label: "Próximo do limite" };
+  return { cor: "verde", dias, label: "Em dia" };
+}
+
+export function useVendedoresPerformance(periodoMeses = 1) {
+  const { vendedores, pedidosVenda, clientesB2B } = useData();
+  return useMemo(() => {
+    const corte = new Date(HOJE_VENDAS); corte.setMonth(corte.getMonth() - periodoMeses);
+    return vendedores.map((v) => {
+      const meus = pedidosVenda.filter((p) => p.vendedorId === v.id && new Date(p.emissao) >= corte);
+      const receita = meus.filter((p) => p.status === "Finalizado").reduce((a, p) => a + p.valor, 0);
+      const pedidos = meus.filter((p) => p.status === "Finalizado").length;
+      const tickets = pedidos ? receita / pedidos : 0;
+      const oportunidades = clientesB2B.filter((c) => c.vendedorId === v.id);
+      const ganhas = oportunidades.filter((c) => c.estagio === "Pedido Fechado").length;
+      const perdidas = oportunidades.filter((c) => c.estagio === "Perdido").length;
+      const conv = (ganhas + perdidas) ? +(ganhas / (ganhas + perdidas) * 100).toFixed(1) : 0;
+      const pipelineAbertas = oportunidades.filter((c) => c.estagio !== "Pedido Fechado" && c.estagio !== "Perdido");
+      const pipelineValor = pipelineAbertas.reduce((a, c) => a + c.valor, 0);
+      const pipelinePonderado = pipelineAbertas.reduce((a, c) => a + c.valor * (PROB_ETAPA[c.estagio] ?? 0), 0);
+      const cicloMedio = oportunidades
+        .filter((c) => c.estagio === "Pedido Fechado" && c.criacao && c.etapaDesde)
+        .map((c) => diffDays(c.criacao!, c.etapaDesde!));
+      const ciclo = cicloMedio.length ? Math.round(cicloMedio.reduce((a, b) => a + b, 0) / cicloMedio.length) : 0;
+      const pctMeta = +((receita / v.metaMensal) * 100).toFixed(1);
+      return { vendedor: v, receita, pedidos, ticketMedio: tickets, conversao: conv,
+        oportunidadesAbertas: pipelineAbertas.length, pipelineValor, pipelinePonderado,
+        cicloMedio: ciclo, pctMeta };
+    }).sort((a, b) => b.receita - a.receita);
+  }, [vendedores, pedidosVenda, clientesB2B, periodoMeses]);
+}
+
+export function useFollowUpAlerts() {
+  const { clientesB2B, interacoes } = useData();
+  return useMemo(() => {
+    return clientesB2B
+      .filter((c) => c.estagio !== "Perdido" && c.estagio !== "Pedido Fechado")
+      .map((c) => {
+        const ultimaInt = interacoes.filter((i) => i.clienteId === c.id).sort((a, b) => b.data.localeCompare(a.data))[0];
+        const diasSemContato = ultimaInt ? diffDays(ultimaInt.data) : diffDays(c.ultimoContato);
+        const cicloMedio = c.cicloMedio ?? 30;
+        const ultimoPed = c.ultimoPedido ?? c.criacao ?? c.ultimoContato;
+        const diasDesdeUltimoPed = diffDays(ultimoPed);
+        const naJanela = diasDesdeUltimoPed >= (cicloMedio - 7);
+        const churn = diasDesdeUltimoPed > 45;
+        const slaVencido = diasSemContato > 8;
+        const motivo = churn ? "Risco de Churn" : naJanela ? "Janela de Compra" : slaVencido ? "SLA Vencido" : null;
+        return { cliente: c, diasSemContato, diasDesdeUltimoPed, motivo };
+      })
+      .filter((x) => x.motivo);
+  }, [clientesB2B, interacoes]);
+}
+
+export function usePlanejamentoComercial() {
+  const { pedidosVenda, clientesB2B, metas } = useData();
+  return useMemo(() => {
+    const mesKey = HOJE_VENDAS.toISOString().slice(0, 7);
+    const realizadoMes = pedidosVenda
+      .filter((p) => p.status === "Finalizado" && p.emissao.startsWith(mesKey))
+      .reduce((a, p) => a + p.valor, 0);
+
+    // Conversão histórica (últimos 3 meses)
+    const fechadas = clientesB2B.filter((c) => c.estagio === "Pedido Fechado").length;
+    const perdidas = clientesB2B.filter((c) => c.estagio === "Perdido").length;
+    const taxaConvHist = (fechadas + perdidas) ? fechadas / (fechadas + perdidas) : 0.3;
+
+    const pipelinePonderado = clientesB2B
+      .filter((c) => c.estagio !== "Perdido" && c.estagio !== "Pedido Fechado")
+      .reduce((a, c) => a + c.valor * (PROB_ETAPA[c.estagio] ?? 0), 0);
+
+    const projecaoMes = realizadoMes + pipelinePonderado * taxaConvHist;
+    const pctMeta = metas.mensal ? +((realizadoMes / metas.mensal) * 100).toFixed(1) : 0;
+
+    // Crescimentos
+    const prevMonth = new Date(HOJE_VENDAS); prevMonth.setMonth(prevMonth.getMonth() - 1);
+    const prevKey = prevMonth.toISOString().slice(0, 7);
+    const receitaPrev = pedidosVenda.filter((p) => p.emissao.startsWith(prevKey)).reduce((a, p) => a + p.valor, 0);
+    const crescMensal = receitaPrev ? +(((realizadoMes - receitaPrev) / receitaPrev) * 100).toFixed(1) : 0;
+
+    // série últimos 6 meses + futuros 3
+    const serie: { mes: string; meta: number; realizado: number; projecao?: number }[] = [];
+    for (let i = 5; i >= -2; i--) {
+      const d = new Date(HOJE_VENDAS); d.setMonth(d.getMonth() - i);
+      const key = d.toISOString().slice(0, 7);
+      const label = d.toLocaleDateString("pt-BR", { month: "short" }).replace(".", "");
+      const real = pedidosVenda.filter((p) => p.emissao.startsWith(key) && p.status === "Finalizado").reduce((a, p) => a + p.valor, 0);
+      const item: typeof serie[number] = { mes: label, meta: metas.mensal, realizado: real };
+      if (i < 0) item.projecao = Math.round(metas.mensal * (0.9 + Math.random() * 0.2));
+      serie.push(item);
+    }
+
+    return { realizadoMes, projecaoMes, pctMeta, crescMensal, taxaConvHist, pipelinePonderado, serie };
+  }, [pedidosVenda, clientesB2B, metas]);
+}
+
+export function useFunilConversao() {
+  const { clientesB2B } = useData();
+  return useMemo(() => {
+    const etapas = ["Lead", "Primeiro Contato", "Negociação", "Proposta", "Pedido Fechado"] as const;
+    return etapas.map((e) => {
+      const arr = clientesB2B.filter((c) => c.estagio === e);
+      return { etapa: e, quantidade: arr.length, valor: arr.reduce((a, c) => a + c.valor, 0) };
+    });
+  }, [clientesB2B]);
+}
+
+export function useMotivosPerda() {
+  const { clientesB2B } = useData();
+  return useMemo(() => {
+    const counts: Record<string, number> = {};
+    clientesB2B.filter((c) => c.estagio === "Perdido" && c.motivoPerda).forEach((c) => {
+      counts[c.motivoPerda!] = (counts[c.motivoPerda!] || 0) + 1;
+    });
+    return Object.entries(counts).map(([motivo, qtd]) => ({ motivo, qtd }));
+  }, [clientesB2B]);
+}
