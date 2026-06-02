@@ -48,7 +48,7 @@ function CrmB2BPage() {
     return {
       id: c.id, title: c.empresa, subtitle: `${vd?.nome ?? "—"} · ${c.cidade}/${c.estado}`,
       valor: c.valor, stage: c.estagio,
-      badge: c.produto ? { label: c.produto, tone: (c.produto === "Esportivo" ? "esportivo" : "casual") as const } : undefined,
+      badge: c.produto ? { label: c.produto, tone: (c.produto === "Esportivo" ? "esportivo" : "casual") as "esportivo" | "casual" } : undefined,
       sla: sla.cor, diasNaEtapa: sla.dias,
       meta: `Últ. contato: ${c.ultimoContato}`,
       onClick: () => setSelected(c),
