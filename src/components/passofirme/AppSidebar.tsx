@@ -36,6 +36,8 @@ const groups: Group[] = [
       { title: "Pedidos de Venda", url: "/vendas/pedidos", icon: ClipboardCheck },
       { title: "Disponibilidade", url: "/vendas/disponibilidade", icon: Layers },
       { title: "Programação de Produção", url: "/producao/programacao", icon: Target },
+      { title: "Análise de Vendedores", url: "/vendas/analise-vendedores", icon: Users },
+      { title: "Planejamento Estratégico", url: "/vendas/planejamento", icon: Target },
       { title: "Indicadores Comerciais", url: "/vendas/indicadores", icon: BarChart3 },
     ],
   },

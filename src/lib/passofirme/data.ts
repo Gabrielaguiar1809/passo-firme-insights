@@ -132,21 +132,47 @@ export interface ProdutoAcabado {
 
 export type EstagioB2B = "Lead" | "Primeiro Contato" | "Negociação" | "Proposta" | "Pedido Fechado" | "Perdido";
 export type EstagioB2C = "Atendimento" | "Orçamento" | "Negociação" | "Venda" | "Perdido";
+export type ProdutoComercial = "Esportivo" | "Casual";
+export type OrigemB2C = "Site" | "Mercado Livre" | "Instagram" | "Indicação" | "Outro";
+export type MotivoPerda =
+  | "Preço acima do mercado" | "Prazo de entrega incompatível"
+  | "Produto não atende a necessidade" | "Cliente escolheu concorrente"
+  | "Negociação não evoluiu" | "Outro";
+
+export interface Vendedor {
+  id: string; nome: string; iniciais: string; perfil: "Gestor" | "Vendedor";
+  metaMensal: number;
+}
+
+export interface InteracaoComercial {
+  id: string; clienteId: string; data: string;
+  tipo: "Ligação" | "E-mail" | "Visita" | "Proposta Enviada" | "Reunião";
+  descricao: string; vendedorId: string;
+}
 
 export interface ClienteB2B {
   id: string; empresa: string; contato: string; cidade: string; estado: string;
   valor: number; estagio: EstagioB2B; ultimoContato: string;
+  vendedorId?: string; produto?: ProdutoComercial;
+  criacao?: string; etapaDesde?: string; motivoPerda?: MotivoPerda;
+  cicloMedio?: number; ultimoPedido?: string;
 }
 export interface ClienteB2C {
   id: string; nome: string; cidade: string; telefone: string;
   valor: number; estagio: EstagioB2C; ultimoContato: string;
+  origem?: OrigemB2C; produto?: ProdutoComercial; vendedorId?: string;
 }
 
-export type StatusPedidoVenda = "Negociação" | "Reservado" | "Produção" | "Pronto para envio" | "Finalizado";
+export type StatusPedidoVenda = "Negociação" | "Validado" | "Reservado" | "Produção" | "Pronto para envio" | "Finalizado";
 export interface PedidoVenda {
   id: string; numero: string; cliente: string; canal: "B2B" | "B2C";
   produtoId: string; produto: string; quantidade: number; valor: number;
   emissao: string; previsaoEntrega: string; status: StatusPedidoVenda;
+  vendedorId?: string; produtoComercial?: ProdutoComercial;
+}
+
+export interface MetasComerciais {
+  mensal: number; trimestral: number; anual: number;
 }
 
 export type StatusOP = "Planejada" | "Em Produção" | "Concluída" | "Atrasada";
@@ -490,3 +516,63 @@ export const historicoMelhoriasSeed: MelhoriaHistorico[] = [
   { id: "h2", titulo: "Redução de 30% no retrabalho de Pesponto", data: "2026-02-20", ganho: "R$ 9.800" },
   { id: "h3", titulo: "Inventário cíclico semanal implantado", data: "2026-01-05", ganho: "Acuracidade 98,5%" },
 ];
+
+// ====== SEEDS COMERCIAIS v2 ======
+
+export const vendedoresSeed: Vendedor[] = [
+  { id: "v1", nome: "Ricardo Ferreira", iniciais: "RF", perfil: "Gestor", metaMensal: 250000 },
+  { id: "v2", nome: "Camila Souza", iniciais: "CS", perfil: "Vendedor", metaMensal: 180000 },
+  { id: "v3", nome: "Bruno Tavares", iniciais: "BT", perfil: "Vendedor", metaMensal: 160000 },
+  { id: "v4", nome: "Letícia Mendes", iniciais: "LM", perfil: "Vendedor", metaMensal: 150000 },
+];
+
+export const metasComerciaisSeed: MetasComerciais = {
+  mensal: 740000, trimestral: 2220000, anual: 8880000,
+};
+
+// Enriquecer clientesB2BSeed com vendedor, produto, criação, etapaDesde
+const _vmap = ["v1", "v2", "v3", "v4"];
+const _pmap: ProdutoComercial[] = ["Esportivo", "Casual"];
+clientesB2BSeed.forEach((c, i) => {
+  c.vendedorId = _vmap[i % _vmap.length];
+  c.produto = _pmap[i % 2];
+  c.criacao = daysAgo(20 + (i * 3) % 60);
+  c.etapaDesde = daysAgo(1 + (i * 7) % 22);
+  c.cicloMedio = 25 + (i % 4) * 10;
+  c.ultimoPedido = daysAgo(10 + (i * 5) % 80);
+  if (c.estagio === "Perdido") {
+    const motivos: MotivoPerda[] = ["Preço acima do mercado", "Cliente escolheu concorrente", "Negociação não evoluiu"];
+    c.motivoPerda = motivos[i % motivos.length];
+  }
+});
+
+const _origens: OrigemB2C[] = ["Site", "Mercado Livre", "Instagram", "Indicação", "Outro"];
+clientesB2CSeed.forEach((c, i) => {
+  c.origem = _origens[i % _origens.length];
+  c.produto = _pmap[i % 2];
+  c.vendedorId = _vmap[(i + 1) % _vmap.length];
+});
+
+pedidosVendaSeed.forEach((p, i) => {
+  p.vendedorId = _vmap[i % _vmap.length];
+  p.produtoComercial = _pmap[i % 2];
+});
+
+// Interações comerciais fictícias
+export const interacoesSeed: InteracaoComercial[] = clientesB2BSeed.flatMap((c, i) => {
+  const n = 1 + (i % 3);
+  return Array.from({ length: n }, (_, j) => ({
+    id: `int-${c.id}-${j}`,
+    clienteId: c.id,
+    data: daysAgo(1 + j * 4 + (i % 3)),
+    tipo: (["Ligação", "E-mail", "Visita", "Proposta Enviada", "Reunião"] as const)[(i + j) % 5],
+    descricao: [
+      "Cliente demonstrou interesse no novo modelo esportivo.",
+      "Proposta enviada com condição 30/60 dias.",
+      "Reunião agendada para revisão de volume mensal.",
+      "Aguardando retorno sobre orçamento.",
+      "Visita técnica realizada na sede do cliente.",
+    ][(i + j) % 5],
+    vendedorId: c.vendedorId ?? "v1",
+  }));
+});

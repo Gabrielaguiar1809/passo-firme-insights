@@ -25,11 +25,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as VisaoSugestoesRouteImport } from './routes/visao.sugestoes'
 import { Route as VisaoPlanoAcaoRouteImport } from './routes/visao.plano-acao'
 import { Route as VisaoObservacoesRouteImport } from './routes/visao.observacoes'
+import { Route as VendasPlanejamentoRouteImport } from './routes/vendas.planejamento'
 import { Route as VendasPedidosRouteImport } from './routes/vendas.pedidos'
 import { Route as VendasIndicadoresRouteImport } from './routes/vendas.indicadores'
 import { Route as VendasDisponibilidadeRouteImport } from './routes/vendas.disponibilidade'
 import { Route as VendasCrmB2cRouteImport } from './routes/vendas.crm-b2c'
 import { Route as VendasCrmB2bRouteImport } from './routes/vendas.crm-b2b'
+import { Route as VendasAnaliseVendedoresRouteImport } from './routes/vendas.analise-vendedores'
 import { Route as ProducaoProgramacaoRouteImport } from './routes/producao.programacao'
 import { Route as ProducaoOrdensRouteImport } from './routes/producao.ordens'
 import { Route as ProducaoIndicadoresRouteImport } from './routes/producao.indicadores'
@@ -127,6 +129,11 @@ const VisaoObservacoesRoute = VisaoObservacoesRouteImport.update({
   path: '/visao/observacoes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VendasPlanejamentoRoute = VendasPlanejamentoRouteImport.update({
+  id: '/vendas/planejamento',
+  path: '/vendas/planejamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VendasPedidosRoute = VendasPedidosRouteImport.update({
   id: '/vendas/pedidos',
   path: '/vendas/pedidos',
@@ -150,6 +157,11 @@ const VendasCrmB2cRoute = VendasCrmB2cRouteImport.update({
 const VendasCrmB2bRoute = VendasCrmB2bRouteImport.update({
   id: '/vendas/crm-b2b',
   path: '/vendas/crm-b2b',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendasAnaliseVendedoresRoute = VendasAnaliseVendedoresRouteImport.update({
+  id: '/vendas/analise-vendedores',
+  path: '/vendas/analise-vendedores',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProducaoProgramacaoRoute = ProducaoProgramacaoRouteImport.update({
@@ -263,11 +275,13 @@ export interface FileRoutesByFullPath {
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
   '/vendas/disponibilidade': typeof VendasDisponibilidadeRoute
   '/vendas/indicadores': typeof VendasIndicadoresRoute
   '/vendas/pedidos': typeof VendasPedidosRoute
+  '/vendas/planejamento': typeof VendasPlanejamentoRoute
   '/visao/observacoes': typeof VisaoObservacoesRoute
   '/visao/plano-acao': typeof VisaoPlanoAcaoRoute
   '/visao/sugestoes': typeof VisaoSugestoesRoute
@@ -302,11 +316,13 @@ export interface FileRoutesByTo {
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
   '/vendas/disponibilidade': typeof VendasDisponibilidadeRoute
   '/vendas/indicadores': typeof VendasIndicadoresRoute
   '/vendas/pedidos': typeof VendasPedidosRoute
+  '/vendas/planejamento': typeof VendasPlanejamentoRoute
   '/visao/observacoes': typeof VisaoObservacoesRoute
   '/visao/plano-acao': typeof VisaoPlanoAcaoRoute
   '/visao/sugestoes': typeof VisaoSugestoesRoute
@@ -342,11 +358,13 @@ export interface FileRoutesById {
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
   '/vendas/disponibilidade': typeof VendasDisponibilidadeRoute
   '/vendas/indicadores': typeof VendasIndicadoresRoute
   '/vendas/pedidos': typeof VendasPedidosRoute
+  '/vendas/planejamento': typeof VendasPlanejamentoRoute
   '/visao/observacoes': typeof VisaoObservacoesRoute
   '/visao/plano-acao': typeof VisaoPlanoAcaoRoute
   '/visao/sugestoes': typeof VisaoSugestoesRoute
@@ -383,11 +401,13 @@ export interface FileRouteTypes {
     | '/producao/indicadores'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
     | '/vendas/disponibilidade'
     | '/vendas/indicadores'
     | '/vendas/pedidos'
+    | '/vendas/planejamento'
     | '/visao/observacoes'
     | '/visao/plano-acao'
     | '/visao/sugestoes'
@@ -422,11 +442,13 @@ export interface FileRouteTypes {
     | '/producao/indicadores'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
     | '/vendas/disponibilidade'
     | '/vendas/indicadores'
     | '/vendas/pedidos'
+    | '/vendas/planejamento'
     | '/visao/observacoes'
     | '/visao/plano-acao'
     | '/visao/sugestoes'
@@ -461,11 +483,13 @@ export interface FileRouteTypes {
     | '/producao/indicadores'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
     | '/vendas/disponibilidade'
     | '/vendas/indicadores'
     | '/vendas/pedidos'
+    | '/vendas/planejamento'
     | '/visao/observacoes'
     | '/visao/plano-acao'
     | '/visao/sugestoes'
@@ -498,11 +522,13 @@ export interface RootRouteChildren {
   ProducaoIndicadoresRoute: typeof ProducaoIndicadoresRoute
   ProducaoOrdensRoute: typeof ProducaoOrdensRoute
   ProducaoProgramacaoRoute: typeof ProducaoProgramacaoRoute
+  VendasAnaliseVendedoresRoute: typeof VendasAnaliseVendedoresRoute
   VendasCrmB2bRoute: typeof VendasCrmB2bRoute
   VendasCrmB2cRoute: typeof VendasCrmB2cRoute
   VendasDisponibilidadeRoute: typeof VendasDisponibilidadeRoute
   VendasIndicadoresRoute: typeof VendasIndicadoresRoute
   VendasPedidosRoute: typeof VendasPedidosRoute
+  VendasPlanejamentoRoute: typeof VendasPlanejamentoRoute
   VisaoObservacoesRoute: typeof VisaoObservacoesRoute
   VisaoPlanoAcaoRoute: typeof VisaoPlanoAcaoRoute
   VisaoSugestoesRoute: typeof VisaoSugestoesRoute
@@ -622,6 +648,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VisaoObservacoesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vendas/planejamento': {
+      id: '/vendas/planejamento'
+      path: '/vendas/planejamento'
+      fullPath: '/vendas/planejamento'
+      preLoaderRoute: typeof VendasPlanejamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vendas/pedidos': {
       id: '/vendas/pedidos'
       path: '/vendas/pedidos'
@@ -655,6 +688,13 @@ declare module '@tanstack/react-router' {
       path: '/vendas/crm-b2b'
       fullPath: '/vendas/crm-b2b'
       preLoaderRoute: typeof VendasCrmB2bRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendas/analise-vendedores': {
+      id: '/vendas/analise-vendedores'
+      path: '/vendas/analise-vendedores'
+      fullPath: '/vendas/analise-vendedores'
+      preLoaderRoute: typeof VendasAnaliseVendedoresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/producao/programacao': {
@@ -814,11 +854,13 @@ const rootRouteChildren: RootRouteChildren = {
   ProducaoIndicadoresRoute: ProducaoIndicadoresRoute,
   ProducaoOrdensRoute: ProducaoOrdensRoute,
   ProducaoProgramacaoRoute: ProducaoProgramacaoRoute,
+  VendasAnaliseVendedoresRoute: VendasAnaliseVendedoresRoute,
   VendasCrmB2bRoute: VendasCrmB2bRoute,
   VendasCrmB2cRoute: VendasCrmB2cRoute,
   VendasDisponibilidadeRoute: VendasDisponibilidadeRoute,
   VendasIndicadoresRoute: VendasIndicadoresRoute,
   VendasPedidosRoute: VendasPedidosRoute,
+  VendasPlanejamentoRoute: VendasPlanejamentoRoute,
   VisaoObservacoesRoute: VisaoObservacoesRoute,
   VisaoPlanoAcaoRoute: VisaoPlanoAcaoRoute,
   VisaoSugestoesRoute: VisaoSugestoesRoute,
