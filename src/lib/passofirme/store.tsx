@@ -133,6 +133,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [sugestoes, setSugestoes] = useState(sugestoesSeed);
   const [historicoMelhorias] = useState(historicoMelhoriasSeed);
   const [devolucoesFornecedor] = useState(devolucoesFornecedorSeed);
+  const [vendedores] = useState(vendedoresSeed);
+  const [interacoes, setInteracoes] = useState(interacoesSeed);
+  const [metas, setMetas] = useState<MetasComerciais>(metasComerciaisSeed);
+  const addInteracao = useCallback((i: Omit<InteracaoComercial, "id">) => {
+    setInteracoes((arr) => [{ ...i, id: uid() }, ...arr]);
+  }, []);
 
   const aplicarEstoque = useCallback((itemTipo: "MP" | "OP", itemId: string, tipo: TipoMovimentacao, qtd: number) => {
     const delta = tipo === "Entrada" ? qtd : tipo === "Saída" ? -qtd : tipo === "Devolução" ? qtd : qtd;
