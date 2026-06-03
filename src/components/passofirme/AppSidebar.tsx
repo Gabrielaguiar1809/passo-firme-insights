@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
-type Item = { title: string; url: string; icon: React.ComponentType<{ className?: string }> };
+type Item = { title: string; url: string; icon: React.ComponentType<{ className?: string }>; badge?: string };
 type Group = { id: string; title: string; icon: React.ComponentType<{ className?: string }>; emoji: string; items: Item[] };
 
 const groups: Group[] = [
@@ -32,7 +32,7 @@ const groups: Group[] = [
     id: "vendas", title: "Vendas", emoji: "💰", icon: TrendingUp,
     items: [
       { title: "CRM B2B", url: "/vendas/crm-b2b", icon: Briefcase },
-      { title: "CRM B2C", url: "/vendas/crm-b2c", icon: Users },
+      { title: "CRM B2C", url: "/vendas/crm-b2c", icon: Users, badge: "Mês 5" },
       { title: "Pedidos de Venda", url: "/vendas/pedidos", icon: ClipboardCheck },
       { title: "Disponibilidade", url: "/vendas/disponibilidade", icon: Layers },
       { title: "Programação de Produção", url: "/producao/programacao", icon: Target },

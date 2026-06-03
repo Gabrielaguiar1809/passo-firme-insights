@@ -1,10 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useData } from "@/lib/passofirme/store";
-import { KanbanBoard } from "@/components/passofirme/Kanban";
-import { AlertCircle } from "lucide-react";
-
-const estagios = ["Atendimento", "Orçamento", "Negociação", "Venda", "Perdido"];
-const labels: Record<string, string> = { "Venda": "Venda — Concluída", "Perdido": "Cancelado" };
+import { Rocket, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/vendas/crm-b2c")({
   head: () => ({ meta: [{ title: "CRM B2C — PassoFirme" }] }),
@@ -12,27 +7,42 @@ export const Route = createFileRoute("/vendas/crm-b2c")({
 });
 
 function CrmB2CPage() {
-  const { clientesB2C } = useData();
-  const items = clientesB2C.map((c) => ({
-    id: c.id, title: c.nome, subtitle: `${c.cidade} · ${c.telefone}`,
-    valor: c.valor, stage: c.estagio,
-    badge: c.origem ? { label: c.origem, tone: "neutro" as const } : undefined,
-    meta: `Últ. contato: ${c.ultimoContato}`,
-  }));
   return (
-    <div className="space-y-5">
-      <div>
-        <div className="flex items-center gap-2 flex-wrap">
-          <h1 className="text-2xl font-semibold tracking-tight">CRM B2C</h1>
-          <span className="text-[10px] rounded-full bg-warning/25 text-warning-foreground px-2 py-0.5 font-medium">Lançamento: Mês 5</span>
+    <div className="space-y-6">
+      <div className="flex items-center gap-2 flex-wrap">
+        <h1 className="text-2xl font-semibold tracking-tight">CRM B2C</h1>
+        <span className="text-[10px] rounded-full bg-warning/25 text-warning-foreground px-2 py-0.5 font-medium">
+          Mês 5
+        </span>
+      </div>
+
+      <div className="rounded-2xl border bg-card p-10 text-center shadow-sm max-w-3xl mx-auto">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary mb-6">
+          <Rocket className="h-8 w-8" />
         </div>
-        <p className="text-sm text-muted-foreground">Funil direto ao consumidor (Site · Mercado Livre · Instagram).</p>
+        <h2 className="text-xl font-semibold mb-3 flex items-center justify-center gap-2">
+          <Clock className="h-5 w-5 text-muted-foreground" />
+          Canal B2C em preparação
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Operação prevista para o <strong className="text-foreground">Mês 5</strong> após estruturação
+          completa do canal B2B. Esta área está reservada para a expansão comercial futura da PassoFirme.
+        </p>
+        <div className="mt-6 grid grid-cols-3 gap-3 text-xs">
+          <div className="rounded-lg border bg-background p-3">
+            <p className="font-medium">Site próprio</p>
+            <p className="text-muted-foreground mt-1">Mês 5</p>
+          </div>
+          <div className="rounded-lg border bg-background p-3">
+            <p className="font-medium">Mercado Livre</p>
+            <p className="text-muted-foreground mt-1">Mês 6</p>
+          </div>
+          <div className="rounded-lg border bg-background p-3">
+            <p className="font-medium">Instagram</p>
+            <p className="text-muted-foreground mt-1">Mês 6</p>
+          </div>
+        </div>
       </div>
-      <div className="rounded-lg border bg-warning/10 p-3 text-xs flex items-start gap-2">
-        <AlertCircle className="h-4 w-4 text-warning shrink-0 mt-0.5" />
-        <p>Canal B2C em preparação. Operação inicia no <strong>Mês 5</strong>, após estruturação do canal B2B e construção do banco de dados de leads.</p>
-      </div>
-      <KanbanBoard stages={estagios} items={items} stageLabels={labels} />
     </div>
   );
 }

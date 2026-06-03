@@ -381,25 +381,63 @@ export const movimentacoesSeed: Movimentacao[] = [
   { id: "mv5", data: "2026-05-25", itemTipo: "MP", itemId: "m11", itemNome: "Ilhós Metálico Nº4", tipo: "Ajuste", quantidade: -150, origem: "Inventário cíclico", responsavel: "Qualidade", observacao: "Diferença identificada em contagem" },
 ];
 
+// ====== PRODUTOS OFICIAIS PASSOFIRME ======
+// Padronização global: apenas Tênis Esportivo e Tênis Casual nas numerações 37 a 42.
+
+export const PRODUTOS_OFICIAIS = ["Tênis Esportivo", "Tênis Casual"] as const;
+export type ProdutoOficial = (typeof PRODUTOS_OFICIAIS)[number];
+
+export const NUMERACOES = ["37", "38", "39", "40", "41", "42"] as const;
+export type Numeracao = (typeof NUMERACOES)[number];
+
+export const CORES_OFICIAIS: Record<ProdutoOficial, string[]> = {
+  "Tênis Esportivo": ["Preto", "Branco", "Azul"],
+  "Tênis Casual": ["Preto", "Marrom", "Caramelo"],
+};
+
+export function skuLabel(produto: ProdutoOficial, cor: string, num: string) {
+  return `${produto} ${cor} ${num}`;
+}
+
+// Gerador de número de lote interno LOT-AAAA-MM-NNNN (determinístico p/ seeds).
+let _loteCounter = 1;
+export function gerarNumeroLote(d: Date = TODAY) {
+  const ano = d.getUTCFullYear();
+  const mes = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const seq = String(_loteCounter++).padStart(4, "0");
+  return `LOT-${ano}-${mes}-${seq}`;
+}
+
 export const planejamentosSeed: Planejamento[] = [
-  { id: "pl1", produto: "Tênis Runner", quantidadePlanejada: 500, periodoMeses: 3, inicio: "2026-05-01", producaoRealizada: 180,
-    bom: [{ materiaId: "m1", consumoPorUnidade: 0.4 }, { materiaId: "m2", consumoPorUnidade: 1 }, { materiaId: "m3", consumoPorUnidade: 0.05 }, { materiaId: "m5", consumoPorUnidade: 1 }, { materiaId: "m10", consumoPorUnidade: 1 }] },
-  { id: "pl2", produto: "Tênis Urban", quantidadePlanejada: 350, periodoMeses: 2, inicio: "2026-05-10", producaoRealizada: 95,
-    bom: [{ materiaId: "m7", consumoPorUnidade: 0.35 }, { materiaId: "m8", consumoPorUnidade: 1 }, { materiaId: "m9", consumoPorUnidade: 2 }, { materiaId: "m11", consumoPorUnidade: 8 }, { materiaId: "m10", consumoPorUnidade: 1 }] },
-  { id: "pl3", produto: "Sapato Executivo", quantidadePlanejada: 200, periodoMeses: 3, inicio: "2026-04-15", producaoRealizada: 140,
-    bom: [{ materiaId: "m1", consumoPorUnidade: 0.45 }, { materiaId: "m4", consumoPorUnidade: 0.08 }, { materiaId: "m5", consumoPorUnidade: 1 }, { materiaId: "m10", consumoPorUnidade: 1 }] },
+  { id: "pl1", produto: "Tênis Esportivo", quantidadePlanejada: 600, periodoMeses: 3, inicio: "2026-05-01", producaoRealizada: 240,
+    bom: [{ materiaId: "m1", consumoPorUnidade: 0.4 }, { materiaId: "m8", consumoPorUnidade: 1 }, { materiaId: "m3", consumoPorUnidade: 0.05 }, { materiaId: "m5", consumoPorUnidade: 1 }, { materiaId: "m10", consumoPorUnidade: 1 }, { materiaId: "m11", consumoPorUnidade: 8 }] },
+  { id: "pl2", produto: "Tênis Casual", quantidadePlanejada: 450, periodoMeses: 2, inicio: "2026-05-10", producaoRealizada: 160,
+    bom: [{ materiaId: "m7", consumoPorUnidade: 0.35 }, { materiaId: "m2", consumoPorUnidade: 1 }, { materiaId: "m9", consumoPorUnidade: 2 }, { materiaId: "m4", consumoPorUnidade: 0.08 }, { materiaId: "m10", consumoPorUnidade: 1 }] },
+  { id: "pl3", produto: "Tênis Esportivo", quantidadePlanejada: 300, periodoMeses: 2, inicio: "2026-04-15", producaoRealizada: 220,
+    bom: [{ materiaId: "m1", consumoPorUnidade: 0.4 }, { materiaId: "m8", consumoPorUnidade: 1 }, { materiaId: "m5", consumoPorUnidade: 1 }, { materiaId: "m10", consumoPorUnidade: 1 }] },
 ];
 
-export const produtosSeed: ProdutoAcabado[] = [
-  { id: "pa1", codigo: "TR-001", produto: "Tênis Runner", cor: "Preto", numeracao: "40", quantidade: 320 },
-  { id: "pa2", codigo: "TR-002", produto: "Tênis Runner", cor: "Branco", numeracao: "41", quantidade: 210 },
-  { id: "pa3", codigo: "TU-001", produto: "Tênis Urban", cor: "Cinza", numeracao: "39", quantidade: 180 },
-  { id: "pa4", codigo: "TU-002", produto: "Tênis Urban", cor: "Azul", numeracao: "42", quantidade: 145 },
-  { id: "pa5", codigo: "SE-001", produto: "Sapato Executivo", cor: "Preto", numeracao: "41", quantidade: 95 },
-  { id: "pa6", codigo: "SE-002", produto: "Sapato Executivo", cor: "Marrom", numeracao: "42", quantidade: 78 },
-  { id: "pa7", codigo: "SC-001", produto: "Sandália Comfort", cor: "Bege", numeracao: "37", quantidade: 240 },
-  { id: "pa8", codigo: "SC-002", produto: "Sandália Comfort", cor: "Preto", numeracao: "38", quantidade: 188 },
-];
+// Gera 2 produtos × 3 cores × 6 numerações = 36 SKUs determinísticos.
+export const produtosSeed: ProdutoAcabado[] = PRODUTOS_OFICIAIS.flatMap((produto) =>
+  CORES_OFICIAIS[produto].flatMap((cor) =>
+    NUMERACOES.map((num) => {
+      const prefix = produto === "Tênis Esportivo" ? "TE" : "TC";
+      const corCode = cor.slice(0, 2).toUpperCase();
+      // quantidades determinísticas (sem usar rnd para preservar PRNG global)
+      const base = (produto === "Tênis Esportivo" ? 80 : 60);
+      const corBoost = cor === "Preto" ? 60 : cor === "Branco" ? 40 : 20;
+      const numBoost = (Number(num) === 39 || Number(num) === 40 || Number(num) === 41) ? 50 : 10;
+      return {
+        id: `pa-${prefix}-${corCode}-${num}`,
+        codigo: `${prefix}-${corCode}-${num}`,
+        produto,
+        cor,
+        numeracao: num,
+        quantidade: base + corBoost + numBoost,
+      } as ProdutoAcabado;
+    })
+  )
+);
 
 // ====== SEEDS NOVOS ======
 
@@ -489,10 +527,10 @@ export const gargalosSeed: Gargalo[] = [
 ];
 
 export const observacoesSeed: Observacao[] = [
-  { id: "ob1", data: daysAgo(2), titulo: "Consumo de cola aumentou 20%", categoria: "Produção", texto: "Aumento detectado na linha de montagem do Tênis Urban. Recomenda-se revisar processo de aplicação.", impacto: "Médio" },
+  { id: "ob1", data: daysAgo(2), titulo: "Consumo de cola aumentou 20%", categoria: "Produção", texto: "Aumento detectado na linha de montagem do Tênis Casual. Recomenda-se revisar processo de aplicação.", impacto: "Médio" },
   { id: "ob2", data: daysAgo(4), titulo: "Estoque de couro abaixo da cobertura ideal", categoria: "Estoque", texto: "Couro Preto Premium com apenas 7 dias de cobertura. Pedido sugerido ao CouroMax.", impacto: "Alto" },
   { id: "ob3", data: daysAgo(6), titulo: "Solados Brasil com atraso recorrente", categoria: "Compras", texto: "3 dos últimos 5 pedidos chegaram fora do prazo. Considerar fornecedor alternativo.", impacto: "Alto" },
-  { id: "ob4", data: daysAgo(8), titulo: "Retrabalho acima da média na Montagem", categoria: "Qualidade", texto: "Taxa de retrabalho subiu para 4,8%. Treinamento agendado para a próxima semana.", impacto: "Médio" },
+  { id: "ob4", data: daysAgo(8), titulo: "Retrabalho acima da média na Montagem", categoria: "Qualidade", texto: "Taxa de retrabalho subiu para 4,8% no Tênis Esportivo. Treinamento agendado para a próxima semana.", impacto: "Médio" },
   { id: "ob5", data: daysAgo(1), titulo: "Crescimento de pedidos B2B do Sudeste", categoria: "Vendas", texto: "Aumento de 18% em pedidos da região nas últimas 4 semanas.", impacto: "Baixo" },
 ];
 
