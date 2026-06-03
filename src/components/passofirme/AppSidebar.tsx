@@ -160,7 +160,15 @@ export function AppSidebar() {
                         return (
                           <SidebarMenuItem key={item.url}>
                             <SidebarMenuButton asChild isActive={active} tooltip={item.title} size="sm">
-                              <Link to={item.url}><item.icon className="h-4 w-4" /><span>{item.title}</span></Link>
+                              <Link to={item.url}>
+                                <item.icon className="h-4 w-4" />
+                                <span className="flex-1">{item.title}</span>
+                                {item.badge && (
+                                  <span className="text-[9px] rounded-full bg-warning/25 text-warning-foreground px-1.5 py-0.5 font-medium">
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </Link>
                             </SidebarMenuButton>
                           </SidebarMenuItem>
                         );
