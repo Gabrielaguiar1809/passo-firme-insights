@@ -59,7 +59,7 @@ function ProdutosPage() {
         onNew={() => {
           addProduto({
             codigo: `NV-${String(produtos.length + 1).padStart(3, "0")}`,
-            produto: "Tênis Runner",
+            produto: "Tênis Esportivo",
             cor: "Preto",
             numeracao: "40",
             quantidade: 50,
