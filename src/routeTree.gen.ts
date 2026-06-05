@@ -39,11 +39,13 @@ import { Route as ProducaoGargalosRouteImport } from './routes/producao.gargalos
 import { Route as ProducaoConsumoRouteImport } from './routes/producao.consumo'
 import { Route as InteligenciaRelatoriosRouteImport } from './routes/inteligencia.relatorios'
 import { Route as InteligenciaHistoricoRouteImport } from './routes/inteligencia.historico'
+import { Route as EstoqueVencimentosRouteImport } from './routes/estoque.vencimentos'
 import { Route as EstoqueRecebimentosRouteImport } from './routes/estoque.recebimentos'
 import { Route as EstoqueInventarioRouteImport } from './routes/estoque.inventario'
 import { Route as EstoqueIndicadoresRouteImport } from './routes/estoque.indicadores'
 import { Route as EstoqueDevolucoesRouteImport } from './routes/estoque.devolucoes'
 import { Route as ComprasIndicadoresRouteImport } from './routes/compras.indicadores'
+import { Route as ComprasFichasRouteImport } from './routes/compras.fichas'
 import { Route as AdminSolicitacoesRouteImport } from './routes/admin.solicitacoes'
 import { Route as AdminLimpezaRouteImport } from './routes/admin.limpeza'
 import { Route as AdminIndicadoresRouteImport } from './routes/admin.indicadores'
@@ -200,6 +202,11 @@ const InteligenciaHistoricoRoute = InteligenciaHistoricoRouteImport.update({
   path: '/inteligencia/historico',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EstoqueVencimentosRoute = EstoqueVencimentosRouteImport.update({
+  id: '/vencimentos',
+  path: '/vencimentos',
+  getParentRoute: () => EstoqueRoute,
+} as any)
 const EstoqueRecebimentosRoute = EstoqueRecebimentosRouteImport.update({
   id: '/recebimentos',
   path: '/recebimentos',
@@ -223,6 +230,11 @@ const EstoqueDevolucoesRoute = EstoqueDevolucoesRouteImport.update({
 const ComprasIndicadoresRoute = ComprasIndicadoresRouteImport.update({
   id: '/compras/indicadores',
   path: '/compras/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprasFichasRoute = ComprasFichasRouteImport.update({
+  id: '/compras/fichas',
+  path: '/compras/fichas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminSolicitacoesRoute = AdminSolicitacoesRouteImport.update({
@@ -270,11 +282,13 @@ export interface FileRoutesByFullPath {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
   '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
@@ -312,11 +326,13 @@ export interface FileRoutesByTo {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
   '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
@@ -355,11 +371,13 @@ export interface FileRoutesById {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
   '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
@@ -399,11 +417,13 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
     | '/estoque/inventario'
     | '/estoque/recebimentos'
+    | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
     | '/producao/consumo'
@@ -441,11 +461,13 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
     | '/estoque/inventario'
     | '/estoque/recebimentos'
+    | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
     | '/producao/consumo'
@@ -483,11 +505,13 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
     | '/estoque/inventario'
     | '/estoque/recebimentos'
+    | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
     | '/producao/consumo'
@@ -526,6 +550,7 @@ export interface RootRouteChildren {
   AdminIndicadoresRoute: typeof AdminIndicadoresRoute
   AdminLimpezaRoute: typeof AdminLimpezaRoute
   AdminSolicitacoesRoute: typeof AdminSolicitacoesRoute
+  ComprasFichasRoute: typeof ComprasFichasRoute
   ComprasIndicadoresRoute: typeof ComprasIndicadoresRoute
   InteligenciaHistoricoRoute: typeof InteligenciaHistoricoRoute
   InteligenciaRelatoriosRoute: typeof InteligenciaRelatoriosRoute
@@ -758,6 +783,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InteligenciaHistoricoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/estoque/vencimentos': {
+      id: '/estoque/vencimentos'
+      path: '/vencimentos'
+      fullPath: '/estoque/vencimentos'
+      preLoaderRoute: typeof EstoqueVencimentosRouteImport
+      parentRoute: typeof EstoqueRoute
+    }
     '/estoque/recebimentos': {
       id: '/estoque/recebimentos'
       path: '/recebimentos'
@@ -791,6 +823,13 @@ declare module '@tanstack/react-router' {
       path: '/compras/indicadores'
       fullPath: '/compras/indicadores'
       preLoaderRoute: typeof ComprasIndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compras/fichas': {
+      id: '/compras/fichas'
+      path: '/compras/fichas'
+      fullPath: '/compras/fichas'
+      preLoaderRoute: typeof ComprasFichasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/solicitacoes': {
@@ -836,6 +875,7 @@ interface EstoqueRouteChildren {
   EstoqueIndicadoresRoute: typeof EstoqueIndicadoresRoute
   EstoqueInventarioRoute: typeof EstoqueInventarioRoute
   EstoqueRecebimentosRoute: typeof EstoqueRecebimentosRoute
+  EstoqueVencimentosRoute: typeof EstoqueVencimentosRoute
 }
 
 const EstoqueRouteChildren: EstoqueRouteChildren = {
@@ -843,6 +883,7 @@ const EstoqueRouteChildren: EstoqueRouteChildren = {
   EstoqueIndicadoresRoute: EstoqueIndicadoresRoute,
   EstoqueInventarioRoute: EstoqueInventarioRoute,
   EstoqueRecebimentosRoute: EstoqueRecebimentosRoute,
+  EstoqueVencimentosRoute: EstoqueVencimentosRoute,
 }
 
 const EstoqueRouteWithChildren =
@@ -867,6 +908,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndicadoresRoute: AdminIndicadoresRoute,
   AdminLimpezaRoute: AdminLimpezaRoute,
   AdminSolicitacoesRoute: AdminSolicitacoesRoute,
+  ComprasFichasRoute: ComprasFichasRoute,
   ComprasIndicadoresRoute: ComprasIndicadoresRoute,
   InteligenciaHistoricoRoute: InteligenciaHistoricoRoute,
   InteligenciaRelatoriosRoute: InteligenciaRelatoriosRoute,
@@ -889,3 +931,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
