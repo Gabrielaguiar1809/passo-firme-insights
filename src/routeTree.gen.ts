@@ -40,6 +40,7 @@ import { Route as ProducaoIndicadoresRouteImport } from './routes/producao.indic
 import { Route as ProducaoGargalosRouteImport } from './routes/producao.gargalos'
 import { Route as ProducaoConsumoRouteImport } from './routes/producao.consumo'
 import { Route as LogisticaTransportadorasRouteImport } from './routes/logistica.transportadoras'
+import { Route as LogisticaReversaRouteImport } from './routes/logistica.reversa'
 import { Route as LogisticaRastreabilidadeRouteImport } from './routes/logistica.rastreabilidade'
 import { Route as InteligenciaRelatoriosRouteImport } from './routes/inteligencia.relatorios'
 import { Route as InteligenciaHistoricoRouteImport } from './routes/inteligencia.historico'
@@ -213,6 +214,11 @@ const LogisticaTransportadorasRoute =
     path: '/logistica/transportadoras',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LogisticaReversaRoute = LogisticaReversaRouteImport.update({
+  id: '/logistica/reversa',
+  path: '/logistica/reversa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LogisticaRastreabilidadeRoute =
   LogisticaRastreabilidadeRouteImport.update({
     id: '/logistica/rastreabilidade',
@@ -325,6 +331,7 @@ export interface FileRoutesByFullPath {
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/reversa': typeof LogisticaReversaRoute
   '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
@@ -374,6 +381,7 @@ export interface FileRoutesByTo {
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/reversa': typeof LogisticaReversaRoute
   '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
@@ -424,6 +432,7 @@ export interface FileRoutesById {
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
   '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/reversa': typeof LogisticaReversaRoute
   '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
@@ -475,6 +484,7 @@ export interface FileRouteTypes {
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
     | '/logistica/rastreabilidade'
+    | '/logistica/reversa'
     | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
@@ -524,6 +534,7 @@ export interface FileRouteTypes {
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
     | '/logistica/rastreabilidade'
+    | '/logistica/reversa'
     | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
@@ -573,6 +584,7 @@ export interface FileRouteTypes {
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
     | '/logistica/rastreabilidade'
+    | '/logistica/reversa'
     | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
@@ -618,6 +630,7 @@ export interface RootRouteChildren {
   InteligenciaHistoricoRoute: typeof InteligenciaHistoricoRoute
   InteligenciaRelatoriosRoute: typeof InteligenciaRelatoriosRoute
   LogisticaRastreabilidadeRoute: typeof LogisticaRastreabilidadeRoute
+  LogisticaReversaRoute: typeof LogisticaReversaRoute
   LogisticaTransportadorasRoute: typeof LogisticaTransportadorasRoute
   ProducaoConsumoRoute: typeof ProducaoConsumoRoute
   ProducaoGargalosRoute: typeof ProducaoGargalosRoute
@@ -857,6 +870,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LogisticaTransportadorasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/logistica/reversa': {
+      id: '/logistica/reversa'
+      path: '/logistica/reversa'
+      fullPath: '/logistica/reversa'
+      preLoaderRoute: typeof LogisticaReversaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/logistica/rastreabilidade': {
       id: '/logistica/rastreabilidade'
       path: '/logistica/rastreabilidade'
@@ -1016,6 +1036,7 @@ const rootRouteChildren: RootRouteChildren = {
   InteligenciaHistoricoRoute: InteligenciaHistoricoRoute,
   InteligenciaRelatoriosRoute: InteligenciaRelatoriosRoute,
   LogisticaRastreabilidadeRoute: LogisticaRastreabilidadeRoute,
+  LogisticaReversaRoute: LogisticaReversaRoute,
   LogisticaTransportadorasRoute: LogisticaTransportadorasRoute,
   ProducaoConsumoRoute: ProducaoConsumoRoute,
   ProducaoGargalosRoute: ProducaoGargalosRoute,

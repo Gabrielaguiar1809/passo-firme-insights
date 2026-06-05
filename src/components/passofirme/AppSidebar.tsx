@@ -5,7 +5,7 @@ import {
   Footprints, TrendingUp, Settings, Sparkles, Boxes, ArrowLeftRight, Target,
   ChevronDown, BarChart3, Users, FileText, Lightbulb, History, AlertTriangle,
   Wrench, ListChecks, Brush, Briefcase, ShieldCheck, ClipboardCheck, Cog, Truck,
-  RotateCcw, Layers, Gauge,
+  RotateCcw, Layers, Gauge, CalendarClock, Handshake, Search,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
