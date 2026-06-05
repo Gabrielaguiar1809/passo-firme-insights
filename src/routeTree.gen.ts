@@ -32,17 +32,26 @@ import { Route as VendasDisponibilidadeRouteImport } from './routes/vendas.dispo
 import { Route as VendasCrmB2cRouteImport } from './routes/vendas.crm-b2c'
 import { Route as VendasCrmB2bRouteImport } from './routes/vendas.crm-b2b'
 import { Route as VendasAnaliseVendedoresRouteImport } from './routes/vendas.analise-vendedores'
+import { Route as ProducaoSopRouteImport } from './routes/producao.sop'
 import { Route as ProducaoProgramacaoRouteImport } from './routes/producao.programacao'
 import { Route as ProducaoOrdensRouteImport } from './routes/producao.ordens'
+import { Route as ProducaoManutencaoRouteImport } from './routes/producao.manutencao'
 import { Route as ProducaoIndicadoresRouteImport } from './routes/producao.indicadores'
 import { Route as ProducaoGargalosRouteImport } from './routes/producao.gargalos'
 import { Route as ProducaoConsumoRouteImport } from './routes/producao.consumo'
+import { Route as LogisticaTransportadorasRouteImport } from './routes/logistica.transportadoras'
+import { Route as LogisticaReversaRouteImport } from './routes/logistica.reversa'
+import { Route as LogisticaRastreabilidadeRouteImport } from './routes/logistica.rastreabilidade'
 import { Route as InteligenciaRelatoriosRouteImport } from './routes/inteligencia.relatorios'
 import { Route as InteligenciaHistoricoRouteImport } from './routes/inteligencia.historico'
+import { Route as EstoqueVencimentosRouteImport } from './routes/estoque.vencimentos'
 import { Route as EstoqueRecebimentosRouteImport } from './routes/estoque.recebimentos'
+import { Route as EstoqueInventarioRouteImport } from './routes/estoque.inventario'
 import { Route as EstoqueIndicadoresRouteImport } from './routes/estoque.indicadores'
 import { Route as EstoqueDevolucoesRouteImport } from './routes/estoque.devolucoes'
 import { Route as ComprasIndicadoresRouteImport } from './routes/compras.indicadores'
+import { Route as ComprasFichasRouteImport } from './routes/compras.fichas'
+import { Route as ComprasAcordosRouteImport } from './routes/compras.acordos'
 import { Route as AdminSolicitacoesRouteImport } from './routes/admin.solicitacoes'
 import { Route as AdminLimpezaRouteImport } from './routes/admin.limpeza'
 import { Route as AdminIndicadoresRouteImport } from './routes/admin.indicadores'
@@ -164,6 +173,11 @@ const VendasAnaliseVendedoresRoute = VendasAnaliseVendedoresRouteImport.update({
   path: '/vendas/analise-vendedores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProducaoSopRoute = ProducaoSopRouteImport.update({
+  id: '/producao/sop',
+  path: '/producao/sop',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProducaoProgramacaoRoute = ProducaoProgramacaoRouteImport.update({
   id: '/producao/programacao',
   path: '/producao/programacao',
@@ -172,6 +186,11 @@ const ProducaoProgramacaoRoute = ProducaoProgramacaoRouteImport.update({
 const ProducaoOrdensRoute = ProducaoOrdensRouteImport.update({
   id: '/producao/ordens',
   path: '/producao/ordens',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducaoManutencaoRoute = ProducaoManutencaoRouteImport.update({
+  id: '/producao/manutencao',
+  path: '/producao/manutencao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProducaoIndicadoresRoute = ProducaoIndicadoresRouteImport.update({
@@ -189,6 +208,23 @@ const ProducaoConsumoRoute = ProducaoConsumoRouteImport.update({
   path: '/producao/consumo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LogisticaTransportadorasRoute =
+  LogisticaTransportadorasRouteImport.update({
+    id: '/logistica/transportadoras',
+    path: '/logistica/transportadoras',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LogisticaReversaRoute = LogisticaReversaRouteImport.update({
+  id: '/logistica/reversa',
+  path: '/logistica/reversa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogisticaRastreabilidadeRoute =
+  LogisticaRastreabilidadeRouteImport.update({
+    id: '/logistica/rastreabilidade',
+    path: '/logistica/rastreabilidade',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const InteligenciaRelatoriosRoute = InteligenciaRelatoriosRouteImport.update({
   id: '/inteligencia/relatorios',
   path: '/inteligencia/relatorios',
@@ -199,9 +235,19 @@ const InteligenciaHistoricoRoute = InteligenciaHistoricoRouteImport.update({
   path: '/inteligencia/historico',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EstoqueVencimentosRoute = EstoqueVencimentosRouteImport.update({
+  id: '/vencimentos',
+  path: '/vencimentos',
+  getParentRoute: () => EstoqueRoute,
+} as any)
 const EstoqueRecebimentosRoute = EstoqueRecebimentosRouteImport.update({
   id: '/recebimentos',
   path: '/recebimentos',
+  getParentRoute: () => EstoqueRoute,
+} as any)
+const EstoqueInventarioRoute = EstoqueInventarioRouteImport.update({
+  id: '/inventario',
+  path: '/inventario',
   getParentRoute: () => EstoqueRoute,
 } as any)
 const EstoqueIndicadoresRoute = EstoqueIndicadoresRouteImport.update({
@@ -217,6 +263,16 @@ const EstoqueDevolucoesRoute = EstoqueDevolucoesRouteImport.update({
 const ComprasIndicadoresRoute = ComprasIndicadoresRouteImport.update({
   id: '/compras/indicadores',
   path: '/compras/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprasFichasRoute = ComprasFichasRouteImport.update({
+  id: '/compras/fichas',
+  path: '/compras/fichas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprasAcordosRoute = ComprasAcordosRouteImport.update({
+  id: '/compras/acordos',
+  path: '/compras/acordos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminSolicitacoesRoute = AdminSolicitacoesRouteImport.update({
@@ -264,17 +320,26 @@ export interface FileRoutesByFullPath {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/acordos': typeof ComprasAcordosRoute
+  '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/reversa': typeof LogisticaReversaRoute
+  '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/manutencao': typeof ProducaoManutencaoRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/producao/sop': typeof ProducaoSopRoute
   '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
@@ -305,17 +370,26 @@ export interface FileRoutesByTo {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/acordos': typeof ComprasAcordosRoute
+  '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/reversa': typeof LogisticaReversaRoute
+  '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/manutencao': typeof ProducaoManutencaoRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/producao/sop': typeof ProducaoSopRoute
   '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
@@ -347,17 +421,26 @@ export interface FileRoutesById {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/acordos': typeof ComprasAcordosRoute
+  '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
+  '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/reversa': typeof LogisticaReversaRoute
+  '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/manutencao': typeof ProducaoManutencaoRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/producao/sop': typeof ProducaoSopRoute
   '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
@@ -390,17 +473,26 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/acordos'
+    | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
+    | '/estoque/inventario'
     | '/estoque/recebimentos'
+    | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
+    | '/logistica/rastreabilidade'
+    | '/logistica/reversa'
+    | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
+    | '/producao/manutencao'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/producao/sop'
     | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
@@ -431,17 +523,26 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/acordos'
+    | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
+    | '/estoque/inventario'
     | '/estoque/recebimentos'
+    | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
+    | '/logistica/rastreabilidade'
+    | '/logistica/reversa'
+    | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
+    | '/producao/manutencao'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/producao/sop'
     | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
@@ -472,17 +573,26 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/acordos'
+    | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
+    | '/estoque/inventario'
     | '/estoque/recebimentos'
+    | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
+    | '/logistica/rastreabilidade'
+    | '/logistica/reversa'
+    | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
+    | '/producao/manutencao'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/producao/sop'
     | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
@@ -514,14 +624,21 @@ export interface RootRouteChildren {
   AdminIndicadoresRoute: typeof AdminIndicadoresRoute
   AdminLimpezaRoute: typeof AdminLimpezaRoute
   AdminSolicitacoesRoute: typeof AdminSolicitacoesRoute
+  ComprasAcordosRoute: typeof ComprasAcordosRoute
+  ComprasFichasRoute: typeof ComprasFichasRoute
   ComprasIndicadoresRoute: typeof ComprasIndicadoresRoute
   InteligenciaHistoricoRoute: typeof InteligenciaHistoricoRoute
   InteligenciaRelatoriosRoute: typeof InteligenciaRelatoriosRoute
+  LogisticaRastreabilidadeRoute: typeof LogisticaRastreabilidadeRoute
+  LogisticaReversaRoute: typeof LogisticaReversaRoute
+  LogisticaTransportadorasRoute: typeof LogisticaTransportadorasRoute
   ProducaoConsumoRoute: typeof ProducaoConsumoRoute
   ProducaoGargalosRoute: typeof ProducaoGargalosRoute
   ProducaoIndicadoresRoute: typeof ProducaoIndicadoresRoute
+  ProducaoManutencaoRoute: typeof ProducaoManutencaoRoute
   ProducaoOrdensRoute: typeof ProducaoOrdensRoute
   ProducaoProgramacaoRoute: typeof ProducaoProgramacaoRoute
+  ProducaoSopRoute: typeof ProducaoSopRoute
   VendasAnaliseVendedoresRoute: typeof VendasAnaliseVendedoresRoute
   VendasCrmB2bRoute: typeof VendasCrmB2bRoute
   VendasCrmB2cRoute: typeof VendasCrmB2cRoute
@@ -697,6 +814,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendasAnaliseVendedoresRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/producao/sop': {
+      id: '/producao/sop'
+      path: '/producao/sop'
+      fullPath: '/producao/sop'
+      preLoaderRoute: typeof ProducaoSopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/producao/programacao': {
       id: '/producao/programacao'
       path: '/producao/programacao'
@@ -709,6 +833,13 @@ declare module '@tanstack/react-router' {
       path: '/producao/ordens'
       fullPath: '/producao/ordens'
       preLoaderRoute: typeof ProducaoOrdensRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producao/manutencao': {
+      id: '/producao/manutencao'
+      path: '/producao/manutencao'
+      fullPath: '/producao/manutencao'
+      preLoaderRoute: typeof ProducaoManutencaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/producao/indicadores': {
@@ -732,6 +863,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProducaoConsumoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/logistica/transportadoras': {
+      id: '/logistica/transportadoras'
+      path: '/logistica/transportadoras'
+      fullPath: '/logistica/transportadoras'
+      preLoaderRoute: typeof LogisticaTransportadorasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logistica/reversa': {
+      id: '/logistica/reversa'
+      path: '/logistica/reversa'
+      fullPath: '/logistica/reversa'
+      preLoaderRoute: typeof LogisticaReversaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logistica/rastreabilidade': {
+      id: '/logistica/rastreabilidade'
+      path: '/logistica/rastreabilidade'
+      fullPath: '/logistica/rastreabilidade'
+      preLoaderRoute: typeof LogisticaRastreabilidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/inteligencia/relatorios': {
       id: '/inteligencia/relatorios'
       path: '/inteligencia/relatorios'
@@ -746,11 +898,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InteligenciaHistoricoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/estoque/vencimentos': {
+      id: '/estoque/vencimentos'
+      path: '/vencimentos'
+      fullPath: '/estoque/vencimentos'
+      preLoaderRoute: typeof EstoqueVencimentosRouteImport
+      parentRoute: typeof EstoqueRoute
+    }
     '/estoque/recebimentos': {
       id: '/estoque/recebimentos'
       path: '/recebimentos'
       fullPath: '/estoque/recebimentos'
       preLoaderRoute: typeof EstoqueRecebimentosRouteImport
+      parentRoute: typeof EstoqueRoute
+    }
+    '/estoque/inventario': {
+      id: '/estoque/inventario'
+      path: '/inventario'
+      fullPath: '/estoque/inventario'
+      preLoaderRoute: typeof EstoqueInventarioRouteImport
       parentRoute: typeof EstoqueRoute
     }
     '/estoque/indicadores': {
@@ -772,6 +938,20 @@ declare module '@tanstack/react-router' {
       path: '/compras/indicadores'
       fullPath: '/compras/indicadores'
       preLoaderRoute: typeof ComprasIndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compras/fichas': {
+      id: '/compras/fichas'
+      path: '/compras/fichas'
+      fullPath: '/compras/fichas'
+      preLoaderRoute: typeof ComprasFichasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compras/acordos': {
+      id: '/compras/acordos'
+      path: '/compras/acordos'
+      fullPath: '/compras/acordos'
+      preLoaderRoute: typeof ComprasAcordosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/solicitacoes': {
@@ -815,13 +995,17 @@ declare module '@tanstack/react-router' {
 interface EstoqueRouteChildren {
   EstoqueDevolucoesRoute: typeof EstoqueDevolucoesRoute
   EstoqueIndicadoresRoute: typeof EstoqueIndicadoresRoute
+  EstoqueInventarioRoute: typeof EstoqueInventarioRoute
   EstoqueRecebimentosRoute: typeof EstoqueRecebimentosRoute
+  EstoqueVencimentosRoute: typeof EstoqueVencimentosRoute
 }
 
 const EstoqueRouteChildren: EstoqueRouteChildren = {
   EstoqueDevolucoesRoute: EstoqueDevolucoesRoute,
   EstoqueIndicadoresRoute: EstoqueIndicadoresRoute,
+  EstoqueInventarioRoute: EstoqueInventarioRoute,
   EstoqueRecebimentosRoute: EstoqueRecebimentosRoute,
+  EstoqueVencimentosRoute: EstoqueVencimentosRoute,
 }
 
 const EstoqueRouteWithChildren =
@@ -846,14 +1030,21 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndicadoresRoute: AdminIndicadoresRoute,
   AdminLimpezaRoute: AdminLimpezaRoute,
   AdminSolicitacoesRoute: AdminSolicitacoesRoute,
+  ComprasAcordosRoute: ComprasAcordosRoute,
+  ComprasFichasRoute: ComprasFichasRoute,
   ComprasIndicadoresRoute: ComprasIndicadoresRoute,
   InteligenciaHistoricoRoute: InteligenciaHistoricoRoute,
   InteligenciaRelatoriosRoute: InteligenciaRelatoriosRoute,
+  LogisticaRastreabilidadeRoute: LogisticaRastreabilidadeRoute,
+  LogisticaReversaRoute: LogisticaReversaRoute,
+  LogisticaTransportadorasRoute: LogisticaTransportadorasRoute,
   ProducaoConsumoRoute: ProducaoConsumoRoute,
   ProducaoGargalosRoute: ProducaoGargalosRoute,
   ProducaoIndicadoresRoute: ProducaoIndicadoresRoute,
+  ProducaoManutencaoRoute: ProducaoManutencaoRoute,
   ProducaoOrdensRoute: ProducaoOrdensRoute,
   ProducaoProgramacaoRoute: ProducaoProgramacaoRoute,
+  ProducaoSopRoute: ProducaoSopRoute,
   VendasAnaliseVendedoresRoute: VendasAnaliseVendedoresRoute,
   VendasCrmB2bRoute: VendasCrmB2bRoute,
   VendasCrmB2cRoute: VendasCrmB2cRoute,

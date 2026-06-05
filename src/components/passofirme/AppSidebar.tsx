@@ -5,7 +5,7 @@ import {
   Footprints, TrendingUp, Settings, Sparkles, Boxes, ArrowLeftRight, Target,
   ChevronDown, BarChart3, Users, FileText, Lightbulb, History, AlertTriangle,
   Wrench, ListChecks, Brush, Briefcase, ShieldCheck, ClipboardCheck, Cog, Truck,
-  RotateCcw, Layers, Gauge,
+  RotateCcw, Layers, Gauge, CalendarClock, Handshake, Search,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
@@ -49,6 +49,8 @@ const groups: Group[] = [
       { title: "Cotações", url: "/cotacoes", icon: ClipboardList },
       { title: "Fornecedores", url: "/fornecedores", icon: Factory },
       { title: "Pedidos de Compra", url: "/pedidos", icon: PackageCheck },
+      { title: "Fichas de Especificação", url: "/compras/fichas", icon: FileText },
+      { title: "Acordos de Fornecimento", url: "/compras/acordos", icon: Handshake },
       { title: "Indicadores de Compras", url: "/compras/indicadores", icon: BarChart3 },
     ],
   },
@@ -59,6 +61,8 @@ const groups: Group[] = [
       { title: "Estoque Operacional", url: "/estoque-operacional", icon: Boxes },
       { title: "Movimentações", url: "/movimentacoes", icon: ArrowLeftRight },
       { title: "Recebimentos", url: "/estoque/recebimentos", icon: Truck },
+      { title: "Inventário Cíclico", url: "/estoque/inventario", icon: ClipboardCheck },
+      { title: "Vencimentos", url: "/estoque/vencimentos", icon: CalendarClock },
       { title: "Devoluções", url: "/estoque/devolucoes", icon: RotateCcw },
       { title: "Indicadores de Estoque", url: "/estoque/indicadores", icon: BarChart3 },
     ],
@@ -68,10 +72,20 @@ const groups: Group[] = [
     items: [
       { title: "Programação", url: "/producao/programacao", icon: Target },
       { title: "Ordens de Produção", url: "/producao/ordens", icon: ClipboardCheck },
+      { title: "SOP de Colagem", url: "/producao/sop", icon: ListChecks },
+      { title: "Manutenção", url: "/producao/manutencao", icon: Wrench },
       { title: "Consumo de MP", url: "/producao/consumo", icon: Gauge },
       { title: "Produto Acabado", url: "/produtos", icon: Footprints },
       { title: "Gargalos", url: "/producao/gargalos", icon: AlertTriangle },
       { title: "Indicadores Operacionais", url: "/producao/indicadores", icon: BarChart3 },
+    ],
+  },
+  {
+    id: "logistica", title: "Logística", emoji: "🚚", icon: Truck,
+    items: [
+      { title: "Transportadoras", url: "/logistica/transportadoras", icon: Truck },
+      { title: "Rastreabilidade de Lote", url: "/logistica/rastreabilidade", icon: Search },
+      { title: "Logística Reversa", url: "/logistica/reversa", icon: RotateCcw },
     ],
   },
   {
