@@ -39,6 +39,8 @@ import { Route as ProducaoManutencaoRouteImport } from './routes/producao.manute
 import { Route as ProducaoIndicadoresRouteImport } from './routes/producao.indicadores'
 import { Route as ProducaoGargalosRouteImport } from './routes/producao.gargalos'
 import { Route as ProducaoConsumoRouteImport } from './routes/producao.consumo'
+import { Route as LogisticaTransportadorasRouteImport } from './routes/logistica.transportadoras'
+import { Route as LogisticaRastreabilidadeRouteImport } from './routes/logistica.rastreabilidade'
 import { Route as InteligenciaRelatoriosRouteImport } from './routes/inteligencia.relatorios'
 import { Route as InteligenciaHistoricoRouteImport } from './routes/inteligencia.historico'
 import { Route as EstoqueVencimentosRouteImport } from './routes/estoque.vencimentos'
@@ -205,6 +207,18 @@ const ProducaoConsumoRoute = ProducaoConsumoRouteImport.update({
   path: '/producao/consumo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LogisticaTransportadorasRoute =
+  LogisticaTransportadorasRouteImport.update({
+    id: '/logistica/transportadoras',
+    path: '/logistica/transportadoras',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LogisticaRastreabilidadeRoute =
+  LogisticaRastreabilidadeRouteImport.update({
+    id: '/logistica/rastreabilidade',
+    path: '/logistica/rastreabilidade',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const InteligenciaRelatoriosRoute = InteligenciaRelatoriosRouteImport.update({
   id: '/inteligencia/relatorios',
   path: '/inteligencia/relatorios',
@@ -310,6 +324,8 @@ export interface FileRoutesByFullPath {
   '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
@@ -357,6 +373,8 @@ export interface FileRoutesByTo {
   '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
@@ -405,6 +423,8 @@ export interface FileRoutesById {
   '/estoque/vencimentos': typeof EstoqueVencimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
+  '/logistica/rastreabilidade': typeof LogisticaRastreabilidadeRoute
+  '/logistica/transportadoras': typeof LogisticaTransportadorasRoute
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
@@ -454,6 +474,8 @@ export interface FileRouteTypes {
     | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
+    | '/logistica/rastreabilidade'
+    | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
@@ -501,6 +523,8 @@ export interface FileRouteTypes {
     | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
+    | '/logistica/rastreabilidade'
+    | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
@@ -548,6 +572,8 @@ export interface FileRouteTypes {
     | '/estoque/vencimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
+    | '/logistica/rastreabilidade'
+    | '/logistica/transportadoras'
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
@@ -591,6 +617,8 @@ export interface RootRouteChildren {
   ComprasIndicadoresRoute: typeof ComprasIndicadoresRoute
   InteligenciaHistoricoRoute: typeof InteligenciaHistoricoRoute
   InteligenciaRelatoriosRoute: typeof InteligenciaRelatoriosRoute
+  LogisticaRastreabilidadeRoute: typeof LogisticaRastreabilidadeRoute
+  LogisticaTransportadorasRoute: typeof LogisticaTransportadorasRoute
   ProducaoConsumoRoute: typeof ProducaoConsumoRoute
   ProducaoGargalosRoute: typeof ProducaoGargalosRoute
   ProducaoIndicadoresRoute: typeof ProducaoIndicadoresRoute
@@ -822,6 +850,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProducaoConsumoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/logistica/transportadoras': {
+      id: '/logistica/transportadoras'
+      path: '/logistica/transportadoras'
+      fullPath: '/logistica/transportadoras'
+      preLoaderRoute: typeof LogisticaTransportadorasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logistica/rastreabilidade': {
+      id: '/logistica/rastreabilidade'
+      path: '/logistica/rastreabilidade'
+      fullPath: '/logistica/rastreabilidade'
+      preLoaderRoute: typeof LogisticaRastreabilidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/inteligencia/relatorios': {
       id: '/inteligencia/relatorios'
       path: '/inteligencia/relatorios'
@@ -973,6 +1015,8 @@ const rootRouteChildren: RootRouteChildren = {
   ComprasIndicadoresRoute: ComprasIndicadoresRoute,
   InteligenciaHistoricoRoute: InteligenciaHistoricoRoute,
   InteligenciaRelatoriosRoute: InteligenciaRelatoriosRoute,
+  LogisticaRastreabilidadeRoute: LogisticaRastreabilidadeRoute,
+  LogisticaTransportadorasRoute: LogisticaTransportadorasRoute,
   ProducaoConsumoRoute: ProducaoConsumoRoute,
   ProducaoGargalosRoute: ProducaoGargalosRoute,
   ProducaoIndicadoresRoute: ProducaoIndicadoresRoute,
@@ -994,3 +1038,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
