@@ -32,6 +32,7 @@ import { Route as VendasDisponibilidadeRouteImport } from './routes/vendas.dispo
 import { Route as VendasCrmB2cRouteImport } from './routes/vendas.crm-b2c'
 import { Route as VendasCrmB2bRouteImport } from './routes/vendas.crm-b2b'
 import { Route as VendasAnaliseVendedoresRouteImport } from './routes/vendas.analise-vendedores'
+import { Route as ProducaoSopRouteImport } from './routes/producao.sop'
 import { Route as ProducaoProgramacaoRouteImport } from './routes/producao.programacao'
 import { Route as ProducaoOrdensRouteImport } from './routes/producao.ordens'
 import { Route as ProducaoIndicadoresRouteImport } from './routes/producao.indicadores'
@@ -166,6 +167,11 @@ const VendasCrmB2bRoute = VendasCrmB2bRouteImport.update({
 const VendasAnaliseVendedoresRoute = VendasAnaliseVendedoresRouteImport.update({
   id: '/vendas/analise-vendedores',
   path: '/vendas/analise-vendedores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducaoSopRoute = ProducaoSopRouteImport.update({
+  id: '/producao/sop',
+  path: '/producao/sop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProducaoProgramacaoRoute = ProducaoProgramacaoRouteImport.update({
@@ -303,6 +309,7 @@ export interface FileRoutesByFullPath {
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/producao/sop': typeof ProducaoSopRoute
   '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
@@ -348,6 +355,7 @@ export interface FileRoutesByTo {
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/producao/sop': typeof ProducaoSopRoute
   '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
@@ -394,6 +402,7 @@ export interface FileRoutesById {
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
+  '/producao/sop': typeof ProducaoSopRoute
   '/vendas/analise-vendedores': typeof VendasAnaliseVendedoresRoute
   '/vendas/crm-b2b': typeof VendasCrmB2bRoute
   '/vendas/crm-b2c': typeof VendasCrmB2cRoute
@@ -441,6 +450,7 @@ export interface FileRouteTypes {
     | '/producao/indicadores'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/producao/sop'
     | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
@@ -486,6 +496,7 @@ export interface FileRouteTypes {
     | '/producao/indicadores'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/producao/sop'
     | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
@@ -531,6 +542,7 @@ export interface FileRouteTypes {
     | '/producao/indicadores'
     | '/producao/ordens'
     | '/producao/programacao'
+    | '/producao/sop'
     | '/vendas/analise-vendedores'
     | '/vendas/crm-b2b'
     | '/vendas/crm-b2c'
@@ -572,6 +584,7 @@ export interface RootRouteChildren {
   ProducaoIndicadoresRoute: typeof ProducaoIndicadoresRoute
   ProducaoOrdensRoute: typeof ProducaoOrdensRoute
   ProducaoProgramacaoRoute: typeof ProducaoProgramacaoRoute
+  ProducaoSopRoute: typeof ProducaoSopRoute
   VendasAnaliseVendedoresRoute: typeof VendasAnaliseVendedoresRoute
   VendasCrmB2bRoute: typeof VendasCrmB2bRoute
   VendasCrmB2cRoute: typeof VendasCrmB2cRoute
@@ -745,6 +758,13 @@ declare module '@tanstack/react-router' {
       path: '/vendas/analise-vendedores'
       fullPath: '/vendas/analise-vendedores'
       preLoaderRoute: typeof VendasAnaliseVendedoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producao/sop': {
+      id: '/producao/sop'
+      path: '/producao/sop'
+      fullPath: '/producao/sop'
+      preLoaderRoute: typeof ProducaoSopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/producao/programacao': {
@@ -938,6 +958,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProducaoIndicadoresRoute: ProducaoIndicadoresRoute,
   ProducaoOrdensRoute: ProducaoOrdensRoute,
   ProducaoProgramacaoRoute: ProducaoProgramacaoRoute,
+  ProducaoSopRoute: ProducaoSopRoute,
   VendasAnaliseVendedoresRoute: VendasAnaliseVendedoresRoute,
   VendasCrmB2bRoute: VendasCrmB2bRoute,
   VendasCrmB2cRoute: VendasCrmB2cRoute,
