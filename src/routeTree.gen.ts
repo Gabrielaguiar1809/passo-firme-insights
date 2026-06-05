@@ -40,6 +40,7 @@ import { Route as ProducaoConsumoRouteImport } from './routes/producao.consumo'
 import { Route as InteligenciaRelatoriosRouteImport } from './routes/inteligencia.relatorios'
 import { Route as InteligenciaHistoricoRouteImport } from './routes/inteligencia.historico'
 import { Route as EstoqueRecebimentosRouteImport } from './routes/estoque.recebimentos'
+import { Route as EstoqueInventarioRouteImport } from './routes/estoque.inventario'
 import { Route as EstoqueIndicadoresRouteImport } from './routes/estoque.indicadores'
 import { Route as EstoqueDevolucoesRouteImport } from './routes/estoque.devolucoes'
 import { Route as ComprasIndicadoresRouteImport } from './routes/compras.indicadores'
@@ -204,6 +205,11 @@ const EstoqueRecebimentosRoute = EstoqueRecebimentosRouteImport.update({
   path: '/recebimentos',
   getParentRoute: () => EstoqueRoute,
 } as any)
+const EstoqueInventarioRoute = EstoqueInventarioRouteImport.update({
+  id: '/inventario',
+  path: '/inventario',
+  getParentRoute: () => EstoqueRoute,
+} as any)
 const EstoqueIndicadoresRoute = EstoqueIndicadoresRouteImport.update({
   id: '/indicadores',
   path: '/indicadores',
@@ -267,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
@@ -308,6 +315,7 @@ export interface FileRoutesByTo {
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
@@ -350,6 +358,7 @@ export interface FileRoutesById {
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
   '/estoque/indicadores': typeof EstoqueIndicadoresRoute
+  '/estoque/inventario': typeof EstoqueInventarioRoute
   '/estoque/recebimentos': typeof EstoqueRecebimentosRoute
   '/inteligencia/historico': typeof InteligenciaHistoricoRoute
   '/inteligencia/relatorios': typeof InteligenciaRelatoriosRoute
@@ -393,6 +402,7 @@ export interface FileRouteTypes {
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
+    | '/estoque/inventario'
     | '/estoque/recebimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
@@ -434,6 +444,7 @@ export interface FileRouteTypes {
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
+    | '/estoque/inventario'
     | '/estoque/recebimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
@@ -475,6 +486,7 @@ export interface FileRouteTypes {
     | '/compras/indicadores'
     | '/estoque/devolucoes'
     | '/estoque/indicadores'
+    | '/estoque/inventario'
     | '/estoque/recebimentos'
     | '/inteligencia/historico'
     | '/inteligencia/relatorios'
@@ -753,6 +765,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EstoqueRecebimentosRouteImport
       parentRoute: typeof EstoqueRoute
     }
+    '/estoque/inventario': {
+      id: '/estoque/inventario'
+      path: '/inventario'
+      fullPath: '/estoque/inventario'
+      preLoaderRoute: typeof EstoqueInventarioRouteImport
+      parentRoute: typeof EstoqueRoute
+    }
     '/estoque/indicadores': {
       id: '/estoque/indicadores'
       path: '/indicadores'
@@ -815,12 +834,14 @@ declare module '@tanstack/react-router' {
 interface EstoqueRouteChildren {
   EstoqueDevolucoesRoute: typeof EstoqueDevolucoesRoute
   EstoqueIndicadoresRoute: typeof EstoqueIndicadoresRoute
+  EstoqueInventarioRoute: typeof EstoqueInventarioRoute
   EstoqueRecebimentosRoute: typeof EstoqueRecebimentosRoute
 }
 
 const EstoqueRouteChildren: EstoqueRouteChildren = {
   EstoqueDevolucoesRoute: EstoqueDevolucoesRoute,
   EstoqueIndicadoresRoute: EstoqueIndicadoresRoute,
+  EstoqueInventarioRoute: EstoqueInventarioRoute,
   EstoqueRecebimentosRoute: EstoqueRecebimentosRoute,
 }
 
@@ -868,13 +889,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
