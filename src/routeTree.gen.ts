@@ -46,6 +46,7 @@ import { Route as EstoqueIndicadoresRouteImport } from './routes/estoque.indicad
 import { Route as EstoqueDevolucoesRouteImport } from './routes/estoque.devolucoes'
 import { Route as ComprasIndicadoresRouteImport } from './routes/compras.indicadores'
 import { Route as ComprasFichasRouteImport } from './routes/compras.fichas'
+import { Route as ComprasAcordosRouteImport } from './routes/compras.acordos'
 import { Route as AdminSolicitacoesRouteImport } from './routes/admin.solicitacoes'
 import { Route as AdminLimpezaRouteImport } from './routes/admin.limpeza'
 import { Route as AdminIndicadoresRouteImport } from './routes/admin.indicadores'
@@ -237,6 +238,11 @@ const ComprasFichasRoute = ComprasFichasRouteImport.update({
   path: '/compras/fichas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComprasAcordosRoute = ComprasAcordosRouteImport.update({
+  id: '/compras/acordos',
+  path: '/compras/acordos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminSolicitacoesRoute = AdminSolicitacoesRouteImport.update({
   id: '/admin/solicitacoes',
   path: '/admin/solicitacoes',
@@ -282,6 +288,7 @@ export interface FileRoutesByFullPath {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/acordos': typeof ComprasAcordosRoute
   '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
@@ -326,6 +333,7 @@ export interface FileRoutesByTo {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/acordos': typeof ComprasAcordosRoute
   '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
@@ -371,6 +379,7 @@ export interface FileRoutesById {
   '/admin/indicadores': typeof AdminIndicadoresRoute
   '/admin/limpeza': typeof AdminLimpezaRoute
   '/admin/solicitacoes': typeof AdminSolicitacoesRoute
+  '/compras/acordos': typeof ComprasAcordosRoute
   '/compras/fichas': typeof ComprasFichasRoute
   '/compras/indicadores': typeof ComprasIndicadoresRoute
   '/estoque/devolucoes': typeof EstoqueDevolucoesRoute
@@ -417,6 +426,7 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/acordos'
     | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
@@ -461,6 +471,7 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/acordos'
     | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
@@ -505,6 +516,7 @@ export interface FileRouteTypes {
     | '/admin/indicadores'
     | '/admin/limpeza'
     | '/admin/solicitacoes'
+    | '/compras/acordos'
     | '/compras/fichas'
     | '/compras/indicadores'
     | '/estoque/devolucoes'
@@ -550,6 +562,7 @@ export interface RootRouteChildren {
   AdminIndicadoresRoute: typeof AdminIndicadoresRoute
   AdminLimpezaRoute: typeof AdminLimpezaRoute
   AdminSolicitacoesRoute: typeof AdminSolicitacoesRoute
+  ComprasAcordosRoute: typeof ComprasAcordosRoute
   ComprasFichasRoute: typeof ComprasFichasRoute
   ComprasIndicadoresRoute: typeof ComprasIndicadoresRoute
   InteligenciaHistoricoRoute: typeof InteligenciaHistoricoRoute
@@ -832,6 +845,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComprasFichasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compras/acordos': {
+      id: '/compras/acordos'
+      path: '/compras/acordos'
+      fullPath: '/compras/acordos'
+      preLoaderRoute: typeof ComprasAcordosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/solicitacoes': {
       id: '/admin/solicitacoes'
       path: '/admin/solicitacoes'
@@ -908,6 +928,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndicadoresRoute: AdminIndicadoresRoute,
   AdminLimpezaRoute: AdminLimpezaRoute,
   AdminSolicitacoesRoute: AdminSolicitacoesRoute,
+  ComprasAcordosRoute: ComprasAcordosRoute,
   ComprasFichasRoute: ComprasFichasRoute,
   ComprasIndicadoresRoute: ComprasIndicadoresRoute,
   InteligenciaHistoricoRoute: InteligenciaHistoricoRoute,
