@@ -35,6 +35,7 @@ import { Route as VendasAnaliseVendedoresRouteImport } from './routes/vendas.ana
 import { Route as ProducaoSopRouteImport } from './routes/producao.sop'
 import { Route as ProducaoProgramacaoRouteImport } from './routes/producao.programacao'
 import { Route as ProducaoOrdensRouteImport } from './routes/producao.ordens'
+import { Route as ProducaoManutencaoRouteImport } from './routes/producao.manutencao'
 import { Route as ProducaoIndicadoresRouteImport } from './routes/producao.indicadores'
 import { Route as ProducaoGargalosRouteImport } from './routes/producao.gargalos'
 import { Route as ProducaoConsumoRouteImport } from './routes/producao.consumo'
@@ -184,6 +185,11 @@ const ProducaoOrdensRoute = ProducaoOrdensRouteImport.update({
   path: '/producao/ordens',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProducaoManutencaoRoute = ProducaoManutencaoRouteImport.update({
+  id: '/producao/manutencao',
+  path: '/producao/manutencao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProducaoIndicadoresRoute = ProducaoIndicadoresRouteImport.update({
   id: '/producao/indicadores',
   path: '/producao/indicadores',
@@ -307,6 +313,7 @@ export interface FileRoutesByFullPath {
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/manutencao': typeof ProducaoManutencaoRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
   '/producao/sop': typeof ProducaoSopRoute
@@ -353,6 +360,7 @@ export interface FileRoutesByTo {
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/manutencao': typeof ProducaoManutencaoRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
   '/producao/sop': typeof ProducaoSopRoute
@@ -400,6 +408,7 @@ export interface FileRoutesById {
   '/producao/consumo': typeof ProducaoConsumoRoute
   '/producao/gargalos': typeof ProducaoGargalosRoute
   '/producao/indicadores': typeof ProducaoIndicadoresRoute
+  '/producao/manutencao': typeof ProducaoManutencaoRoute
   '/producao/ordens': typeof ProducaoOrdensRoute
   '/producao/programacao': typeof ProducaoProgramacaoRoute
   '/producao/sop': typeof ProducaoSopRoute
@@ -448,6 +457,7 @@ export interface FileRouteTypes {
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
+    | '/producao/manutencao'
     | '/producao/ordens'
     | '/producao/programacao'
     | '/producao/sop'
@@ -494,6 +504,7 @@ export interface FileRouteTypes {
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
+    | '/producao/manutencao'
     | '/producao/ordens'
     | '/producao/programacao'
     | '/producao/sop'
@@ -540,6 +551,7 @@ export interface FileRouteTypes {
     | '/producao/consumo'
     | '/producao/gargalos'
     | '/producao/indicadores'
+    | '/producao/manutencao'
     | '/producao/ordens'
     | '/producao/programacao'
     | '/producao/sop'
@@ -582,6 +594,7 @@ export interface RootRouteChildren {
   ProducaoConsumoRoute: typeof ProducaoConsumoRoute
   ProducaoGargalosRoute: typeof ProducaoGargalosRoute
   ProducaoIndicadoresRoute: typeof ProducaoIndicadoresRoute
+  ProducaoManutencaoRoute: typeof ProducaoManutencaoRoute
   ProducaoOrdensRoute: typeof ProducaoOrdensRoute
   ProducaoProgramacaoRoute: typeof ProducaoProgramacaoRoute
   ProducaoSopRoute: typeof ProducaoSopRoute
@@ -781,6 +794,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProducaoOrdensRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/producao/manutencao': {
+      id: '/producao/manutencao'
+      path: '/producao/manutencao'
+      fullPath: '/producao/manutencao'
+      preLoaderRoute: typeof ProducaoManutencaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/producao/indicadores': {
       id: '/producao/indicadores'
       path: '/producao/indicadores'
@@ -956,6 +976,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProducaoConsumoRoute: ProducaoConsumoRoute,
   ProducaoGargalosRoute: ProducaoGargalosRoute,
   ProducaoIndicadoresRoute: ProducaoIndicadoresRoute,
+  ProducaoManutencaoRoute: ProducaoManutencaoRoute,
   ProducaoOrdensRoute: ProducaoOrdensRoute,
   ProducaoProgramacaoRoute: ProducaoProgramacaoRoute,
   ProducaoSopRoute: ProducaoSopRoute,
