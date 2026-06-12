@@ -212,12 +212,12 @@ export interface MelhoriaHistorico {
 // ====== SEEDS ======
 
 export const fornecedoresSeed: Fornecedor[] = [
-  { id: "f1", nome: "CouroMax", categoria: "Couro", cidade: "Franca", estado: "SP", qualidade: 9.2, entrega: 8.8, preco: 7.5, atendimento: 9.0, leadTime: 7, otif: 92, observacoes: "Produto aprovado pela equipe de modelagem. Excelente uniformidade de couro." },
-  { id: "f2", nome: "Solados Brasil", categoria: "Solados", cidade: "Novo Hamburgo", estado: "RS", qualidade: 8.5, entrega: 7.2, preco: 8.0, atendimento: 8.5, leadTime: 10, otif: 78, observacoes: "Houve devolução de lote em 03/2026 por divergência de espessura." },
-  { id: "f3", nome: "ColaFlex", categoria: "Colas e Químicos", cidade: "Joinville", estado: "SC", qualidade: 8.8, entrega: 9.0, preco: 8.2, atendimento: 8.7, leadTime: 5, otif: 95, observacoes: "Excelente prazo de entrega e suporte técnico." },
-  { id: "f4", nome: "Palmilhas Prime", categoria: "Palmilhas", cidade: "Birigui", estado: "SP", qualidade: 9.0, entrega: 8.5, preco: 7.8, atendimento: 9.2, leadTime: 6, otif: 90, observacoes: "Parceria estratégica desde 2022." },
-  { id: "f5", nome: "NylonTech", categoria: "Linhas e Cadarços", cidade: "Blumenau", estado: "SC", qualidade: 9.4, entrega: 9.1, preco: 8.6, atendimento: 9.0, leadTime: 4, otif: 96, observacoes: "Recomendado para substituir fornecedores com IQF baixo." },
-  { id: "f6", nome: "Componentes Nova Era", categoria: "Aviamentos", cidade: "São Paulo", estado: "SP", qualidade: 8.0, entrega: 8.2, preco: 8.8, atendimento: 8.0, leadTime: 8, otif: 85, observacoes: "Problemas recorrentes de qualidade em ilhós metálicos." },
+  { id: "f1", nome: "CouroMax", categoria: "Couro", cidade: "Franca", estado: "SP", qualidade: 9.2, entrega: 9.0, preco: 8.4, atendimento: 9.0, leadTime: 7, otif: 94, observacoes: "Fornecedor homologado com acordo trimestral. Excelente uniformidade de couro." },
+  { id: "f2", nome: "Solados Brasil", categoria: "Solados", cidade: "Novo Hamburgo", estado: "RS", qualidade: 9.0, entrega: 8.8, preco: 8.5, atendimento: 8.8, leadTime: 8, otif: 91, observacoes: "Desempenho recuperado após plano de ação. OTIF em conformidade desde 04/2026." },
+  { id: "f3", nome: "ColaFlex", categoria: "Colas e Químicos", cidade: "Joinville", estado: "SC", qualidade: 9.3, entrega: 9.2, preco: 8.6, atendimento: 9.1, leadTime: 5, otif: 96, observacoes: "Fornecedor homologado com ficha de especificação técnica da cola (viscosidade, tempo de ativação e adesão validados em laudo)." },
+  { id: "f4", nome: "Palmilhas Prime", categoria: "Palmilhas", cidade: "Birigui", estado: "SP", qualidade: 9.1, entrega: 9.0, preco: 8.3, atendimento: 9.2, leadTime: 6, otif: 93, observacoes: "Parceria estratégica desde 2022, com acordo de fornecimento ativo." },
+  { id: "f5", nome: "NylonTech", categoria: "Linhas e Cadarços", cidade: "Blumenau", estado: "SC", qualidade: 9.4, entrega: 9.1, preco: 8.6, atendimento: 9.0, leadTime: 4, otif: 96, observacoes: "Fornecedor de referência em qualidade e prazo." },
+  { id: "f6", nome: "Componentes Nova Era", categoria: "Aviamentos", cidade: "São Paulo", estado: "SP", qualidade: 8.8, entrega: 8.7, preco: 8.8, atendimento: 8.6, leadTime: 7, otif: 90, observacoes: "Qualidade de ilhós normalizada após inspeção de recebimento por amostragem." },
 ];
 
 export function calcIQF(f: Pick<Fornecedor, "qualidade" | "entrega" | "preco" | "atendimento">) {
@@ -225,16 +225,16 @@ export function calcIQF(f: Pick<Fornecedor, "qualidade" | "entrega" | "preco" | 
 }
 
 export const materiasSeed: MateriaPrima[] = [
-  { id: "m1", sku: "MP-001", nome: "Couro Preto Premium", categoria: "Couro", estoqueAtual: 120, consumoMedioDiario: 18, estoqueMinimo: 200, estoqueMaximo: 1200, leadTime: 7, estoqueSeguranca: 80, custoUnitario: 45.5, ultimaMovimentacao: "2026-05-26" },
-  { id: "m7", sku: "MP-007", nome: "Couro Marrom Soft", categoria: "Couro", estoqueAtual: 540, consumoMedioDiario: 14, estoqueMinimo: 200, estoqueMaximo: 1200, leadTime: 7, estoqueSeguranca: 70, custoUnitario: 42.0, ultimaMovimentacao: "2026-05-28" },
-  { id: "m2", sku: "MP-002", nome: "Solado EVA Branco", categoria: "Solados", estoqueAtual: 850, consumoMedioDiario: 60, estoqueMinimo: 400, estoqueMaximo: 2000, leadTime: 10, estoqueSeguranca: 200, custoUnitario: 12.3, ultimaMovimentacao: "2026-05-28" },
-  { id: "m8", sku: "MP-008", nome: "Solado TR Esportivo", categoria: "Solados", estoqueAtual: 320, consumoMedioDiario: 45, estoqueMinimo: 500, estoqueMaximo: 2000, leadTime: 10, estoqueSeguranca: 200, custoUnitario: 15.6, ultimaMovimentacao: "2026-05-25" },
-  { id: "m3", sku: "MP-003", nome: "Linha Nylon 0.8", categoria: "Linhas e Cadarços", estoqueAtual: 320, consumoMedioDiario: 8, estoqueMinimo: 150, estoqueMaximo: 800, leadTime: 4, estoqueSeguranca: 50, custoUnitario: 6.2, ultimaMovimentacao: "2026-05-29" },
-  { id: "m9", sku: "MP-009", nome: "Cadarço Plano 120cm", categoria: "Linhas e Cadarços", estoqueAtual: 1800, consumoMedioDiario: 25, estoqueMinimo: 600, estoqueMaximo: 3000, leadTime: 5, estoqueSeguranca: 100, custoUnitario: 1.8, ultimaMovimentacao: "2026-05-27" },
-  { id: "m4", sku: "MP-004", nome: "Cola PU Industrial", categoria: "Colas e Químicos", estoqueAtual: 40, consumoMedioDiario: 12, estoqueMinimo: 80, estoqueMaximo: 400, leadTime: 5, estoqueSeguranca: 30, custoUnitario: 22.0, ultimaMovimentacao: "2026-05-20" },
-  { id: "m5", sku: "MP-005", nome: "Palmilha Comfort", categoria: "Palmilhas", estoqueAtual: 1200, consumoMedioDiario: 35, estoqueMinimo: 500, estoqueMaximo: 2500, leadTime: 6, estoqueSeguranca: 150, custoUnitario: 9.8, ultimaMovimentacao: "2026-02-10" },
-  { id: "m10", sku: "MP-010", nome: "Caixa Padrão 30cm", categoria: "Embalagens", estoqueAtual: 4200, consumoMedioDiario: 80, estoqueMinimo: 1500, estoqueMaximo: 6000, leadTime: 6, estoqueSeguranca: 300, custoUnitario: 1.2, ultimaMovimentacao: "2026-05-29" },
-  { id: "m11", sku: "MP-011", nome: "Ilhós Metálico Nº4", categoria: "Aviamentos", estoqueAtual: 9500, consumoMedioDiario: 220, estoqueMinimo: 4000, estoqueMaximo: 20000, leadTime: 8, estoqueSeguranca: 500, custoUnitario: 0.15, ultimaMovimentacao: "2026-05-28" },
+  { id: "m1", sku: "MP-001", nome: "Couro Preto Premium", categoria: "Couro", estoqueAtual: 410, consumoMedioDiario: 18, estoqueMinimo: 200, estoqueMaximo: 1200, leadTime: 7, estoqueSeguranca: 80, custoUnitario: 45.5, ultimaMovimentacao: "2026-05-29" },
+  { id: "m7", sku: "MP-007", nome: "Couro Marrom Soft", categoria: "Couro", estoqueAtual: 320, consumoMedioDiario: 14, estoqueMinimo: 200, estoqueMaximo: 1200, leadTime: 7, estoqueSeguranca: 70, custoUnitario: 42.0, ultimaMovimentacao: "2026-05-28" },
+  { id: "m2", sku: "MP-002", nome: "Solado EVA Branco", categoria: "Solados", estoqueAtual: 1320, consumoMedioDiario: 60, estoqueMinimo: 400, estoqueMaximo: 2000, leadTime: 10, estoqueSeguranca: 200, custoUnitario: 12.3, ultimaMovimentacao: "2026-05-29" },
+  { id: "m8", sku: "MP-008", nome: "Solado TR Esportivo", categoria: "Solados", estoqueAtual: 990, consumoMedioDiario: 45, estoqueMinimo: 500, estoqueMaximo: 2000, leadTime: 10, estoqueSeguranca: 200, custoUnitario: 15.6, ultimaMovimentacao: "2026-05-28" },
+  { id: "m3", sku: "MP-003", nome: "Linha Nylon 0.8", categoria: "Linhas e Cadarços", estoqueAtual: 190, consumoMedioDiario: 8, estoqueMinimo: 150, estoqueMaximo: 800, leadTime: 4, estoqueSeguranca: 50, custoUnitario: 6.2, ultimaMovimentacao: "2026-05-29" },
+  { id: "m9", sku: "MP-009", nome: "Cadarço Plano 120cm", categoria: "Linhas e Cadarços", estoqueAtual: 720, consumoMedioDiario: 25, estoqueMinimo: 600, estoqueMaximo: 3000, leadTime: 5, estoqueSeguranca: 100, custoUnitario: 1.8, ultimaMovimentacao: "2026-05-29" },
+  { id: "m4", sku: "MP-004", nome: "Cola PU Industrial", categoria: "Colas e Químicos", estoqueAtual: 280, consumoMedioDiario: 12, estoqueMinimo: 80, estoqueMaximo: 400, leadTime: 5, estoqueSeguranca: 30, custoUnitario: 22.0, ultimaMovimentacao: "2026-05-29" },
+  { id: "m5", sku: "MP-005", nome: "Palmilha Comfort", categoria: "Palmilhas", estoqueAtual: 760, consumoMedioDiario: 35, estoqueMinimo: 500, estoqueMaximo: 2500, leadTime: 6, estoqueSeguranca: 150, custoUnitario: 9.8, ultimaMovimentacao: "2026-05-27" },
+  { id: "m10", sku: "MP-010", nome: "Caixa Padrão 30cm", categoria: "Embalagens", estoqueAtual: 1900, consumoMedioDiario: 80, estoqueMinimo: 1500, estoqueMaximo: 6000, leadTime: 6, estoqueSeguranca: 300, custoUnitario: 1.2, ultimaMovimentacao: "2026-05-29" },
+  { id: "m11", sku: "MP-011", nome: "Ilhós Metálico Nº4", categoria: "Aviamentos", estoqueAtual: 5200, consumoMedioDiario: 220, estoqueMinimo: 4000, estoqueMaximo: 20000, leadTime: 8, estoqueSeguranca: 500, custoUnitario: 0.15, ultimaMovimentacao: "2026-05-28" },
 ];
 
 export const itensOperacionalSeed: ItemOperacional[] = [
@@ -409,11 +409,11 @@ export function gerarNumeroLote(d: Date = TODAY) {
 }
 
 export const planejamentosSeed: Planejamento[] = [
-  { id: "pl1", produto: "Tênis Esportivo", quantidadePlanejada: 600, periodoMeses: 3, inicio: "2026-05-01", producaoRealizada: 240,
+  { id: "pl1", produto: "Tênis Esportivo", quantidadePlanejada: 600, periodoMeses: 3, inicio: "2026-05-01", producaoRealizada: 540,
     bom: [{ materiaId: "m1", consumoPorUnidade: 0.4 }, { materiaId: "m8", consumoPorUnidade: 1 }, { materiaId: "m3", consumoPorUnidade: 0.05 }, { materiaId: "m5", consumoPorUnidade: 1 }, { materiaId: "m10", consumoPorUnidade: 1 }, { materiaId: "m11", consumoPorUnidade: 8 }] },
-  { id: "pl2", produto: "Tênis Casual", quantidadePlanejada: 450, periodoMeses: 2, inicio: "2026-05-10", producaoRealizada: 160,
+  { id: "pl2", produto: "Tênis Casual", quantidadePlanejada: 450, periodoMeses: 2, inicio: "2026-05-10", producaoRealizada: 400,
     bom: [{ materiaId: "m7", consumoPorUnidade: 0.35 }, { materiaId: "m2", consumoPorUnidade: 1 }, { materiaId: "m9", consumoPorUnidade: 2 }, { materiaId: "m4", consumoPorUnidade: 0.08 }, { materiaId: "m10", consumoPorUnidade: 1 }] },
-  { id: "pl3", produto: "Tênis Esportivo", quantidadePlanejada: 300, periodoMeses: 2, inicio: "2026-04-15", producaoRealizada: 220,
+  { id: "pl3", produto: "Tênis Esportivo", quantidadePlanejada: 300, periodoMeses: 2, inicio: "2026-04-15", producaoRealizada: 280,
     bom: [{ materiaId: "m1", consumoPorUnidade: 0.4 }, { materiaId: "m8", consumoPorUnidade: 1 }, { materiaId: "m5", consumoPorUnidade: 1 }, { materiaId: "m10", consumoPorUnidade: 1 }] },
 ];
 
@@ -513,7 +513,7 @@ export const ordensProducaoSeed: OrdemProducao[] = planejamentosSeed.flatMap((pl
       dataInicio: ini.toISOString().slice(0, 10),
       dataFim: fim.toISOString().slice(0, 10),
       status: st,
-      retrabalho: rint(0, 12),
+      retrabalho: rint(0, 4),
       operadores: 6 + rint(0, 8),
     } as OrdemProducao;
   });
@@ -521,25 +521,25 @@ export const ordensProducaoSeed: OrdemProducao[] = planejamentosSeed.flatMap((pl
 
 export const gargalosSeed: Gargalo[] = [
   { id: "g1", etapa: "Corte", status: "Normal", observacao: "Operando dentro da capacidade.", capacidadeUso: 72 },
-  { id: "g2", etapa: "Pesponto", status: "Atenção", observacao: "Fila de OPs aguardando há 2 dias.", capacidadeUso: 91 },
-  { id: "g3", etapa: "Montagem", status: "Atrasado", observacao: "Quebra de máquina nº 04. Manutenção acionada.", capacidadeUso: 98 },
-  { id: "g4", etapa: "Acabamento", status: "Normal", observacao: "Equipe reforçada esta semana.", capacidadeUso: 64 },
+  { id: "g2", etapa: "Pesponto", status: "Normal", observacao: "Fluxo equilibrado após balanceamento de equipe.", capacidadeUso: 78 },
+  { id: "g3", etapa: "Montagem", status: "Atenção", observacao: "Pico de demanda do Tênis Esportivo. Manutenção preventiva em dia.", capacidadeUso: 84 },
+  { id: "g4", etapa: "Acabamento", status: "Normal", observacao: "3 pontos de verificação de qualidade ativos.", capacidadeUso: 64 },
 ];
 
 export const observacoesSeed: Observacao[] = [
-  { id: "ob1", data: daysAgo(2), titulo: "Consumo de cola aumentou 20%", categoria: "Produção", texto: "Aumento detectado na linha de montagem do Tênis Casual. Recomenda-se revisar processo de aplicação.", impacto: "Médio" },
-  { id: "ob2", data: daysAgo(4), titulo: "Estoque de couro abaixo da cobertura ideal", categoria: "Estoque", texto: "Couro Preto Premium com apenas 7 dias de cobertura. Pedido sugerido ao CouroMax.", impacto: "Alto" },
-  { id: "ob3", data: daysAgo(6), titulo: "Solados Brasil com atraso recorrente", categoria: "Compras", texto: "3 dos últimos 5 pedidos chegaram fora do prazo. Considerar fornecedor alternativo.", impacto: "Alto" },
-  { id: "ob4", data: daysAgo(8), titulo: "Retrabalho acima da média na Montagem", categoria: "Qualidade", texto: "Taxa de retrabalho subiu para 4,8% no Tênis Esportivo. Treinamento agendado para a próxima semana.", impacto: "Médio" },
-  { id: "ob5", data: daysAgo(1), titulo: "Crescimento de pedidos B2B do Sudeste", categoria: "Vendas", texto: "Aumento de 18% em pedidos da região nas últimas 4 semanas.", impacto: "Baixo" },
+  { id: "ob1", data: daysAgo(2), titulo: "Defeito de colagem reduzido para 0,3%", categoria: "Qualidade", texto: "Após implantação do SOP de colagem e dos 3 pontos de verificação na linha, a taxa de devolução por defeito caiu de 8,2% para 0,3%.", impacto: "Alto" },
+  { id: "ob2", data: daysAgo(4), titulo: "Cobertura de estoque dentro da faixa ideal", categoria: "Estoque", texto: "Todos os insumos críticos operando entre 20 e 25 dias de cobertura. Ponto de pedido ativo por SKU.", impacto: "Baixo" },
+  { id: "ob3", data: daysAgo(6), titulo: "Cola homologada com especificação técnica", categoria: "Compras", texto: "ColaFlex aprovado com ficha de especificação (viscosidade, tempo de ativação e adesão). Inspeção por amostragem na entrada ativa.", impacto: "Médio" },
+  { id: "ob4", data: daysAgo(8), titulo: "Retrabalho na Montagem em queda", categoria: "Qualidade", texto: "Taxa de retrabalho do Tênis Esportivo recuou para 1,9% após padronização do processo.", impacto: "Baixo" },
+  { id: "ob5", data: daysAgo(1), titulo: "Crescimento de pedidos B2B do Sudeste", categoria: "Vendas", texto: "Aumento de 18% em pedidos da região nas últimas 4 semanas, com follow-up estruturado por janela de compra.", impacto: "Médio" },
 ];
 
 export const planoAcaoSeed: PlanoAcao[] = [
-  { id: "pa-1", problema: "Atrasos do fornecedor Solados Brasil", responsavel: "Compras / Renato", prazo: daysAgo(-14), status: "Em andamento" },
-  { id: "pa-2", problema: "Reduzir retrabalho na Montagem", responsavel: "Produção / Camila", prazo: daysAgo(-21), status: "Aberto" },
-  { id: "pa-3", problema: "Reposição urgente de Couro Preto", responsavel: "Compras / Renato", prazo: daysAgo(-3), status: "Em andamento" },
-  { id: "pa-4", problema: "Padronizar aplicação de cola", responsavel: "Qualidade / Felipe", prazo: daysAgo(-30), status: "Aberto" },
-  { id: "pa-5", problema: "Substituir Componentes Nova Era", responsavel: "Compras / Renato", prazo: daysAgo(-45), status: "Aberto" },
+  { id: "pa-1", problema: "Renovar acordo trimestral com Solados Brasil", responsavel: "Compras / Renato", prazo: daysAgo(-14), status: "Em andamento" },
+  { id: "pa-2", problema: "Manter retrabalho da Montagem abaixo de 2%", responsavel: "Produção / Camila", prazo: daysAgo(-21), status: "Em andamento" },
+  { id: "pa-3", problema: "Revisar ponto de pedido do Couro Preto", responsavel: "Compras / Renato", prazo: daysAgo(-3), status: "Concluído" },
+  { id: "pa-4", problema: "Auditar SOP de aplicação de cola (trimestral)", responsavel: "Qualidade / Felipe", prazo: daysAgo(-30), status: "Concluído" },
+  { id: "pa-5", problema: "Homologar segundo fornecedor de aviamentos", responsavel: "Compras / Renato", prazo: daysAgo(-45), status: "Em andamento" },
 ];
 
 export const sugestoesSeed: Sugestao[] = [
