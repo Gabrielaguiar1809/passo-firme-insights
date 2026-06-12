@@ -310,10 +310,11 @@ export function useIndicadores() {
 export function useIndicadoresVendas() {
   const { pedidosVenda, clientesB2B, clientesB2C, produtos } = useData();
   return useMemo(() => {
-    const totalLeads = clientesB2B.length + clientesB2C.length;
     const fechados = clientesB2B.filter((c) => c.estagio === "Pedido Fechado").length
       + clientesB2C.filter((c) => c.estagio === "Venda").length;
-    const conversao = totalLeads ? +(fechados / totalLeads * 100).toFixed(1) : 0;
+    const perdidos = clientesB2B.filter((c) => c.estagio === "Perdido").length
+      + clientesB2C.filter((c) => c.estagio === "Perdido").length;
+    const conversao = (fechados + perdidos) ? +(fechados / (fechados + perdidos) * 100).toFixed(1) : 0;
     const ticketMedio = pedidosVenda.length ? +(pedidosVenda.reduce((a, p) => a + p.valor, 0) / pedidosVenda.length).toFixed(0) : 0;
     const novosClientes = clientesB2B.filter((c) => c.estagio === "Lead" || c.estagio === "Primeiro Contato").length;
     const porProduto = pedidosVenda.reduce<Record<string, number>>((acc, p) => {
@@ -384,7 +385,7 @@ export function useInsights() {
     if (parado > 0) insights.push(`Você possui R$ ${parado.toLocaleString("pt-BR", { maximumFractionDigits: 0 })} em estoque parado há mais de 90 dias.`);
     const ranked = [...fornecedores].sort((a, b) => calcIQF(b) - calcIQF(a));
     const pior = ranked[ranked.length - 1];
-    if (pior && calcIQF(pior) < 8.3) insights.push(`O fornecedor ${pior.nome} teve queda recente no IQF (${calcIQF(pior)}).`);
+    if (pior && calcIQF(pior) < 8.0) insights.push(`O fornecedor ${pior.nome} teve queda recente no IQF (${calcIQF(pior)}).`);
     const melhor = ranked[0];
     if (melhor && pior && melhor.id !== pior.id) {
       insights.push(`Trocar para o fornecedor ${melhor.nome} pode gerar economia estimada de R$ 12.300.`);
@@ -507,13 +508,16 @@ export function usePlanejamentoComercial() {
 
     // série últimos 6 meses + futuros 3
     const serie: { mes: string; meta: number; realizado: number; projecao?: number }[] = [];
+    // fatores determinísticos de projeção (evita números que mudam a cada reload)
+    const fatorProj = [1.04, 1.08, 1.12];
+    let futuroIdx = 0;
     for (let i = 5; i >= -2; i--) {
       const d = new Date(HOJE_VENDAS); d.setMonth(d.getMonth() - i);
       const key = d.toISOString().slice(0, 7);
       const label = d.toLocaleDateString("pt-BR", { month: "short" }).replace(".", "");
       const real = pedidosVenda.filter((p) => p.emissao.startsWith(key) && p.status === "Finalizado").reduce((a, p) => a + p.valor, 0);
       const item: typeof serie[number] = { mes: label, meta: metas.mensal, realizado: real };
-      if (i < 0) item.projecao = Math.round(metas.mensal * (0.9 + Math.random() * 0.2));
+      if (i < 0) { item.projecao = Math.round(metas.mensal * (fatorProj[futuroIdx] ?? 1)); futuroIdx++; }
       serie.push(item);
     }
 
